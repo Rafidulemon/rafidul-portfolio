@@ -1,113 +1,164 @@
-import Image from "next/image";
+import React from "react";
+import TyAnimation from "./components/animations/TyAnimation";
+import Link from "next/link";
+import Button from "./components/display/Button";
+import { Text } from "./components/typography/Text";
+import MotionDiv from "./components/animations/MotionDiv";
+import { Line } from "./components/display/Line";
+import ServicessCard from "./components/cards/ServiceCard";
+import { MdOutlineCode, MdAppShortcut } from "react-icons/md";
+import { SiMaterialdesignicons } from "react-icons/si";
+import ProjectsCard from "./components/cards/ProjectsCard";
+import SkillBar from "./components/animations/SkillBar";
 
-export default function Home() {
+const HeroSection = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="lg:py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-12">
+        <div className="col-span-7 place-self-center text-center sm:text-left justify-self-start">
+          <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-8xl lg:leading-normal font-extrabold">
+            <span className="text-cyan-500 bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+              Hello, I&apos;m{" "}
+            </span>
+            <br></br>
+            <TyAnimation />
+          </h1>
+          <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl text-justify">
+            Crafted by a skilled Software Engineer, specializing in Mobile App
+            Development and Web Development, the digital experiences by this
+            innovative mind blend technology and creativity seamlessly.
+            Dedicated to delivering exceptional solutions, this talent strives
+            to make a meaningful impact through their work.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/contact">
+              <Button theme="primary">
+                <Text text="Contact me" className="mx-4" />
+              </Button>
+            </Link>
+            <Link href="/">
+              <Button theme="secondary">
+                <Text text="Download CV" />
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+        <MotionDiv
+          src="/images/hero-image.png"
+          isTransparentBG
+          className="col-span-5 place-self-end"
+          isRoundedImage
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="w-full my-20">
+        <div className="w-full flex flex-col mb-10 items-center justify-center px-[650px]">
+          <Line className="w-full border-cyan-500" />
+          <Text text="My Skills" isNosifer className="text-[48px]" />
+          <Line className="w-full border-cyan-500" />
+        </div>
+        <div className="flex flex-col gap-6 items-center">
+          <div className="w-full flex flex-row gap-10 w-[60vh]">
+            <div className="w-full">
+              <SkillBar label="Java" level={65} />
+              <SkillBar label="python" level={70} />
+              <SkillBar label="Javascript" level={80} />
+            </div>
+            <div className="w-full">
+              <SkillBar label="Next.js" level={85} />
+              <SkillBar label="React.js" level={60} />
+              <SkillBar label="Angular.js" level={50} />
+            </div>
+          </div>
+          <div className="w-full flex flex-row gap-10 w-[60vh]">
+            <div className="w-full">
+              <SkillBar label="Java" level={65} />
+              <SkillBar label="python" level={70} />
+              <SkillBar label="Javascript" level={80} />
+            </div>
+            <div className="w-full">
+              <SkillBar label="Next.js" level={85} />
+              <SkillBar label="React.js" level={60} />
+              <SkillBar label="Angular.js" level={50} />
+            </div>
+          </div>
+        </div>
       </div>
-    </main>
+      <div className="w-full mt-16 flex flex-col items-center">
+        <div className="w-full flex flex-col mb-10 items-center justify-center px-[650px]">
+          <Line className="w-full border-cyan-500" />
+          <Text text="My Services" isNosifer className="text-[48px]" />
+          <Line className="w-full border-cyan-500" />
+        </div>
+        <div className="w-full flex flex-row justify-center gap-6">
+          <ServicessCard
+            icon={<MdOutlineCode size={40} />}
+            service_title="Front-End Developement"
+            service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
+          />
+          <ServicessCard
+            icon={<MdAppShortcut size={40} />}
+            service_title="Mobile App Developement"
+            service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
+          />
+          <ServicessCard
+            icon={<SiMaterialdesignicons size={40} />}
+            service_title="UI/UX Design"
+            service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
+          />
+        </div>
+        <Link
+          href={"/services"}
+          className="flex flex-row items-center justify-center mt-10"
+        >
+          <Text text="See More..." className="text-cyan-200 text-[24px]" />
+        </Link>
+      </div>
+      <div className="w-full my-20">
+        <div className="w-full flex flex-col mb-10 items-center justify-center px-[650px]">
+          <Line className="w-full border-cyan-500" />
+          <Text text="My Projects" isNosifer className="text-[48px]" />
+          <Line className="w-full border-cyan-500" />
+        </div>
+        <div className="w-full flex flex-col gap-10">
+          <div className="flex flex-row items-center justify-center gap-10">
+            <ProjectsCard
+              src="/images/projects/alizaAi.jpg"
+              project_title="Virtual Assistant"
+              project_details="Details about the project will be added here."
+            />
+            <ProjectsCard
+              src="/images/projects/portfolio-web.png"
+              project_title="Portfolio Website"
+              project_details="Details about the project will be added here."
+            />
+          </div>
+          <div className="flex flex-row items-center justify-center gap-10">
+            <ProjectsCard
+              src="/images/projects/hr-mgt.jpg"
+              project_title="HR Management App"
+              project_details="Details about the project will be added here."
+            />
+            <ProjectsCard
+              src="/images/projects/food-delivery-web.png"
+              project_title="Food Delivery App"
+              project_details="Details about the project will be added here."
+            />
+            <ProjectsCard
+              src="/images/projects/ecom-website.png"
+              project_title="E-Commerce Website"
+              project_details="Details about the project will be added here."
+            />
+          </div>
+          <Link
+            href={"/projects"}
+            className="flex flex-row items-center justify-center"
+          >
+            <Text text="See More..." className="text-cyan-200 text-[24px]" />
+          </Link>
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default HeroSection;
