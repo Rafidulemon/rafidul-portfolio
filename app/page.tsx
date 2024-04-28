@@ -66,7 +66,7 @@ const HeroSection = () => {
       <div className="w-full sm:my-6 md:my-10 lg:my-14 xl:my-20">
         <div className="w-full flex flex-col mb-4 md:mb-6 lg:mb-8 xl:mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
           <Line className="w-full border-cyan-500" />
-          <Text text="My Skills" isNosifer className="text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
+          <Text text="My Skills" isNosifer className="text-white text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
           <Line className="w-full border-cyan-500" />
         </div>
         <div className="flex flex-col gap-6 items-center">
@@ -98,22 +98,22 @@ const HeroSection = () => {
       <div className="w-full flex flex-col items-center sm:mb-6 md:mb-10 lg:mb-14 xl:mb-20">
         <div className="w-full flex flex-col mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
           <Line className="w-full border-cyan-500" />
-          <Text text="My Services" isNosifer className="text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
+          <Text text="My Services" isNosifer className="text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
           <Line className="w-full border-cyan-500" />
         </div>
         <div className="w-full flex flex-col md:flex-row justify-center gap-6">
           <ServicessCard
-            icon={<MdOutlineCode className="text-2xl lg:text-5xl"/>}
+            icon={<MdOutlineCode className="text-2xl lg:text-5xl" color="#FFFFFF"/>}
             service_title="Front-End Developement"
             service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
           />
           <ServicessCard
-            icon={<MdAppShortcut className="text-2xl lg:text-5xl" />}
+            icon={<MdAppShortcut className="text-2xl lg:text-5xl" color="#FFFFFF" />}
             service_title="Mobile App Developement"
             service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
           />
           <ServicessCard
-            icon={<SiMaterialdesignicons className="text-2xl lg:text-5xl"/>}
+            icon={<SiMaterialdesignicons className="text-2xl lg:text-5xl" color="#FFFFFF"/>}
             service_title="UI/UX Design"
             service_details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse libero officiis illum error, saepe quas eum obcaecati? Commodi tenetur quasi eligendi est! Cumque aspernatur ipsum soluta doloribus, reiciendis laborum! Corporis?"
           />
@@ -128,7 +128,7 @@ const HeroSection = () => {
       <div className="w-full">
         <div className="w-full flex flex-col mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
           <Line className="w-full border-cyan-500" />
-          <Text text="My Projects" isNosifer className="text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
+          <Text text="My Projects" isNosifer className="text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]" />
           <Line className="w-full border-cyan-500" />
         </div>
         <div className="w-full flex flex-col gap-10">

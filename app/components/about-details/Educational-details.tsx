@@ -17,7 +17,7 @@ function EducationalDetails() {
           className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-cyan-200"
           isBold
         />
-        <Text text="Session : Summer 2016 to Summer 2020" className="text-[14px]" />
+        <Text text="Session : Summer 2016 to Summer 2020" className="text-white text-[11px] md:text-[13px] lg:text-[14px]" />
       </div>
       <div className="flex flex-col">
         <Text
@@ -27,8 +27,8 @@ function EducationalDetails() {
           className="text-[16px] md:text-[18px] lg:text-[22px] xl:text-[24px] text-cyan-500 mb-4"
         />
         <Text text="Government City College ,Chittagong" className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-cyan-200" isBold />
-        <Text text="Group : Science" className="text-[14px]" />
-        <Text text="Passing Year : 2015" className="text-[14px]" />
+        <Text text="Group : Science" className="text-white text-[11px] md:text-[13px] lg:text-[14px]" />
+        <Text text="Passing Year : 2015" className="text-white text-[11px] md:text-[13px] lg:text-[14px]" />
       </div>
       <div className="flex flex-col">
         <Text
@@ -45,11 +45,11 @@ function EducationalDetails() {
         />
         <Text
           text="Group : Science"
-          className="text-[14px]"
+          className="text-white text-[11px] md:text-[13px] lg:text-[14px]"
         />
         <Text
           text="Passing Year : 2013"
-          className="text-[14px]"
+          className="text-white text-[11px] md:text-[13px] lg:text-[14px]"
         />
       </div>
     </div>

@@ -22,7 +22,7 @@ function ProjectsCard(props:  ProjectsCardProps) {
         />
       </div>
       <div className="flex flex-col w-full m-4">
-        <Text text={project_title} isBold/>
+        <Text text={project_title} isBold className="text-white"/>
         <Text text={project_details} className="text-[#ADB7BE]"/>
       </div>
     </div>

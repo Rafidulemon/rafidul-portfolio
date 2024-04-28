@@ -279,7 +279,7 @@ function page() {
           <Text
             text="My Projects"
             isNosifer
-            className="text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
+            className="text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
           />
           <Line className="w-full border-cyan-500" />
         </div>

@@ -22,7 +22,7 @@ function ProfessionalDetails() {
             isBold
           />
         </Link>
-        <Text text="From August 2023 to Present" className="text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
+        <Text text="From August 2023 to Present" className="text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
       </div>
 
       <Text
@@ -38,7 +38,7 @@ function ProfessionalDetails() {
             isBold
           />
         </Link>
-        <Text text="From January 2023 to July 2023" className="text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
+        <Text text="From January 2023 to July 2023" className="text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
       </div>
 
       <Text text="Trainee" isBold className="text-[16px] md:text-[18px] lg:text-[22px] xl:text-[24px] text-cyan-500" />
@@ -53,7 +53,7 @@ function ProfessionalDetails() {
         />
         <Text
           text="From April 2022 to September 2022"
-          className="text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]"
+          className="text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]"
         />
       </div>
 
@@ -70,7 +70,7 @@ function ProfessionalDetails() {
             isBold
           />
         </Link>
-        <Text text="Form November 2021 to March 2022" className="text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
+        <Text text="Form November 2021 to March 2022" className="text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]" />
       </div>
     </Grid>
   );
