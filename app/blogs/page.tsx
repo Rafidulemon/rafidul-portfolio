@@ -3,7 +3,7 @@ import PageTitle from '../components/typography/PageTitle'
 
 function blogs() {
   return (
-    <div>
+    <div className='w-full pt-16 md:py-20'>
       <PageTitle name='BLOGS'/>
     </div>
   )

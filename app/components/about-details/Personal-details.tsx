@@ -15,7 +15,7 @@ function PersonalDetails() {
           isTransparentBG
         />
       </div>
-      <Grid colCount={2} className="gap-8">
+      <Grid colCount={2} className="gap-4 md:gap-6 lg:gap-7 xl:gap-8 text-white text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px]">
         <div>
           <Text text="Name " isBold />
         </div>

@@ -10,7 +10,6 @@ import { MdOutlineCode, MdAppShortcut } from "react-icons/md";
 import { SiMaterialdesignicons } from "react-icons/si";
 import ProjectsCard from "./components/cards/ProjectsCard";
 import SkillBar from "./components/animations/SkillBar";
-import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -74,7 +73,7 @@ const HeroSection = () => {
           <div className="w-full flex flex-row gap-10 md:w-[350px] lg:w-[550px] xl:w-[700px]">
             <div className="w-full">
               <SkillBar label="Java" level={65} />
-              <SkillBar label="python" level={70} />
+              <SkillBar label="python" level={55} />
               <SkillBar label="Javascript" level={80} />
             </div>
             <div className="w-full">
@@ -166,7 +165,7 @@ const HeroSection = () => {
             href={"/projects"}
             className="flex flex-row items-center justify-center"
           >
-            <Text text="See More..." className="text-cyan-200 xl:text-[12px] xl:text-[16px] xl:text-[20px] xl:text-[24px]" />
+            <Text text="See More..." className="text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]" />
           </Link>
         </div>
       </div>

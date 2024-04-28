@@ -41,13 +41,13 @@ function Header() {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+              className={`flex-1 justify-self-center md:pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
                 navbar ? "p-12 md:p-0 block" : "hidden"
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex md:gap-8 lg:gap-12 xl:gap-16 md:pt-5">
                 <li
-                  className={`pb-6 text-xl 
+                  className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
                   path === "/" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
@@ -57,7 +57,7 @@ function Header() {
                   </Link>
                 </li>
                 <li
-                  className={`pb-6 text-xl 
+                  className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
                   path === "/about" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
@@ -67,7 +67,7 @@ function Header() {
                   </Link>
                 </li>
                 <li
-                  className={`pb-6 text-xl 
+                  className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
                   path === "/services" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
@@ -77,7 +77,7 @@ function Header() {
                   </Link>
                 </li>
                 <li
-                  className={`pb-6 text-xl 
+                  className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
                   path === "/blogs" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
@@ -87,7 +87,7 @@ function Header() {
                   </Link>
                 </li>
                 <li
-                  className={`pb-6 text-xl 
+                  className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
                   path === "/contact" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}

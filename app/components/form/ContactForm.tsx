@@ -5,6 +5,7 @@ import { TextInput } from '../typography/TextInput'
 import { TextArea } from '../typography/TextArea'
 import Button from '../display/Button'
 import Link from 'next/link';
+import { Text } from '../typography/Text';
 
 function ContactForm() {
   return (
@@ -20,7 +21,9 @@ function ContactForm() {
           <TextArea label="Message" placeholder='Type your message here...' className='h-[250px]'/>
         </div>
         <Link href={"/"}>
-          <Button theme='primary' isWidthFull>Send</Button>
+          <Button theme='primary' isWidthFull>
+            <Text text='Send' className='text-white text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]' />
+          </Button>
         </Link>
       </form>
     </div>

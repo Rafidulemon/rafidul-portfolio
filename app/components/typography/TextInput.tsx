@@ -43,7 +43,7 @@ export const TextInput = (props: TextInputProps) => {
           {label && (
             <Text
               text={label}
-              className={`md:text-[14px] lg:text-[18px] xl:text-[22px] ${
+              className={`text-white text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] ${
                 isLabelBold ? "font-extrabold" : "font-medium"
               }`}
             />
@@ -53,7 +53,7 @@ export const TextInput = (props: TextInputProps) => {
             <Text
               text="*"
               isBold
-              className="pl-1 md:text-[14px] lg:text-[18px] xl:text-[22px] text-red-600"
+              className="pl-1 text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] text-red-600"
             />
           )}
         </Flex>
@@ -63,7 +63,7 @@ export const TextInput = (props: TextInputProps) => {
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`border border-cyan-500 rounded-lg px-3 py-2 focus:outline-none focus:border-cyan-900 ${className}`}
+        className={`text-white border border-cyan-500 rounded-lg px-3 py-2 text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] focus:outline-none focus:border-cyan-900 ${className}`}
         style={{ backgroundColor }}
         data-cy={dataCy}
       />

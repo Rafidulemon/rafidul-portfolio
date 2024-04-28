@@ -22,7 +22,7 @@ function Footer() {
           <FaInstagram size={30} color="#E1306C" />
         </a>
         <a href="https://www.facebook.com/" target="_blank">
-          <FaGithub size={30} />
+          <FaGithub size={30} color="#FFFFFF"/>
         </a>
         <a href="https://www.facebook.com/" target="_blank">
           <FaTwitter size={30} color="#1DA1F2" />

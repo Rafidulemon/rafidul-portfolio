@@ -32,24 +32,24 @@ const SkillBar = ({ label, level }: SkillBarProps) => {
 
     // Determine background color based on the level
     let bgColor = '';
-    if (level < 50) {
-      bgColor = 'bg-cyan-200';
+    if (level < 60) {
+      bgColor = 'bg-[#E74C3C]';
     } else if (level < 70) {
-      bgColor = 'bg-cyan-500';
+      bgColor = 'bg-[#F8C471]';
     } else if (level < 80) {
       bgColor = 'bg-cyan-700';
     } else {
-      bgColor = 'bg-cyan-800';
+      bgColor = 'bg-[#1ABC9C]';
     }
     bgColorRef.current = bgColor;
   }, [level]);
 
   return (
     <div className="mb-4">
-      <p className="mb-2 text-white">{label}</p>
-      <div className={`bg-cyan-100 h-4 w-full rounded-full`}>
+      <p className="mb-2 text-white text-[10px] md:text-[12px] lg-text-[14px] xl:text-[16px]">{label}</p>
+      <div className={`bg-cyan-100 h-2 md:h-3 lg:h-4 w-full rounded-full`}>
         <div
-          className={`h-4 rounded-full ${bgColorRef.current}`}
+          className={`h-2 md:h-3 lg:h-4  rounded-full ${bgColorRef.current}`}
           style={{ width: `${width}%` }}
         ></div>
       </div>
