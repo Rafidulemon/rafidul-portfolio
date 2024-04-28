@@ -13,7 +13,7 @@ function Footer() {
   return (
     <div className="flex w-full flex-col items-center justify-center pb-6 bg-[#111111]">
       <Line className="border-white mb-4" />
-      <Text text="Get in Touch" className="w-full text-center text-[16px] md:text-[24px]" isBold/>
+      <Text text="Get in Touch" className="w-full text-white text-center text-[16px] md:text-[24px]" isBold/>
       <div className="flex w-full flex-row items-center justify-center mt-6 gap-x-8 mb-10">
         <a href="https://www.facebook.com/" target="_blank">
           <FaFacebook size={30} color="#1877F2" />
