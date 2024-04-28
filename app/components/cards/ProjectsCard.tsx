@@ -11,7 +11,7 @@ interface ProjectsCardProps {
 function ProjectsCard(props:  ProjectsCardProps) {
     const { src = "", project_title = "", project_details =""} = props;
   return (
-    <div className="bg-[#111111] rounded-2xl h-[330px] w-[450px] flex shadow-md shadow-cyan-900 flex flex-col gap-0">
+    <div className="bg-[#111111] rounded-2xl flex shadow-md shadow-cyan-900 flex flex-col gap-0">
       <div className="rounded-2xl">
         <Image
           src={src}

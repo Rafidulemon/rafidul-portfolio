@@ -21,7 +21,7 @@ import Link from "next/link";
 
 function page() {
   return (
-    <div className="w-full">
+    <div className="w-full md:mt-20">
       <PageTitle name="ABOUT ME" />
       <Grid colCount={3} className="w-full mt-[60px]">
         <div className="flex flex-col justify-start">

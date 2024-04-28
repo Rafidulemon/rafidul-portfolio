@@ -3,8 +3,6 @@ import React from "react";
 import { Flex } from "../components/layout/Flex";
 import { Text } from "../components/typography/Text";
 import ContactForm from "../components/form/ContactForm";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { Grid } from "../components/layout/Grid";
 import PageTitle from "../components/typography/PageTitle";
 import MotionDiv from "../components/animations/MotionDiv";

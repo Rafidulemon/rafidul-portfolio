@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { type ReactNode } from "react";
 
 type TitleProps = {
   src?: string;
@@ -42,7 +41,7 @@ const MotionDiv = (props: TitleProps) => {
           alt="hero image"
           width={height_width}
           height={height_width}
-          className={`${isRoundedImage ? "rounded-full" : ""}`}
+          className={`${className} ${isRoundedImage ? "rounded-full" : ""}`}
         />
       </div>
     </motion.div>
