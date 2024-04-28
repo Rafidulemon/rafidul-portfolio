@@ -46,7 +46,7 @@ const SkillBar = ({ label, level }: SkillBarProps) => {
 
   return (
     <div className="mb-4">
-      <p className="mb-2">{label}</p>
+      <p className="mb-2 text-white">{label}</p>
       <div className={`bg-cyan-100 h-4 w-full rounded-full`}>
         <div
           className={`h-4 rounded-full ${bgColorRef.current}`}
