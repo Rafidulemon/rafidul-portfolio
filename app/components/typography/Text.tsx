@@ -26,7 +26,7 @@ type Props = {
             isNosifer ? "font-nosifer" : "font-mplus_1p"
           } ${
           isBold && "font-bold"
-        } `}
+        } text-white`}
         title={isTitleVisible ? text : undefined}
         data-cy={dataCy}
         onClick={onClick}
