@@ -2,7 +2,7 @@ import React from 'react'
 import PageTitle from '../components/typography/PageTitle'
 import { Text } from '../components/typography/Text'
 
-function blogs() {
+function blogsPage() {
   return (
     <div className='w-full pt-16 md:py-20'>
       <PageTitle name='BLOGS'/>
@@ -13,4 +13,4 @@ function blogs() {
   )
 }
 
-export default blogs
+export default blogsPage;

@@ -7,7 +7,7 @@ export default function AdminLayout({
     children: React.ReactNode;
   }>) {
   return (
-    <div className='grid  grid-cols-12 gap-4'>
+    <div className='grid  grid-cols-12 gap-4 -mx-10'>
       <div className='md:col-span-3 lg:col-span-2'>
         <LeftMenu/>
       </div>

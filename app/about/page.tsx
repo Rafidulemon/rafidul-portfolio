@@ -19,7 +19,7 @@ import {
 import Details from "../components/about-details/Details";
 import Link from "next/link";
 
-function page() {
+function aboutPage() {
   return (
     <div className="w-full pt-16 md:py-20">
       <PageTitle name="ABOUT ME" />
@@ -331,4 +331,4 @@ function page() {
   );
 }
 
-export default page;
+export default aboutPage;

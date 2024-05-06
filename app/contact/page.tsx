@@ -7,7 +7,7 @@ import { Grid } from "../components/layout/Grid";
 import PageTitle from "../components/typography/PageTitle";
 import MotionDiv from "../components/animations/MotionDiv";
 
-function page() {
+function contactPage() {
   return (
     <div className="w-full py-16 md:py-20">
       <PageTitle name="CONTACT ME" />
@@ -63,4 +63,4 @@ function page() {
   );
 }
 
-export default page;
+export default contactPage;

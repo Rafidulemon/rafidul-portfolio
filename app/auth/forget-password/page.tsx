@@ -8,7 +8,7 @@ import Link from "next/link";
 import Button from "../../components/display/Button";
 import Image from "next/image";
 
-function page() {
+function forgetPasswordPage() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [rememberMe, setRememberMe] = useState(false);
   const handleRememberMeChange = () => {
@@ -50,4 +50,4 @@ function page() {
   );
 }
 
-export default page;
+export default forgetPasswordPage;

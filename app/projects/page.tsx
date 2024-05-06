@@ -5,7 +5,7 @@ import { Text } from "../components/typography/Text";
 import Projects from "../components/projects/Projects";
 import Link from "next/link";
 
-function page() {
+function projectPage() {
   return (
     <div>
       <PageTitle name="PROJECTS" />
@@ -21,4 +21,4 @@ function page() {
   );
 }
 
-export default page;
+export default projectPage;

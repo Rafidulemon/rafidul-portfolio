@@ -7,7 +7,7 @@ import Link from "next/link";
 import Button from "../components/display/Button";
 import { Text } from "../components/typography/Text";
 
-function page() {
+function ServicesPage() {
   return (
     <div className="w-full pt-16 md:py-20">
       <PageTitle name="SERVICES" />
@@ -46,4 +46,4 @@ function page() {
   );
 }
 
-export default page;
+export default ServicesPage;
