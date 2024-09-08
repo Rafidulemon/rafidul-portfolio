@@ -9,9 +9,9 @@ import ProfessionalDetails from "./Professional-details";
 import EducationalDetails from "./Educational-details";
 import Link from "next/link";
 import { useState } from "react";
-import Personal from "../admin/edit/profile/personal";
-import Educational from "../admin/edit/profile/educational";
-import Professional from "../admin/edit/profile/professional";
+import Personal from "../admin/edit/profile/Personal";
+import Educational from "../admin/edit/profile/Educational";
+import Professional from "../admin/edit/profile/Professional";
 
 type Props = {
   isAdmin?: boolean;
