@@ -53,7 +53,7 @@ export const TextInput = (props: TextInputProps) => {
             <Text
               text="*"
               isBold
-              className="pl-1 text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] text-red-600"
+              className="pl-1 text-[12px] md:text-[16px] text-red-600"
             />
           )}
         </Flex>
@@ -63,7 +63,7 @@ export const TextInput = (props: TextInputProps) => {
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`text-white border border-cyan-500 rounded-lg px-3 py-2 text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] focus:outline-none focus:border-cyan-900 ${className}`}
+        className={`text-white border border-cyan-500 rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${className}`}
         style={{ backgroundColor }}
         data-cy={dataCy}
       />

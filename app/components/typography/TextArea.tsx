@@ -42,7 +42,7 @@ export const TextArea = (props: Props) => {
             <Text
               text="*"
               isBold
-              className="pl-1 text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] text-red-600"
+              className="pl-1 text-[12px] md:text-[16px] text-red-600"
             />
           )}
         </Flex>
@@ -53,7 +53,7 @@ export const TextArea = (props: Props) => {
         onChange={onChange}
         {...register?.(name)}
         style={{ resize: "none" }}
-        className={`border border-cyan-500 bg-[#111111] text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] rounded-lg px-3 py-2 focus:outline-none focus:border-cyan-900 text-white ${className}`}
+        className={`border border-cyan-500 bg-[#111111] text-[12px] md:text-[16px] rounded-lg px-3 py-2 focus:outline-none focus:border-cyan-900 text-white ${className}`}
         placeholder={placeholder}
       ></textarea>
     </Flex>
