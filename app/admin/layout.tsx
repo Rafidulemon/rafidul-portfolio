@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import React from 'react'
 import LeftMenu from '../components/admin/LeftMenu'
+
+export const metadata: Metadata = {
+  title: "Admin Panel",
+  description: "Portfolio website of Md. Rafidul Islam",
+};
+
 
 export default function AdminLayout({
     children,

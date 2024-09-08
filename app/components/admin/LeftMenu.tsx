@@ -16,7 +16,7 @@ function LeftMenu() {
   const path = usePathname();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#212F3C] w-full items-center md:gap-2 xl:gap-4 px-10">
+    <div className="flex flex-col h-full min-h-screen bg-[#212F3C] w-full items-center md:gap-2 xl:gap-4 px-10">
       <div className="flex flex-row items-center justify-center mt-2">
         <MotionDiv
           src="/images/hero-image.png"
