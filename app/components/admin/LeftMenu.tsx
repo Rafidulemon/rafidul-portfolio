@@ -110,7 +110,7 @@ function LeftMenu() {
         href={"/auth/login"}
         className="w-full bg-gradient-to-br from-cyan-500 to-teal-700 p-2 flex flex-row items-center mb-4"
       >
-        <div className="flex flex-row items-center w-full justify-center gap-4">
+        <div className="flex flex-row items-center w-full gap-4">
           <TbLogout size={28} />
           <Text text="Logout" />
         </div>

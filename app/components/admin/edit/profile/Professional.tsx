@@ -49,7 +49,7 @@ function Professional() {
         <div className="flex flex-col items-center justify-center gap-10">
           <Grid
             colCount={2}
-            className="w-1/2 flex flex-col p-4 md:p-10 rounded shadow-lg shadow-teal-700 gap-4 md:gap-6 lg:gap-8 xl:gap-10"
+            className="w-[50%] flex flex-col p-4 md:p-10 rounded shadow-lg shadow-teal-700 gap-4 md:gap-6 lg:gap-8 xl:gap-10"
           >
             <div>
               <Text text="Position" isBold />
