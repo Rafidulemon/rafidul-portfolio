@@ -18,7 +18,7 @@ export default function AdminLayout({
       <div className='md:col-span-3 lg:col-span-2'>
         <LeftMenu/>
       </div>
-      <div className="flex flex-row md:col-span-9 lg:col-span-10 p-6">{children}</div>
+      <div className="flex flex-row md:col-span-9 lg:col-span-10 p-6 bg-black">{children}</div>
     </div>
   )
 }
