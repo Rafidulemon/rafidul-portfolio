@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id          String    @id @default(uuid())
+  first_name       String
+  last_name        String
+  occupation       String
+  phone            String
+  email            String    @unique
+  dob              DateTime
+  nationality      String
+  image1           String
+  image2           String
+  image3           String
+  image4           String
+  image5           String
+  address          String
+  password_hash    String
+  self_introduction String
+  skill_description String
+  social_media     SocialMedia?
+  educational_details EducationalDetail[]
+  professional_details ProfessionalDetail[]
+  skills           Skill[]
+  projects         Project[]
+  blogs            Blog[]
+  services         Service[]
+}
+
+model SocialMedia {
+  user_id    String  @unique
+  facebook   String
+  youtube    String
+  twitter    String
+  instagram  String
+  linkedin   String
+  dribbble   String
+  user       User    @relation(fields: [user_id], references: [user_id])
+}
+
+model EducationalDetail {
+  edu_id          Int      @id @default(autoincrement())
+  user_id         String
+  degree          String
+  group_major     String
+  institution_name String
+  passing_year    Int
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
+
+model ProfessionalDetail {
+  prof_id         Int      @id @default(autoincrement())
+  user_id         String
+  company_name    String
+  designation     String
+  company_website String
+  work_from       DateTime
+  work_till       DateTime
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
+
+model Skill {
+  skill_id        Int      @id @default(autoincrement())
+  user_id         String
+  skill_name      String
+  skill_percentage Int
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
+
+model Project {
+  project_id      Int      @id @default(autoincrement())
+  user_id         String
+  project_name    String
+  project_description String
+  project_image   String
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
+
+model Blog {
+  blog_id         Int      @id @default(autoincrement())
+  user_id         String
+  blog_name       String
+  blog_details    String
+  blog_image      String
+  created_at      DateTime @default(now())
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
+
+model Service {
+  service_id      Int      @id @default(autoincrement())
+  user_id         String
+  service_name    String
+  service_details String
+  service_image   String
+  user            User     @relation(fields: [user_id], references: [user_id])
+}
