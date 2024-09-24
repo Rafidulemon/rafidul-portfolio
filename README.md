@@ -28,15 +28,15 @@ Make sure you have the following installed:
 
 3.  Install the dependencies:
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
-```
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
 
 ### Prisma Commands
 1. Run Migrations:
@@ -51,21 +51,20 @@ bun install
 
 3. Seed the Database (if applicable):
 
-```bash
-npx prisma db seed
-
-```
+   ```bash
+   npx prisma db seed
+   ```
 
 ### Running the Development Server
 
   ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+  ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
