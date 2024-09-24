@@ -29,7 +29,7 @@ function SignupPage() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       console.error("Passwords do not match");
       return;
@@ -43,7 +43,7 @@ function SignupPage() {
         },
         body: JSON.stringify({
           ...formData,
-          languages: formData.languages.split(",").map(lang => lang.trim()), // Convert languages to an array
+          languages: formData.languages.split(",").map((lang) => lang.trim()), // Convert languages to an array
         }),
       });
 
