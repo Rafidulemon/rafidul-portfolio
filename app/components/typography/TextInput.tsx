@@ -12,6 +12,9 @@ type TextInputProps = {
   isLabelBold?: boolean;
   className?: string;
   dataCy?: string;
+  name?: string; // Add this line
+  type?: string; // Add this line
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Add this line
 };
 
 export const TextInput = (props: TextInputProps) => {
@@ -24,7 +27,10 @@ export const TextInput = (props: TextInputProps) => {
     color = "#111111",
     isFullWidth = false,
     className = "",
-    dataCy = ""
+    dataCy = "",
+    name,
+    type = "text",
+    onChange,
   } = props;
 
   const [inputValue, setInputValue] = useState(value);
@@ -32,6 +38,7 @@ export const TextInput = (props: TextInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setInputValue(newValue);
+    if (onChange) onChange(event);
   };
 
   const backgroundColor = color;
@@ -59,7 +66,8 @@ export const TextInput = (props: TextInputProps) => {
         </Flex>
       )}
       <input
-        type="text"
+        type={type} 
+        name={name} 
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder}

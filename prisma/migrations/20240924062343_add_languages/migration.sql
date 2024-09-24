@@ -8,11 +8,11 @@ CREATE TABLE `User` (
     `email` VARCHAR(191) NOT NULL,
     `dob` DATETIME(3) NOT NULL,
     `nationality` VARCHAR(191) NOT NULL,
-    `image1` VARCHAR(191) NOT NULL,
-    `image2` VARCHAR(191) NOT NULL,
-    `image3` VARCHAR(191) NOT NULL,
-    `image4` VARCHAR(191) NOT NULL,
-    `image5` VARCHAR(191) NOT NULL,
+    `image1` VARCHAR(191) NULL,
+    `image2` VARCHAR(191) NULL,
+    `image3` VARCHAR(191) NULL,
+    `image4` VARCHAR(191) NULL,
+    `image5` VARCHAR(191) NULL,
     `address` VARCHAR(191) NOT NULL,
     `password_hash` VARCHAR(191) NOT NULL,
     `self_introduction` VARCHAR(191) NOT NULL,
@@ -20,6 +20,15 @@ CREATE TABLE `User` (
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`user_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Language` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(191) NOT NULL,
+    `language_name` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -103,6 +112,9 @@ CREATE TABLE `Service` (
 
     PRIMARY KEY (`service_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Language` ADD CONSTRAINT `Language_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `SocialMedia` ADD CONSTRAINT `SocialMedia_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;

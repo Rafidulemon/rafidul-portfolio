@@ -8,6 +8,7 @@ type Props = {
   theme?: "primary" | "secondary";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   isWidthFull?: boolean;
+  type?: "button" | "submit" | "reset"; // Add type prop
 };
 
 function Button(props: Props) {
@@ -17,6 +18,7 @@ function Button(props: Props) {
     theme = "primary",
     onClick,
     isWidthFull = false,
+    type = "button", // Default type to "button"
   } = props;
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -34,6 +36,7 @@ function Button(props: Props) {
     },
     [onClick],
   );
+
   useEffect(() => {
     if (isClicked) {
       const timeout = setTimeout(() => {
@@ -45,16 +48,17 @@ function Button(props: Props) {
 
   return (
     <button
+      type={type} // Set the button type here
       onClick={(e) => {
         setIsClicked(true);
-        debouncedOnClick(e)
+        debouncedOnClick(e);
       }}
       className={`${className} ${isWidthFull ? "w-full" : "w-fit"}`}
       onFocus={() => {}}
     >
       {theme === "secondary" && (
         <div
-          className={`${className} "px-1 inline-block py-1 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3"`}
+          className={`${className} px-1 inline-block py-1 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3`}
         >
           <span className="block bg-black hover:bg-black rounded-full mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
             {children}

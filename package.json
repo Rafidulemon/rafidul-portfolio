@@ -2,11 +2,13 @@
   "name": "rafidul-portfolio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "node prisma/seeds/mainSeed.js"
   },
   "dependencies": {
     "@trpc/client": "^10.45.2",
@@ -33,6 +35,7 @@
     "postcss": "^8",
     "prisma": "^5.19.1",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

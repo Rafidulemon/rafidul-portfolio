@@ -16,15 +16,16 @@ model User {
   email            String    @unique
   dob              DateTime
   nationality      String
-  image1           String
-  image2           String
-  image3           String
-  image4           String
-  image5           String
+  image1           String?
+  image2           String?
+  image3           String?
+  image4           String?
+  image5           String?
   address          String
   password_hash    String
   self_introduction String
   skill_description String
+  languages        Language[] // Add this line for languages
   social_media     SocialMedia?
   educational_details EducationalDetail[]
   professional_details ProfessionalDetail[]
@@ -33,6 +34,14 @@ model User {
   blogs            Blog[]
   services         Service[]
 }
+
+model Language {
+  id          Int      @id @default(autoincrement())
+  user_id     String
+  language_name String
+  user        User     @relation(fields: [user_id], references: [user_id])
+}
+
 
 model SocialMedia {
   user_id    String  @unique
