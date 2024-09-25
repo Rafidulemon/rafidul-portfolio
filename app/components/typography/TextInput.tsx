@@ -12,12 +12,13 @@ type TextInputProps = {
   isLabelBold?: boolean;
   className?: string;
   dataCy?: string;
-  name?: string; // Add this line
-  type?: string; // Add this line
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Add this line
+  name?: string;
+  type?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string; // Add this line
 };
 
-export const TextInput = (props: TextInputProps) => {
+export const TextInput: React.FC<TextInputProps> = (props) => {
   const {
     isRequired = true,
     isLabelBold,
@@ -31,6 +32,7 @@ export const TextInput = (props: TextInputProps) => {
     name,
     type = "text",
     onChange,
+    error, // Destructure error prop
   } = props;
 
   const [inputValue, setInputValue] = useState(value);
@@ -55,7 +57,6 @@ export const TextInput = (props: TextInputProps) => {
               }`}
             />
           )}
-
           {isRequired && (
             <Text
               text="*"
@@ -66,15 +67,18 @@ export const TextInput = (props: TextInputProps) => {
         </Flex>
       )}
       <input
-        type={type} 
-        name={name} 
+        type={type}
+        name={name}
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`text-white border border-cyan-500 rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${className}`}
+        className={`text-white border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
+          error ? 'border-red-500' : 'border-cyan-500'
+        } ${className}`}
         style={{ backgroundColor }}
         data-cy={dataCy}
       />
+      {error && <span className="text-red-500 text-sm">{error}</span>} {/* Display error message */}
     </Flex>
   );
 };
