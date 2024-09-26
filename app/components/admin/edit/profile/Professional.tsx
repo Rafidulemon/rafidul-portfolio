@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Grid } from "@/app/components/layout/Grid";
 import { Text } from "@/app/components/typography/Text";
 import { TextInput } from "@/app/components/typography/TextInput";
-import Details from "@/app/components/about-details/Details";
+import Details from "@/app/components/admin/about-details/Details";
 import Button from "@/app/components/display/Button";
 
 function Professional() {
@@ -44,12 +44,12 @@ function Professional() {
   const [isDetailsPage, setDetailsPage] = useState<boolean>(false);
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       {!isDetailsPage ? (
-        <div className="flex flex-col items-center justify-center gap-10">
+        <div className="w-2/3 flex flex-col items-center justify-center gap-10">
           <Grid
             colCount={2}
-            className="w-[50%] flex flex-col p-4 md:p-10 rounded shadow-lg shadow-teal-700 gap-4 md:gap-6 lg:gap-8 xl:gap-10"
+            className="flex flex-col p-4 md:p-10 rounded shadow-lg shadow-teal-700 gap-4 md:gap-6 lg:gap-8 xl:gap-10"
           >
             <div>
               <Text text="Position" isBold />
@@ -120,9 +120,9 @@ function Professional() {
           </div>
         </div>
       ) : (
-        <Details isAdmin />
+        <Details />
       )}
-    </>
+    </div>
   );
 }
 

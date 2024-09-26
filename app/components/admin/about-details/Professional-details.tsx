@@ -1,6 +1,6 @@
 import React from "react";
-import { Text } from "../typography/Text";
-import { Grid } from "../layout/Grid";
+import { Grid } from "../../layout/Grid";
+import { Text } from "../../typography/Text";
 import Link from "next/link";
 
 function ProfessionalDetails() {

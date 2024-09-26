@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TextInput } from "../typography/TextInput";
-import Button from "../display/Button";
 import { z } from "zod"; // Import Zod
+import { TextInput } from "../../typography/TextInput";
+import Button from "../../display/Button";
 
 interface AddInstitutionPopupProps {
   onClose: () => void;

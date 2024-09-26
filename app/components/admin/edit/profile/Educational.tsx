@@ -4,7 +4,7 @@ import { Grid } from "@/app/components/layout/Grid";
 import { Text } from "@/app/components/typography/Text";
 import { TextInput } from "@/app/components/typography/TextInput";
 import Button from "@/app/components/display/Button";
-import Details from "@/app/components/about-details/Details";
+import Details from "@/app/components/admin/about-details/Details";
 
 interface EducationalProps {
   userId: string;
@@ -109,9 +109,6 @@ function Educational({ userId }: EducationalProps) {
     }
   };
   
-  
-  
-
   return (
     <>
       {!isDetailsPage ? (
@@ -167,7 +164,7 @@ function Educational({ userId }: EducationalProps) {
           </div>
         </div>
       ) : (
-        <Details isAdmin userId={userId} />
+        <Details userId={userId} />
       )}
     </>
   );

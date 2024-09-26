@@ -1,10 +1,6 @@
-import MotionDiv from "@/app/components/animations/MotionDiv";
 import React from "react";
-import { Text } from "@/app/components/typography/Text";
-import { TextGroup } from "@/app/components/typography/TextGroup";
 import PageTitle from "@/app/components/typography/PageTitle";
-import Button from "@/app/components/display/Button";
-import Details from "@/app/components/about-details/Details";
+import Details from "@/app/components/admin/about-details/Details";
 
 function profilePage() {
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "../typography/Text";
-import Button from "../display/Button";
+import AddInstitutionPopup from "./AddInstitutionPopup";
+import Button from "../../display/Button";
+import { Text } from "../../typography/Text";
 
 interface EducationalDetail {
   edu_id: number;
@@ -64,6 +65,18 @@ function EducationalDetails() {
             />
           </div>
         ))
+      )}
+      <div className="flex justify-center mt-6">
+        <Button theme="primary" onClick={() => setIsPopupOpen(true)}>
+          Add Institution
+        </Button>
+      </div>
+      {isPopupOpen && (
+        <AddInstitutionPopup
+          onClose={() => setIsPopupOpen(false)}
+          userId={userId}
+          onSave={handleSave}
+        />
       )}
     </div>
   );

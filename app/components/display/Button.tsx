@@ -8,7 +8,7 @@ type Props = {
   theme?: "primary" | "secondary";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   isWidthFull?: boolean;
-  type?: "button" | "submit" | "reset"; // Add type prop
+  type?: "button" | "submit" | "reset";
 };
 
 function Button(props: Props) {
@@ -34,7 +34,7 @@ function Button(props: Props) {
       }
       lastClickTimestamp.current = now;
     },
-    [onClick],
+    [onClick]
   );
 
   useEffect(() => {
@@ -58,7 +58,7 @@ function Button(props: Props) {
     >
       {theme === "secondary" && (
         <div
-          className={`${className} px-1 inline-block py-1 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3`}
+          className={`${className} "px-1 inline-block py-1 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3"`}
         >
           <span className="block bg-black hover:bg-black rounded-full mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
             {children}

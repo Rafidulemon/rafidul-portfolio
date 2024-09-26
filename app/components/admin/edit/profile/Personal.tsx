@@ -5,7 +5,7 @@ import { Text } from "@/app/components/typography/Text";
 import MotionDiv from "@/app/components/animations/MotionDiv";
 import { TextInput } from "@/app/components/typography/TextInput";
 import Button from "@/app/components/display/Button";
-import Details from "@/app/components/about-details/Details";
+import Details from "@/app/components/admin/about-details/Details";
 
 function Personal() {
   const [name, setName] = useState<string>("Md. Rafidul Islam");
@@ -110,7 +110,7 @@ function Personal() {
           </div>
         </div>
       ) : (
-        <Details isAdmin />
+        <Details />
       )}
     </>
   );
