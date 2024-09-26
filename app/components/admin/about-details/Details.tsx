@@ -38,7 +38,7 @@ function Details(props: Props) {
 
   return (
     <>
-      {isPersonalProfileEdit && <Personal />}
+      {isPersonalProfileEdit && <Personal userId={userId} />}
       {isEducationalProfileEdit && <Educational userId={userId} />}
       {isProfessionalProfileEdit && <Professional />}
 

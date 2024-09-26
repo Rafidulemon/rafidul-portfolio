@@ -1,22 +1,65 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@/app/components/layout/Grid";
 import { Text } from "@/app/components/typography/Text";
 import MotionDiv from "@/app/components/animations/MotionDiv";
 import { TextInput } from "@/app/components/typography/TextInput";
 import Button from "@/app/components/display/Button";
 import Details from "@/app/components/admin/about-details/Details";
+import Modal from "@/app/components/display/Modal";
 
-function Personal() {
-  const [name, setName] = useState<string>("Md. Rafidul Islam");
-  const [occupation, setOccupation] = useState<string>("Software Engineer");
-  const [phone, setPhone] = useState<string>("+8801111111111");
-  const [email, setEmail] = useState<string>("rafidul@example.com");
-  const [dob, setDob] = useState<string>("12 November 1997");
-  const [nationality, setNationality] = useState<string>("Bangladeshi");
-  const [address, setAddress] = useState<string>("Patiya, Chittagong");
-  const [languages, setLanguages] = useState<string>("English, Bengali");
+interface PersonalProps {
+  userId: string;
+}
+
+interface Language {
+  language_name: string;
+}
+
+interface User {
+  user_id: string;
+  first_name: string;
+  last_name: string;
+  occupation: string;
+  phone: string;
+  email: string;
+  dob: Date;
+  nationality: string;
+  image1?: string;
+  address: string;
+  languages: Language[];
+}
+
+function Personal({ userId }: PersonalProps) {
   const [isDetailsPage, setDetailsPage] = useState<boolean>(false);
+  const [userData, setUserData] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/users/${userId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await response.json();
+        setUserData(data.user);
+        console.log("Fetched User Data:", data.user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -35,67 +78,86 @@ function Personal() {
               colCount={2}
               className="gap-4 md:gap-6 lg:gap-7 xl:gap-8 text-white text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px]"
             >
-              <div>
-                <Text text="Name" isBold />
-              </div>
-              <div>
-                <TextInput value={name} />
-              </div>
+              <React.Fragment>
+                <div>
+                  <Text text="First Name" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.first_name} />
+                </div>
 
-              <div>
-                <Text text="Occupation" isBold />
-              </div>
-              <div>
-                <TextInput value={occupation} />
-              </div>
+                <div>
+                  <Text text="Last Name" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.last_name} />
+                </div>
 
-              <div>
-                <Text text="Phone" isBold />
-              </div>
-              <div>
-                <TextInput value={phone} />
-              </div>
+                <div>
+                  <Text text="Occupation" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.occupation} />
+                </div>
 
-              <div>
-                <Text text="Email" isBold />
-              </div>
-              <div>
-                <TextInput value={email} />
-              </div>
+                <div>
+                  <Text text="Phone" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.phone} />
+                </div>
 
-              <div>
-                <Text text="Date of Birth" isBold />
-              </div>
-              <div>
-                <TextInput value={dob} />
-              </div>
+                <div>
+                  <Text text="Email" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.email} />
+                </div>
 
-              <div>
-                <Text text="Nationality" isBold />
-              </div>
-              <div>
-                <TextInput value={nationality} />
-              </div>
+                <div>
+                  <Text text="Date of Birth" isBold />
+                </div>
+                <div>
+                  <TextInput
+                    value={
+                      userData?.dob
+                        ? new Date(userData.dob).toLocaleDateString()
+                        : ""
+                    }
+                  />
+                </div>
 
-              <div>
-                <Text text="Address" isBold />
-              </div>
-              <div>
-                <TextInput value={address} />
-              </div>
+                <div>
+                  <Text text="Nationality" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.nationality} />
+                </div>
 
-              <div>
-                <Text text="Languages" isBold />
-              </div>
-              <div>
-                <TextInput value={languages} />
-              </div>
+                <div>
+                  <Text text="Address" isBold />
+                </div>
+                <div>
+                  <TextInput value={userData?.address} />
+                </div>
+
+                <div>
+                  <Text text="Languages" isBold />
+                </div>
+                <div>
+                  <TextInput
+                    value={userData?.languages
+                      ?.map((language) => language.language_name)
+                      .join(", ")}
+                  />
+                </div>
+              </React.Fragment>
             </Grid>
           </div>
           <div className="flex flex-row gap-6 mb-6">
             <Button
               theme="primary"
-              onClick={() => setDetailsPage(true)}
+              onClick={() => setModalOpen(true)}
               className="w-[200px]"
             >
               Save
@@ -111,6 +173,15 @@ function Personal() {
         </div>
       ) : (
         <Details />
+      )}
+
+      {isModalOpen && (
+        <Modal
+          title="Confirmation"
+          message="Are you sure you want to update the details?"
+          onConfirm={() => setModalOpen(false)}
+          onCancel={() => setModalOpen(false)}
+        />
       )}
     </>
   );

@@ -26,7 +26,7 @@ model User {
   password_hash      String
   self_introduction  String
   skill_description  String
-  languages          Language[]        // Add this line for languages
+  languages          String?        // Add this line for languages
   social_media       SocialMedia?
   educational_details EducationalDetail[]
   professional_details ProfessionalDetail[]
@@ -34,13 +34,6 @@ model User {
   projects           Project[]
   blogs              Blog[]
   services           Service[]
-}
-
-model Language {
-  id              String    @id @default(uuid())
-  user_id         String
-  language_name   String
-  user            User      @relation(fields: [user_id], references: [user_id])
 }
 
 model SocialMedia {
