@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { z } from "zod"; // Import Zod
+import { z } from "zod";
 import { TextInput } from "../../typography/TextInput";
 import Button from "../../display/Button";
 
@@ -9,7 +9,6 @@ interface AddInstitutionPopupProps {
   onSave: (data: { degree: string; group_major: string; institution_name: string; passing_year: number }) => void;
 }
 
-// Define a Zod schema for the form fields
 const institutionSchema = z.object({
   degree: z.string().min(1, "Degree is required."),
   group_major: z.string().min(1, "Group/Major is required."),
@@ -29,10 +28,8 @@ const AddInstitutionPopup: React.FC<AddInstitutionPopupProps> = ({
   const [errors, setErrors] = useState<{ degree?: string; group_major?: string; institution_name?: string; passing_year?: string }>({});
 
   const handleSave = async () => {
-    // Parse passingYear to a number for validation
     const parsedYear = parseInt(passingYear);
 
-    // Validate input using Zod
     const validationResult = institutionSchema.safeParse({
       degree,
       group_major: groupMajor,
@@ -41,10 +38,9 @@ const AddInstitutionPopup: React.FC<AddInstitutionPopupProps> = ({
     });
 
     if (!validationResult.success) {
-      // Set errors based on Zod validation
       const newErrors: any = {};
       validationResult.error.errors.forEach((error) => {
-        newErrors[error.path[0]] = error.message; // Map error messages
+        newErrors[error.path[0]] = error.message;
       });
       setErrors(newErrors);
       return;

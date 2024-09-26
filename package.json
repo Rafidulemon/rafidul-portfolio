@@ -11,6 +11,7 @@
     "seed": "node prisma/seeds/mainSeed.js"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@trpc/client": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",

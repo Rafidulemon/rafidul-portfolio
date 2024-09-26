@@ -67,7 +67,7 @@ function EducationalDetails() {
         ))
       )}
       <div className="flex justify-center mt-6">
-        <Button theme="primary" onClick={() => setIsPopupOpen(true)}>
+        <Button theme="secondary" onClick={() => setIsPopupOpen(true)}>
           Add Institution
         </Button>
       </div>

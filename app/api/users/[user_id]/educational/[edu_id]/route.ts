@@ -16,7 +16,7 @@ export async function PUT(req: Request, { params }: { params: { user_id: string;
 
     const updatedDetail = await prisma.educationalDetail.update({
       where: {
-        edu_id: Number(edu_id),
+        edu_id: edu_id,
       },
       data: {
         degree,

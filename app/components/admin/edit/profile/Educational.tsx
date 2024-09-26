@@ -5,24 +5,18 @@ import { Text } from "@/app/components/typography/Text";
 import { TextInput } from "@/app/components/typography/TextInput";
 import Button from "@/app/components/display/Button";
 import Details from "@/app/components/admin/about-details/Details";
+import Modal from "@/app/components/display/Modal";
 
 interface EducationalProps {
   userId: string;
-}
-
-interface EducationalDetail {
-  edu_id: string;
-  degree: string;
-  institution_name: string;
-  group_major: string;
-  passing_year: string;
-  userId?: string; 
 }
 
 function Educational({ userId }: EducationalProps) {
   const [educationalDetails, setEducationalDetails] = useState<any[]>([]);
   const [isDetailsPage, setDetailsPage] = useState<boolean>(false);
   const [updatedDetails, setUpdatedDetails] = useState<any[]>([]);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [hasChanges, setHasChanges] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchEducationalDetails = async () => {
@@ -33,7 +27,7 @@ function Educational({ userId }: EducationalProps) {
 
         if (data.success) {
           setEducationalDetails(data.educationalDetails);
-          setUpdatedDetails(data.educationalDetails); // Initialize updated details
+          setUpdatedDetails(data.educationalDetails);
         } else {
           setEducationalDetails([]);
         }
@@ -53,6 +47,18 @@ function Educational({ userId }: EducationalProps) {
       [field]: value,
     };
     setUpdatedDetails(newDetails);
+
+    if (newDetails[index][field] !== educationalDetails[index][field]) {
+      setHasChanges(true);
+    }
+  };
+
+  const handleSaveClick = () => {
+    if (hasChanges) {
+      setModalOpen(true);
+    } else {
+      setDetailsPage(true);
+    }
   };
 
   const handleSave = async () => {
@@ -61,34 +67,14 @@ function Educational({ userId }: EducationalProps) {
         const eduId = detail.edu_id;
         console.log("Attempting to update Edu ID: ", eduId);
   
-        const originalDetail = educationalDetails.find(e => e.edu_id === eduId);
-  
-        if (!originalDetail) {
-          console.error(`No original detail found for Edu ID ${eduId}`);
-          continue;
-        }
-  
-        const fieldsToUpdate: Partial<EducationalDetail> = {};
-
-        for (const key of Object.keys(detail) as (keyof EducationalDetail)[]) {
-          if (key !== 'edu_id' && originalDetail.hasOwnProperty(key) && detail[key] !== originalDetail[key]) {
-            fieldsToUpdate[key] = detail[key];
-          }
-        }
-        if (Object.keys(fieldsToUpdate).length === 0) {
-          console.log(`No changes detected for Edu ID ${eduId}, skipping update.`);
-          continue;
-        }
-        fieldsToUpdate.userId = userId;
-
         const response = await fetch(`/api/users/${userId}/educational/${eduId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(fieldsToUpdate),
+          body: JSON.stringify(detail),
         });
-
+  
         if (!response.ok) {
           const errorData = await response.json();
           console.error("Error updating detail:", errorData.error);
@@ -98,7 +84,7 @@ function Educational({ userId }: EducationalProps) {
         const data = await response.json();
         console.log("Update Response for Edu ID:", eduId, data);
       }
-
+  
       const updatedResponse = await fetch(`/api/users/${userId}/educational`);
       const updatedData = await updatedResponse.json();
       if (updatedData.success) {
@@ -106,9 +92,13 @@ function Educational({ userId }: EducationalProps) {
       }
     } catch (error) {
       console.error("Error saving educational detail:", error);
+    } finally {
+      setModalOpen(false);
+      setDetailsPage(true);
     }
   };
   
+
   return (
     <>
       {!isDetailsPage ? (
@@ -155,16 +145,25 @@ function Educational({ userId }: EducationalProps) {
           )}
 
           <div className="flex flex-row gap-6 mb-6">
-            <Button theme="primary" className="w-[200px]" onClick={handleSave}>
+            <Button theme="primary" className="w-[200px]" onClick={handleSaveClick}>
               Save
             </Button>
-            <Button theme="secondary" className="w-[200px]" onClick={() => setDetailsPage(false)}>
+            <Button theme="secondary" className="w-[200px]" onClick={() => setDetailsPage(true)}>
               Back to Profile
             </Button>
           </div>
         </div>
       ) : (
         <Details userId={userId} />
+      )}
+
+      {isModalOpen && (
+        <Modal
+          title="Confirmation"
+          message="Are you sure you want to update the details?"
+          onConfirm={handleSave}
+          onCancel={() => setModalOpen(false)}
+        />
       )}
     </>
   );

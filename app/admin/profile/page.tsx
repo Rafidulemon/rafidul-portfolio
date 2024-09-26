@@ -7,7 +7,7 @@ function profilePage() {
     <div className="w-full flex flex-col items-center">
       <PageTitle name="Profile" />
         <div className="w-full mt-10">
-        <Details isAdmin/>
+        <Details />
       </div>
     </div>
   );
