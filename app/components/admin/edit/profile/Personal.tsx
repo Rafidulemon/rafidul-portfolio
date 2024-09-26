@@ -27,7 +27,7 @@ interface User {
   nationality: string;
   image1?: string;
   address: string;
-  languages: Language[];
+  languages: string;
 }
 
 function Personal({ userId }: PersonalProps) {
@@ -145,11 +145,7 @@ function Personal({ userId }: PersonalProps) {
                   <Text text="Languages" isBold />
                 </div>
                 <div>
-                  <TextInput
-                    value={userData?.languages
-                      ?.map((language) => language.language_name)
-                      .join(", ")}
-                  />
+                  <TextInput value={userData?.languages} />
                 </div>
               </React.Fragment>
             </Grid>

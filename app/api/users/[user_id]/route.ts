@@ -16,9 +16,6 @@ export async function GET(request: Request, { params }: { params: { user_id: str
       where: {
         user_id,
       },
-      include: {
-        languages: true,
-      },
     });
 
     if (!user) {
@@ -54,6 +51,7 @@ export async function PUT(request: Request, { params }: { params: { user_id: str
         dob: new Date(body.dob),
         nationality: body.nationality,
         address: body.address,
+        languages: body.languages
       },
     });
 

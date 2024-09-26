@@ -19,7 +19,7 @@ interface User {
   nationality: string;
   image1?: string;
   address: string;
-  languages: Language[];
+  languages: string;
 }
 
 function PersonalDetails() {
@@ -46,7 +46,7 @@ function PersonalDetails() {
   return (
     <div className="p-10 rounded shadow-lg shadow-teal-700">
       {!userData ? (
-          <Text text="No User Found" className="w-full text-center"/>
+        <Text text="No User Found" className="w-full text-center" />
       ) : (
         <div>
           <div className="pb-6 flex flex-row justify-center">
@@ -108,11 +108,7 @@ function PersonalDetails() {
               <Text text="Languages" isBold />
             </div>
             <div>
-              <Text
-                text={userData.languages
-                  .map((lang) => lang.language_name)
-                  .join(", ")}
-              />{" "}
+              <Text text={userData.languages} />
             </div>
           </Grid>
         </div>

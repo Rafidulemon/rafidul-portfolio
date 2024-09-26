@@ -17,18 +17,10 @@ CREATE TABLE `User` (
     `password_hash` VARCHAR(191) NOT NULL,
     `self_introduction` VARCHAR(191) NOT NULL,
     `skill_description` VARCHAR(191) NOT NULL,
+    `languages` VARCHAR(191) NULL,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`user_id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Language` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(191) NOT NULL,
-    `language_name` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -46,7 +38,7 @@ CREATE TABLE `SocialMedia` (
 
 -- CreateTable
 CREATE TABLE `EducationalDetail` (
-    `edu_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `edu_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `degree` VARCHAR(191) NOT NULL,
     `group_major` VARCHAR(191) NOT NULL,
@@ -58,7 +50,7 @@ CREATE TABLE `EducationalDetail` (
 
 -- CreateTable
 CREATE TABLE `ProfessionalDetail` (
-    `prof_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `prof_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `company_name` VARCHAR(191) NOT NULL,
     `designation` VARCHAR(191) NOT NULL,
@@ -71,7 +63,7 @@ CREATE TABLE `ProfessionalDetail` (
 
 -- CreateTable
 CREATE TABLE `Skill` (
-    `skill_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `skill_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `skill_name` VARCHAR(191) NOT NULL,
     `skill_percentage` INTEGER NOT NULL,
@@ -81,7 +73,7 @@ CREATE TABLE `Skill` (
 
 -- CreateTable
 CREATE TABLE `Project` (
-    `project_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `project_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `project_name` VARCHAR(191) NOT NULL,
     `project_description` VARCHAR(191) NOT NULL,
@@ -92,7 +84,7 @@ CREATE TABLE `Project` (
 
 -- CreateTable
 CREATE TABLE `Blog` (
-    `blog_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `blog_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `blog_name` VARCHAR(191) NOT NULL,
     `blog_details` VARCHAR(191) NOT NULL,
@@ -104,7 +96,7 @@ CREATE TABLE `Blog` (
 
 -- CreateTable
 CREATE TABLE `Service` (
-    `service_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `service_id` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
     `service_name` VARCHAR(191) NOT NULL,
     `service_details` VARCHAR(191) NOT NULL,
@@ -112,9 +104,6 @@ CREATE TABLE `Service` (
 
     PRIMARY KEY (`service_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- AddForeignKey
-ALTER TABLE `Language` ADD CONSTRAINT `Language_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `SocialMedia` ADD CONSTRAINT `SocialMedia_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
