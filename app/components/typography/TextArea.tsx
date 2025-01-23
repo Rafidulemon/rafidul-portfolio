@@ -1,30 +1,48 @@
-import { type FieldError, type UseFormRegister } from "react-hook-form";
 import { Flex } from "../layout/Flex";
 import { Text } from "../typography/Text";
+import { useState } from "react";
+
 export type Props = {
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  className?: string;
-  label?: string;
-  isLabelBold?: boolean;
-  placeholder?: string;
-  name?: string;
-  register?: UseFormRegister<any>;
   value?: string;
+  placeholder?: string;
+  label?: string;
+  color?: string;
+  isFullWidth?: boolean;
   isRequired?: boolean;
-  isDisable?: boolean;
+  isLabelBold?: boolean;
+  className?: string;
+  dataCy?: string;
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  error?: string;
 };
+
 export const TextArea = (props: Props) => {
   const {
     isRequired = true,
-    value,
-    onChange,
-    className,
-    label,
     isLabelBold,
-    name = "",
-    register,
-    placeholder,
+    value,
+    placeholder = "",
+    label = "",
+    color = "#111111",
+    isFullWidth = false,
+    className = "",
+    dataCy = "",
+    name,
+    onChange,
+    error,
   } = props;
+
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    if (onChange) onChange(event);
+  };
+
+  const backgroundColor = color;
+
   return (
     <Flex direction="col" gap="10px" className={`w-full ${className}`}>
       {((label && label.length > 0) ?? isRequired) && (
@@ -47,15 +65,18 @@ export const TextArea = (props: Props) => {
           )}
         </Flex>
       )}
-
       <textarea
-        value={value}
-        onChange={onChange}
-        {...register?.(name)}
-        style={{ resize: "none" }}
-        className={`border border-cyan-500 bg-[#111111] text-[12px] md:text-[16px] rounded-lg px-3 py-2 focus:outline-none focus:border-cyan-900 text-white ${className}`}
+        name={name}
+        value={inputValue}
+        onChange={handleChange}
         placeholder={placeholder}
-      ></textarea>
+        className={`text-top text-white border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
+          error ? "border-red-500" : "border-cyan-500"
+        } ${className}`}
+        style={{ backgroundColor }}
+        data-cy={dataCy}
+      />
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </Flex>
   );
 };

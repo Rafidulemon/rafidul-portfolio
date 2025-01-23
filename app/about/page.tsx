@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Line } from "../components/display/Line";
 import { Text } from "../components/typography/Text";
 import { Grid } from "../components/layout/Grid";
@@ -19,7 +20,91 @@ import {
 import Details from "../components/about-details/Details";
 import Link from "next/link";
 
-function aboutPage() {
+const AboutPage = () => {
+  const [showPersonalProjects, setShowPersonalProjects] = useState(true);
+  
+    const personalProjects = [
+      {
+        src: "/images/projects/alizaAi.jpg",
+        title: "Virtual Assistant",
+        details:
+          "An AI-powered virtual assistant capable of handling user queries, setting reminders, and performing various tasks.",
+        github: "https://github.com/Rafidulemon/myVirtualAssistant",
+        link: "#",
+      },
+      {
+        src: "/images/projects/portfolio-web.png",
+        title: "Portfolio Website",
+        details:
+          "A visually stunning and responsive portfolio website showcasing skills, projects, and achievements.",
+        github: "https://github.com/Rafidulemon/rafidul-portfolio",
+        link: "https://rafidul-portfolio.vercel.app",
+      },
+      {
+        src: "/images/projects/hr_mgt.jpeg",
+        title: "HR Management App",
+        details:
+          "A modern HR management application to handle employee records, payroll, and organizational tasks effectively.",
+        github: "https://github.com/Rafidulemon/hr_mgt",
+        link: "https://hr-mgt.netlify.app/",
+      },
+      {
+        src: "/images/projects/hospital.jpg",
+        title: "Hospital App",
+        details:
+          "A hospital management web app featuring patient records, doctor schedules, and appointment booking.",
+        github: "https://github.com/Rafidulemon/demo_hospital",
+        link: "https://demo-hospital-theta.vercel.app",
+      },
+      {
+        src: "/images/projects/career.jpg",
+        title: "Carriastic Website",
+        details:
+          "A carrer development website showcasing various job opportunities and resources for career growth.",
+        github: "https://github.com/Rafidulemon/carriastic",
+        link: "https://carriasticapp.vercel.app/",
+      },
+    ];
+    
+    const professionalProjects = [
+      {
+        src: "/images/projects/moeguide.png",
+        title: "MoeGuide",
+        details:
+          "A comprehensive guide application featuring detailed itineraries, activities, and location-based recommendations.",
+        link: "https://moeguide-app.vercel.app/",
+        github: "https://github.com/",
+      },
+      {
+        src: "/images/projects/suiri.png",
+        title: "Suirikyou",
+        details:
+          "A plafrorm for online test and getting results, certificates, and scholarships.",
+        link: "https://suirikyou.vercel.app/",
+        github: "https://github.com/",
+      },
+      {
+        src: "/images/projects/rag.png",
+        title: "Raggie",
+        details:
+          "An inhouse gpt platform for ai chatting",
+        link: "https://raggie-swart.vercel.app/",
+        github: "https://github.com/",
+      },
+      {
+        src: "/images/projects/benrimono.png",
+        title: "Benrimono",
+        details:
+          "A platform for user and driver management including live location, calling the driver",
+        link: "https://benrimono-api-next.vercel.app",
+        github: "https://github.com/",
+      },
+    ];
+    
+  
+    const currentProjects = showPersonalProjects
+      ? personalProjects
+      : professionalProjects;
   return (
     <div className="w-full pt-16 md:py-20">
       <PageTitle name="ABOUT ME" />
@@ -36,31 +121,25 @@ function aboutPage() {
               />
             </div>
             <div className="flex w-full flex-row items-center justify-center mt-4 gap-x-4 mb-4">
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.facebook.com/rafidul.emon.50" target="_blank">
                 <FaFacebook
                   color="#1877F2"
                   size={20}
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.instagram.com/rafidulemon" target="_blank">
                 <FaInstagram
                   color="#E1306C"
                   size={20}
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://github.com/Rafidulemon" target="_blank">
                 <FaGithub
                   color="#FFFFFF"
                   size={20}
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
-                <FaTwitter
-                  color="#1DA1F2"
-                  size={20}
-                />
-              </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.linkedin.com/in/md-rafidul-islam-8b013118b/" target="_blank">
                 <FaLinkedin
                   color="#0077B5"
                   size={20}
@@ -75,7 +154,7 @@ function aboutPage() {
             isBold
             className="text-[16px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] text-[12px] mb-4 text-justify">
+          <p className="text-[#ADB7BE] text-[14px] mb-4 text-justify">
             Crafted by a skilled Software Engineer, specializing in Mobile App
             Development and Web Development, the digital experiences by this
             innovative mind blend technology and creativity seamlessly.
@@ -101,27 +180,27 @@ function aboutPage() {
                 className="mr-4 inline-block align-middle"
               />
               <Text
-                text="+8801111111111"
-                className="inline-block align-middle text-white text-[12px]"
+                text="+8801990497796"
+                className="inline-block align-middle text-white text-[14px]"
               />
             </div>
-            <div className="mb-2">
+            <Link href={`mailto:rafidulemon@gmail.com`} className="mb-2">
               <MdOutlineEmail
                 size={18}
                 color="#00BCD4"
                 className="mr-4 inline-block align-middle"
               />
               <Text
-                text="rafidul@example.com"
-                className="inline-block align-middle text-white text-[12px]"
+                text="rafidulemon@gmail.com"
+                className="inline-block align-middle text-white text-[14px]"
               />
-            </div>
-            <Link href={"/contact"}>
+            </Link>
+            <Link href={"/contact"} className="w-full my-2">
               <Button
                 theme="primary"
-                className="w-[120px]"
+                className="w-full"
               >
-                <Text text="Get in Touch" className="text-[12px] text-white"/>
+                <Text text="Get in Touch" className="text-[14px] text-white"/>
               </Button>
             </Link>
           </div>
@@ -132,7 +211,7 @@ function aboutPage() {
             isBold
             className="text-[16px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] text-[12px] mb-4 text-justify">
+          <p className="text-[#ADB7BE] text-[14px] mb-4 text-justify">
             With expertise spanning web development encompassing JavaScript,
             TypeScript, React.js, Next.js, and database management tools like
             MySQL, MongoDB, and Prisma, alongside mobile app development
@@ -181,21 +260,21 @@ function aboutPage() {
                 className="mr-4 inline-block align-middle"
               />
               <Text
-                text="+8801111111111"
+                text="+8801990497796"
                 className="inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
               />
             </div>
-            <div>
+            <Link href={`mailto:rafidulemon@gmail.com`}>
               <MdOutlineEmail
                 size={24}
                 color="#00BCD4"
                 className="mr-4 inline-block align-middle"
               />
               <Text
-                text="rafidul@example.com"
+                text="rafidulemon@gmail.com"
                 className="inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
               />
-            </div>
+            </Link>
             <Link href={"/contact"} className="mt-4">
               <Button
                 theme="primary"
@@ -218,31 +297,25 @@ function aboutPage() {
               />
             </div>
             <div className="flex w-full flex-row items-center justify-center md:mt-4 md:gap-x-4 lg:mt-8 lg:gap-x-8 xl:mt-8 xl:gap-x-8 mb-10">
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.facebook.com/rafidul.emon.50" target="_blank">
                 <FaFacebook
                   color="#1877F2"
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.instagram.com/rafidulemon" target="_blank">
                 <FaInstagram
                   color="#E1306C"
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://github.com/Rafidulemon" target="_blank">
                 <FaGithub
                   color="#FFFFFF"
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
                 />
               </a>
-              <a href="https://www.facebook.com/" target="_blank">
-                <FaTwitter
-                  color="#1DA1F2"
-                  className="md:text-[24px] md:text-[28px] md:text-[30px]"
-                />
-              </a>
-              <a href="https://www.facebook.com/" target="_blank">
+              <a href="https://www.linkedin.com/in/md-rafidul-islam-8b013118b/" target="_blank">
                 <FaLinkedin
                   color="#0077B5"
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
@@ -273,8 +346,8 @@ function aboutPage() {
           </div>
         </div>
       </Grid>
-      <div className="w-full md:my-14 lg:my-18 xl:my-20">
-        <div className="w-full flex flex-col mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
+      <div className="w-full mt-6">
+        <div className="w-full flex flex-col items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
           <Line className="w-full border-cyan-500" />
           <Text
             text="My Projects"
@@ -283,52 +356,63 @@ function aboutPage() {
           />
           <Line className="w-full border-cyan-500" />
         </div>
+
+        {/* Tabs */}
+        <div className="w-full flex flex-row items-center justify-center gap-4 md:gap-10 my-6">
+          <button
+            className={`${
+              showPersonalProjects
+                ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
+                : "border border-cyan-500 rounded-xl py-1 px-4"
+            } text-[16px] md:text-[24px] focus:outline-none`}
+            onClick={() => setShowPersonalProjects(true)}
+          >
+            Personal Projects
+          </button>
+
+          <button
+            className={`${
+              !showPersonalProjects
+                ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
+                : "border border-cyan-500 rounded-xl py-1 px-4"
+            } text-[16px] md:text-[24px] focus:outline-none`}
+            onClick={() => setShowPersonalProjects(false)}
+          >
+            Professional Projects
+          </button>
+        </div>
+
+        {/* Project Cards */}
         <div className="w-full flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-            <ProjectsCard
-              src="/images/projects/alizaAi.jpg"
-              project_title="Virtual Assistant"
-              project_details="Details about the project will be added here."
-            />
-            <ProjectsCard
-              src="/images/projects/portfolio-web.png"
-              project_title="Portfolio Website"
-              project_details="Details about the project will be added here."
-            />
+          <div className="flex flex-wrap items-center justify-center gap-10">
+            {currentProjects.map((project, index) => (
+              <ProjectsCard
+                key={index}
+                src={project.src}
+                project_title={project.title}
+                project_details={project.details}
+                github_link={project.github}
+                live_link={project.link}
+              />
+            ))}
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-            <ProjectsCard
-              src="/images/projects/hr-mgt.jpg"
-              project_title="HR Management App"
-              project_details="Details about the project will be added here."
-            />
-            <ProjectsCard
-              src="/images/projects/food-delivery-web.png"
-              project_title="Food Delivery App"
-              project_details="Details about the project will be added here."
-            />
-            <ProjectsCard
-              src="/images/projects/ecom-website.png"
-              project_title="E-Commerce Website"
-              project_details="Details about the project will be added here."
-            />
-          </div>
+
           <Link
             href={"/projects"}
             className="flex flex-row items-center justify-center"
           >
             <Text
               text="See More..."
-              className="text-cyan-200 md:text-[16px] lg:text-[20px] xl:text-[24px]"
+              className="text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]"
             />
           </Link>
         </div>
       </div>
-      <div className="w-full mt-10">
+      <div className="w-full my-10">
         <Details />
       </div>
     </div>
   );
 }
 
-export default aboutPage;
+export default AboutPage;

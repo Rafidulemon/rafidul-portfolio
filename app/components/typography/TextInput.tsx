@@ -15,14 +15,14 @@ type TextInputProps = {
   name?: string;
   type?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string; // Add this line
+  error?: string;
 };
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
   const {
     isRequired = true,
     isLabelBold,
-    value = "",
+    value,
     placeholder = "",
     label = "",
     color = "#111111",
@@ -32,7 +32,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
     name,
     type = "text",
     onChange,
-    error, // Destructure error prop
+    error,
   } = props;
 
   const [inputValue, setInputValue] = useState(value);

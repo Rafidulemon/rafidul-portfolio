@@ -16,8 +16,8 @@ function ServicessCard(props: ServicesCardProps) {
         {icon}
       </div>
       <div className="flex flex-col mx-4 my-2">
-        <Text text={service_title} isBold className="text-white text-[12px] md:text-[15px] lg:text-[18px] mb-2"/>
-        <Text text={service_details} className="text-[#ADB7BE] text-justify text-[10px] md:text-[14px] lg:text-[16px]" />
+        <Text text={service_title} isBold className="text-white text-[16px] md:text-[20px] mb-2"/>
+        <Text text={service_details} className="text-[#ADB7BE] text-justify text-[14px] md:text-[16px]" />
       </div>
     </div>
   );

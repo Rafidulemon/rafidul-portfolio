@@ -58,9 +58,9 @@ function Button(props: Props) {
     >
       {theme === "secondary" && (
         <div
-          className={`${className} "px-1 inline-block py-1 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3"`}
+          className={`${className} "inline-block py-[2px] md:py-1 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-white mt-3"`}
         >
-          <span className="block bg-black hover:bg-black rounded-full mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
+          <span className="block bg-black hover:bg-black rounded-xl md:rounded-full mx-[2px] md:mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
             {children}
           </span>
         </div>
@@ -68,7 +68,7 @@ function Button(props: Props) {
 
       {theme === "primary" && (
         <div
-          className={`${className} px-6 inline-block py-2 md:py-3 rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white`}
+          className={`${className} px-6 inline-block py-2 md:py-3 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white`}
         >
           <span className="flex flex-col justify-center">{children}</span>
         </div>
