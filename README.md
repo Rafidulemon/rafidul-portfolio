@@ -12,7 +12,6 @@ Make sure you have the following installed:
 - [Yarn](https://yarnpkg.com/) (if you're using Yarn)
 - [PNPM](https://pnpm.js.org/) (if you're using PNPM)
 - [Bun](https://bun.sh/) (if you're using Bun)
-- [Prisma CLI](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch-typescript-postgres)
 
 ### Installation
 
@@ -37,24 +36,6 @@ Make sure you have the following installed:
    # or
    bun install
    ```
-
-### Prisma Commands
-1. Run Migrations:
-
-   ```bash
-   npx prisma migrate dev
-
-2. Generate Prisma Client:
-
-   ```bash
-   npx prisma generate
-
-3. Seed the Database (if applicable):
-
-   ```bash
-   npx prisma db seed
-   ```
-
 ### Running the Development Server
 
   ```bash
