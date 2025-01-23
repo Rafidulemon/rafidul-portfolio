@@ -8,13 +8,11 @@ function WebProject() {
         <ProjectsCard
           src="/images/projects/portfolio-web.png"
           project_title="Portfolio Website"
-          project_details="Details about the project will be added here."
-        />
+          project_details="Details about the project will be added here." github_link={""} live_link={""}        />
         <ProjectsCard
           src="/images/projects/ecom-website.png"
           project_title="E-Commerce Website"
-          project_details="Details about the project will be added here."
-        />
+          project_details="Details about the project will be added here." github_link={""} live_link={""}        />
       </div>
     </div>
   );

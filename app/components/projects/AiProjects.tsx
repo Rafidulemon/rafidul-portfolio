@@ -7,8 +7,7 @@ function AiProjects() {
       <ProjectsCard
         src="/images/projects/alizaAi.jpg"
         project_title="Virtual Assistant"
-        project_details="Details about the project will be added here."
-      />
+        project_details="Details about the project will be added here." github_link={""} live_link={""}      />
     </div>
   );
 }
