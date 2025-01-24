@@ -30,6 +30,7 @@ const config: Config = {
       colors: {
         primary: "#00BCD4",
         tertiary: "#F44336",
+        primary_light: "#B2EBF2",
       },
     },
   },

@@ -1,32 +1,10 @@
 "use client";
+import React from "react";
 
-import Router from "next/router";
-import { useEffect, useState } from "react";
-
-const LoadingBar: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const start = () => {
-      setLoading(true);
-    };
-
-    const end = () => setLoading(false);
-
-    Router.events.on("routeChangeStart", start);
-    Router.events.on("routeChangeComplete", end);
-    Router.events.on("routeChangeError", end);
-
-    return () => {
-      Router.events.off("routeChangeStart", start);
-      Router.events.off("routeChangeComplete", end);
-      Router.events.off("routeChangeError", end);
-    };
-  }, []);
-
-  return loading ? (
-    <div className="loading-bar" style={{ backgroundColor: "#00BCD4" }} />
-  ) : null;
+export default function Loading() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-12 h-12 border-4 border-primary border-t-primary_light rounded-full animate-spin"></div>
+    </div>
+  );
 };
-
-export default LoadingBar;
