@@ -306,7 +306,7 @@ const HomePage = () => {
           >
             <Text
               text="See More..."
-              className="dark:text-primary text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]"
+              className="dark:text-primary text-cyan-200 text-[16px] lg:text-[20px] xl:text-[24px]"
             />
           </Link>
         </div>

@@ -7,7 +7,7 @@ const TyAnimation = () => {
   return (
     <TypeAnimation
       sequence={[
-        "Rafid",
+        "Md. Rafidul Islam",
         1500,
         "Web Developer",
         1000,
