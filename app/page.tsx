@@ -92,15 +92,6 @@ const HomePage = () => {
     },
   ];
 
-  // const handleDownload = () => {
-  //   const link = document.createElement("a");
-  //   link.href = "/cv/rafid_cv.pdf";
-  //   link.download = "rafid_cv.pdf";
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
-
   const currentProjects = showPersonalProjects
     ? personalProjects
     : professionalProjects;
@@ -138,17 +129,13 @@ const HomePage = () => {
                 />
               </Button>
             </Link>
-            {/* <Link href="/">
-              <Button theme="secondary" onClick={handleDownload}>
+            <a href="rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
+              <Button theme="secondary">
                 <Text
                   text="Download CV"
                   className="text-[12px] md:text-[16px] py-[3px] md:py-0"
                 />
               </Button>
-            </Link> */}
-
-            <a href="rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
-              <button className="btn highlighted-btn">Get Resume</button>
             </a>
           </div>
         </div>
