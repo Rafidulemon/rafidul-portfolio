@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { env } from "process";
 
 export async function POST(request: Request) {
 
   try {
     const { name, email, title, message } = await request.json();
-
     if (!name || !email || !title || !message) {
       return NextResponse.json(
         { message: "All fields are required" },
@@ -17,15 +15,15 @@ export async function POST(request: Request) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.NEXT_PUBLIC_EMAIL_USER,
+        pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
       from: email,
-      to: "rafidul.islam054@gmail.com",
-      subject: `Contact Form: ${title}`,
+      to: process.env.NEXT_PUBLIC_RECEIVER_EMAIL,
+      subject: `Contact Form: ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 

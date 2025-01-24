@@ -1,79 +1,59 @@
-import React, { forwardRef } from "react";
-import { Flex } from "../layout/Flex";
-import { Text } from "./Text";
+import { UseFormRegister, type FieldError } from "react-hook-form";
 
-type TextInputProps = {
-  value?: string;
-  placeholder?: string;
-  label?: string;
-  color?: string;
-  isFullWidth?: boolean;
-  isRequired?: boolean;
-  isLabelBold?: boolean;
+type Props = {
   className?: string;
-  dataCy?: string;
-  name?: string;
-  type?: string;
+  isRequired?: boolean;
+  label: string;
+  defaultValue?: string;
+  placeholder?: string;
+  value?: string;
+  error?: FieldError | undefined;
+  id?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
+  name?: string;
+  register?: UseFormRegister<any>;
 };
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (props, ref) => {
-    const {
-      isRequired = true,
-      isLabelBold,
-      value,
-      placeholder = "",
-      label = "",
-      color = "#111111",
-      isFullWidth = false,
-      className = "",
-      dataCy = "",
-      name,
-      type = "text",
-      onChange,
-      error,
-    } = props;
+function TextInput(props: Props) {
+  const {
+    id,
+    name = "name",
+    register,
+    className,
+    isRequired = false,
+    label,
+    defaultValue,
+    placeholder,
+    value,
+    error,
+    onChange,
+  } = props;
 
-    const backgroundColor = color;
-
-    return (
-      <Flex direction="col" gap="10px" className={`w-full ${className}`}>
-        {label && (
-          <Flex direction="row" className="w-full" gap="0px">
-            <Text
-              text={label}
-              className={`text-white text-[12px] md:text-[14px] lg:text-[18px] xl:text-[22px] ${
-                isLabelBold ? "font-extrabold" : "font-medium"
-              }`}
-            />
-            {isRequired && (
-              <Text
-                text="*"
-                isBold
-                className="pl-1 text-[12px] md:text-[16px] text-red-600"
-              />
-            )}
-          </Flex>
+  return (
+    <div className={`flex flex-col ${className}`}>
+      <div className="flex flex-row gap-[5px] mb-2">
+        <label htmlFor={id} className="text-[16px] font-bold text-text_bold">
+          {label}
+        </label>
+        {isRequired && (
+          <span className="text-[16px] font-bold text-tertiary">*</span>
         )}
-        <input
-          ref={ref} // Forward ref added here
-          type={type}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className={`text-white border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
-            error ? "border-red-500" : "border-cyan-500"
-          } ${className}`}
-          style={{ backgroundColor }}
-          data-cy={dataCy}
-        />
-        {error && <span className="text-red-500 text-sm">{error}</span>} {/* Display error message */}
-      </Flex>
-    );
-  }
-);
+      </div>
+      <input
+        id={id}
+        type="text"
+        className={`text-white bg-black border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
+          error ? "border-tertiary" : "border-primary"
+        } ${className}`}
+        defaultValue={defaultValue}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        {...register?.(name)}
+      />
+      {error && <div className="text-[14px] text-tertiary">{error.message}</div>}
+    </div>
+  );
+}
 
-TextInput.displayName = "TextInput"; // Required for forwardRef components
+export default TextInput;

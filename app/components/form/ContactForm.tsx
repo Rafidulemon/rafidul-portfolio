@@ -1,19 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { TextInput } from "../typography/TextInput";
+import TextInput from "../typography/TextInput";
+import TextArea  from "../typography/TextArea";
 import Button from "../display/Button";
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Text } from "../typography/Text";
-import { config } from "dotenv";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100, "Name is too long"),
   email: z.string().email("Invalid email address"),
   title: z.string().min(1, "Title is required").max(100, "Title is too long"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  message: z.string().min(1, "Message is required"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -29,11 +29,7 @@ const ContactForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
-    try {
-      config({ path: ".environment" });
-      console.log("EMAIL_USER:", process.env.EMAIL_USER);
-      console.log("EMAIL_PASS:", );
-      console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
+    try {  
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -59,33 +55,41 @@ const ContactForm: React.FC = () => {
           <TextInput
             label="Your Name"
             placeholder="Please enter your name here..."
-            {...register("name")}
-            error={errors.name?.message}
+            register={register}
+            isRequired
+            name="name"
+            error={errors.name}
           />
         </div>
         <div className="mb-4">
           <TextInput
             label="Your Email"
             placeholder="Please enter your email here..."
-            {...register("email")}
-            error={errors.email?.message}
+            register={register}
+            isRequired
+            name="email"
+            error={errors.email}
           />
         </div>
         <div className="mb-4">
           <TextInput
             label="Title"
             placeholder="Enter the title of your message..."
-            {...register("title")}
-            error={errors.title?.message}
+            name="title"
+            register={register}
+            isRequired
+            error={errors.title}
           />
         </div>
         <div className="mb-8">
-          <TextInput
+          <TextArea
             label="Message"
             placeholder="Type your message here..."
             className="h-[250px]"
-            {...register("message")}
-            error={errors.message?.message}
+            register={register}
+            name="message"
+            isRequired
+            error={errors.message}
           />
         </div>
         <Button theme="primary" type="submit" isWidthFull className="w-full">
