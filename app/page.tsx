@@ -57,7 +57,7 @@ const HomePage = () => {
       link: "https://carriasticapp.vercel.app/",
     },
   ];
-  
+
   const professionalProjects = [
     {
       src: "/images/projects/moeguide.png",
@@ -78,8 +78,7 @@ const HomePage = () => {
     {
       src: "/images/projects/rag.png",
       title: "Raggie",
-      details:
-        "An inhouse gpt platform for ai chatting",
+      details: "An inhouse gpt platform for ai chatting",
       link: "https://raggie-swart.vercel.app/",
       github: "https://github.com/",
     },
@@ -93,15 +92,14 @@ const HomePage = () => {
     },
   ];
 
-  
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/cv/rafid_cv.pdf";
-    link.download = "rafid_cv.pdf"; 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleDownload = () => {
+  //   const link = document.createElement("a");
+  //   link.href = "/cv/rafid_cv.pdf";
+  //   link.download = "rafid_cv.pdf";
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   const currentProjects = showPersonalProjects
     ? personalProjects
@@ -140,14 +138,18 @@ const HomePage = () => {
                 />
               </Button>
             </Link>
-            <Link href="/">
+            {/* <Link href="/">
               <Button theme="secondary" onClick={handleDownload}>
                 <Text
                   text="Download CV"
                   className="text-[12px] md:text-[16px] py-[3px] md:py-0"
                 />
               </Button>
-            </Link>
+            </Link> */}
+
+            <a href="cv/rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
+              <button className="btn highlighted-btn">Get Resume</button>
+            </a>
           </div>
         </div>
         <MotionDiv
