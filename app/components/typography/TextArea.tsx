@@ -35,7 +35,7 @@ function TextArea(props: Props) {
   return (
     <div className={`flex flex-col ${className}`}>
       <div className="flex flex-row gap-[5px] mb-2">
-        <label className="text-[16px] font-bold">{label}</label>
+        <label className="text-[16px] font-bold text-white">{label}</label>
         {isRequired && <span className="text-[16px] font-bold text-tertiary">*</span>}
       </div>
       <textarea

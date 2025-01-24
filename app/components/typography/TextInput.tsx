@@ -32,7 +32,7 @@ function TextInput(props: Props) {
   return (
     <div className={`flex flex-col ${className}`}>
       <div className="flex flex-row gap-[5px] mb-2">
-        <label htmlFor={id} className="text-[16px] font-bold text-text_bold">
+        <label htmlFor={id} className="text-[16px] font-bold text-white">
           {label}
         </label>
         {isRequired && (

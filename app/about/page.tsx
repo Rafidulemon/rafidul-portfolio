@@ -106,7 +106,7 @@ const AboutPage = () => {
       ? personalProjects
       : professionalProjects;
   return (
-    <div className="w-full pt-16 md:py-20">
+    <div className="w-full pt-16 md:py-20 bg-black">
       <PageTitle name="ABOUT ME" />
       <div className="md:hidden">
         <div className="flex flex-row justify-center mt-8">
@@ -364,7 +364,7 @@ const AboutPage = () => {
               showPersonalProjects
                 ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
                 : "border border-cyan-500 rounded-xl py-1 px-4"
-            } text-[16px] md:text-[24px] focus:outline-none`}
+            } text-white text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(true)}
           >
             Personal Projects
@@ -375,7 +375,7 @@ const AboutPage = () => {
               !showPersonalProjects
                 ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
                 : "border border-cyan-500 rounded-xl py-1 px-4"
-            } text-[16px] md:text-[24px] focus:outline-none`}
+            } text-white text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(false)}
           >
             Professional Projects

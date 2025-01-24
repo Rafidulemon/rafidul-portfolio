@@ -135,7 +135,7 @@ const HomePage = () => {
               <Button theme="secondary">
                 <Text
                   text="Download CV"
-                  className="text-[12px] md:text-[16px]"
+                  className="text-[12px] md:text-[16px] py-[3px] md:py-0"
                 />
               </Button>
             </Link>
