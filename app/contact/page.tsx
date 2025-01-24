@@ -9,7 +9,7 @@ import MotionDiv from "../components/animations/MotionDiv";
 
 const contactPage = () => {
   return (
-    <div className="w-full py-16 md:py-20">
+    <div className="w-full">
       <PageTitle name="CONTACT ME" />
       <Grid colCount={12} className="mt-10">
         <MotionDiv src="/images/ai-image-2.png" className="col-span-4 hidden md:flex" isTransparentBG isRoundedImage/>

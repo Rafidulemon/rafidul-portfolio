@@ -92,13 +92,22 @@ const HomePage = () => {
       github: "https://github.com/",
     },
   ];
+
   
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/cv/rafid_cv.pdf";
+    link.download = "rafid_cv.pdf"; 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const currentProjects = showPersonalProjects
     ? personalProjects
     : professionalProjects;
   return (
-    <section className="py-16">
+    <section>
       <div className="grid grid-cols-12">
         <MotionDiv
           src="/images/hero-image.png"
@@ -132,7 +141,7 @@ const HomePage = () => {
               </Button>
             </Link>
             <Link href="/">
-              <Button theme="secondary">
+              <Button theme="secondary" onClick={handleDownload}>
                 <Text
                   text="Download CV"
                   className="text-[12px] md:text-[16px] py-[3px] md:py-0"

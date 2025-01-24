@@ -106,7 +106,7 @@ const AboutPage = () => {
       ? personalProjects
       : professionalProjects;
   return (
-    <div className="w-full pt-16 md:py-20 bg-black">
+    <div className="w-full">
       <PageTitle name="ABOUT ME" />
       <div className="md:hidden">
         <div className="flex flex-row justify-center mt-8">

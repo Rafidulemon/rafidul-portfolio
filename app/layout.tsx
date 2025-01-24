@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <div>
           <Header />
-          <div className="bg-black px-6 md:px-10 min-h-screen">{children}</div>
+          <div className="bg-black px-6 md:px-10 mt-16 md:mt-20 mb-6 min-h-screen">{children}</div>
           <Footer />
         </div>
       </body>
