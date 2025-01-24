@@ -7,7 +7,7 @@ import { Grid } from "../components/layout/Grid";
 import PageTitle from "../components/typography/PageTitle";
 import MotionDiv from "../components/animations/MotionDiv";
 
-function contactPage() {
+const contactPage = () => {
   return (
     <div className="w-full py-16 md:py-20">
       <PageTitle name="CONTACT ME" />
@@ -39,7 +39,7 @@ function contactPage() {
               className="w-full text-center text-[12px] md:text-[16px] text-cyan-500"
             />
             <Text
-              text="+8801111111111"
+              text="+8801990497796"
               isBold
               className="w-full text-center text-[12px] md:text-[16px] text-white "
             />
@@ -51,7 +51,7 @@ function contactPage() {
               className="w-full text-center text-[12px] md:text-[16px] text-cyan-500"
             />
             <Text
-              text="rafidul@example.com"
+              text="rafidulemon@gmail.com"
               isBold
               className="w-full text-center text-[12px] md:text-[16px] underline text-white"
             />

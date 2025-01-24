@@ -72,6 +72,16 @@ function Header() {
                   <li
                     className={`py-4 md:py-0 md:pb-6 md:text-xl 
                 ${
+                  path === "/projects" ? "text-cyan-500" : "text-white"
+                }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
+                  >
+                    <Link href="/projects" onClick={() => setNavbar(!navbar)}>
+                      <Text text="projects" />
+                    </Link>
+                  </li>
+                  <li
+                    className={`py-4 md:py-0 md:pb-6 md:text-xl 
+                ${
                   path === "/services" ? "text-cyan-500" : "text-white"
                 }  text-center border-b-2 md:border-b-0 hover:bg-cyan-600 border-cyan-900 md:hover:text-cyan-600 md:hover:bg-transparent`}
                   >
