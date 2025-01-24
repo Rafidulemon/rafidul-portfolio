@@ -147,7 +147,7 @@ const HomePage = () => {
               </Button>
             </Link> */}
 
-            <a href="cv/rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
+            <a href="rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
               <button className="btn highlighted-btn">Get Resume</button>
             </a>
           </div>
