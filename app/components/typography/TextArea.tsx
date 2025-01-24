@@ -35,12 +35,12 @@ function TextArea(props: Props) {
   return (
     <div className={`flex flex-col ${className}`}>
       <div className="flex flex-row gap-[5px] mb-2">
-        <label className="text-[16px] font-bold text-white">{label}</label>
+        <label className="text-[16px] font-bold dark:text-primary_dark text-white">{label}</label>
         {isRequired && <span className="text-[16px] font-bold text-tertiary">*</span>}
       </div>
       <textarea
         id={id}
-        className={`text-top bg-black text-white border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
+        className={`text-top dark:text-black dark:bg-white bg-black text-white border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
           error ? "border-tertiary" : "border-primary"
         } ${className}`}
         defaultValue={defaultValue}

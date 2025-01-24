@@ -3,7 +3,7 @@
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
 
-function TyAnimation() {
+const TyAnimation = () => {
   return (
     <TypeAnimation
       sequence={[

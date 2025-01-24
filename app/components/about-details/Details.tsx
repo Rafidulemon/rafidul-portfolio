@@ -20,30 +20,30 @@ function Details() {
             theme={currentTab === "personal" ? "primary" : "secondary"}
             onClick={() => setCurrentTab("personal")}
           >
-            <Text text="Personal Details" className="text-[14px] md:text-[16px] text-white" />
+            <Text text="Personal Details" className="text-[14px] md:text-[16px]" />
           </Button>
           <Button
             theme={currentTab === "education" ? "primary" : "secondary"}
             onClick={() => setCurrentTab("education")}
           >
-            <Text text="Educational Details" className="text-[14px] md:text-[16px] text-white" />
+            <Text text="Educational Details" className="text-[14px] md:text-[16px]" />
           </Button>
           <Button
             theme={currentTab === "professional" ? "primary" : "secondary"}
             onClick={() => setCurrentTab("professional")}
           >
-            <Text text="Professional Detail" className="text-[14px] md:text-[16px] text-white" />
+            <Text text="Professional Detail" className="text-[14px] md:text-[16px]" />
           </Button>
         </div>
 
         {/* Circles */}
         <div className="flex flex-row justify-between my-4 gap-4">
-          <FaCircle color={currentTab === "personal" ? "#00BCD4" : "#FFFFFF"} />
+          <FaCircle color={currentTab === "personal" ? "#00BCD4" : "#d0d8d9"} />
           <FaCircle
-            color={currentTab === "education" ? "#00BCD4" : "#FFFFFF"}
+            color={currentTab === "education" ? "#00BCD4" : "#d0d8d9"}
           />
           <FaCircle
-            color={currentTab === "professional" ? "#00BCD4" : "#FFFFFF"}
+            color={currentTab === "professional" ? "#00BCD4" : "#d0d8d9"}
           />
         </div>
 

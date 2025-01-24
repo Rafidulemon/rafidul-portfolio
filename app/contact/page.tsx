@@ -24,36 +24,36 @@ const contactPage = () => {
             <Text
               text="Let's get "
               isBold
-              className="w-full text-center text-[24px] md:text-[48px] text-white"
+              className="w-full text-center text-[24px] md:text-[48px] dark:text-primary text-white"
             />
             <Text
               text="connected"
               isBold
-              className="w-full text-center text-[24px] md:text-[48px] text-cyan-500"
+              className="w-full text-center text-[24px] md:text-[48px] dark:text-primary_dark text-cyan-500"
             />
           </div>
           <div>
             <Text
               text="Phone: "
               isBold
-              className="w-full text-center text-[12px] md:text-[16px] text-cyan-500"
+              className="w-full text-center text-[12px] md:text-[16px] dark:text-primary text-cyan-500"
             />
             <Text
               text="+8801990497796"
               isBold
-              className="w-full text-center text-[12px] md:text-[16px] text-white "
+              className="w-full text-center text-[12px] md:text-[16px] dark:text-gray-700 text-white "
             />
           </div>
           <div className="mb-10">
             <Text
               text="Email: "
               isBold
-              className="w-full text-center text-[12px] md:text-[16px] text-cyan-500"
+              className="w-full text-center text-[12px] md:text-[16px] dark:text-primary text-cyan-500"
             />
             <Text
               text="rafidulemon@gmail.com"
               isBold
-              className="w-full text-center text-[12px] md:text-[16px] underline text-white"
+              className="w-full text-center text-[12px] md:text-[16px] underline dark:text-gray-700 text-white"
             />
           </div>
           <ContactForm />

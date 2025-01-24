@@ -20,6 +20,7 @@ const config: Config = {
       mplus_1p: '"M PLUS 1p", sans-serif',
       notable: '"Notable", sans-serif',
       nosifer: '"Nosifer Caps"',
+      poppins: '"Poppins", sans-serif',
     },
     extend: {
       backgroundImage: {
@@ -31,9 +32,11 @@ const config: Config = {
         primary: "#00BCD4",
         tertiary: "#F44336",
         primary_light: "#B2EBF2",
+        primary_dark: "#037887",
       },
     },
   },
   plugins: [],
+  darkMode: "class",
 };
 export default config;

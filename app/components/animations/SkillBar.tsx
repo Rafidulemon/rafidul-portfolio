@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+
+import { useEffect, useState, useRef } from "react";
 
 interface SkillBarProps {
   label: string;
@@ -8,10 +9,10 @@ interface SkillBarProps {
 
 const SkillBar = ({ label, level }: SkillBarProps) => {
   const [width, setWidth] = useState(0);
-  const bgColorRef = useRef<string>('');
+  const bgColorRef = useRef<string>("");
 
   useEffect(() => {
-    const animationTime = 1000;
+    const animationTime = 1000; // Animation duration in milliseconds
     const maxWidth = level;
     let start: number | null = null;
 
@@ -30,25 +31,34 @@ const SkillBar = ({ label, level }: SkillBarProps) => {
 
     requestAnimationFrame(animate);
 
-    let bgColor = '';
+    // Determine background color based on the level
+    let bgColor = "";
     if (level < 60) {
-      bgColor = 'bg-[#E74C3C]';
+      bgColor = "bg-gradient-to-br from-red-400 to-red-800";
     } else if (level < 70) {
-      bgColor = 'bg-[#F8C471]';
+      bgColor = "bg-gradient-to-br from-yellow-400 to-yellow-800";
     } else if (level < 80) {
-      bgColor = 'bg-cyan-700';
+      bgColor = "bg-gradient-to-br from-blue-400 to-blue-800";
     } else {
-      bgColor = 'bg-[#1ABC9C]';
+      bgColor = "bg-gradient-to-br from-cyan-400 to-cyan-800";
     }
     bgColorRef.current = bgColor;
   }, [level]);
 
   return (
-    <div className="mb-4">
-      <p className="mb-2 text-white text-[14px] md:text-[16px]">{label}</p>
-      <div className={`bg-cyan-100 h-2 md:h-3 lg:h-4 w-full rounded-full`}>
+    <div className="mb-6">
+      {/* Label and Percentage */}
+      <div className="flex justify-between items-center mb-2">
+        <p className="dark:text-black text-white text-[14px] md:text-[16px]">{label}</p>
+        <span className="dark:text-black text-white text-[14px] md:text-[16px]">
+          {Math.round(width)}%
+        </span>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="dark:bg-gray-300 bg-white h-2 md:h-3 lg:h-4 w-full rounded-full">
         <div
-          className={`h-2 md:h-3 lg:h-4  rounded-full ${bgColorRef.current}`}
+          className={`h-2 md:h-3 lg:h-4 rounded-full ${bgColorRef.current}`}
           style={{ width: `${width}%` }}
         ></div>
       </div>
@@ -57,4 +67,3 @@ const SkillBar = ({ label, level }: SkillBarProps) => {
 };
 
 export default SkillBar;
-

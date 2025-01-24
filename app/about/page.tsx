@@ -133,9 +133,8 @@ const AboutPage = () => {
                   size={20}
                 />
               </a>
-              <a href="https://github.com/Rafidulemon" target="_blank">
+              <a href="https://github.com/Rafidulemon" target="_blank" className="text-white dark:text-gray-600">
                 <FaGithub
-                  color="#FFFFFF"
                   size={20}
                 />
               </a>
@@ -152,9 +151,9 @@ const AboutPage = () => {
           <Text
             text="Md. Rafidul Islam"
             isBold
-            className="text-[16px] text-cyan-300 mb-4"
+            className="dark:text-primary_dark text-[16px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] text-[14px] mb-4 text-justify">
+          <p className="dark:text-gray-700 text-[#ADB7BE] text-[14px] mb-4 text-justify">
             Crafted by a skilled Software Engineer, specializing in Mobile App
             Development and Web Development, the digital experiences by this
             innovative mind blend technology and creativity seamlessly.
@@ -170,7 +169,7 @@ const AboutPage = () => {
               />
               <Text
                 text="Patiya, Chittagong, Bangladesh"
-                className="inline-block align-middle text-white text-[12px]"
+                className="dark:text-gray-700 inline-block align-middle text-white text-[12px]"
               />
             </div>
             <div>
@@ -181,7 +180,7 @@ const AboutPage = () => {
               />
               <Text
                 text="+8801990497796"
-                className="inline-block align-middle text-white text-[14px]"
+                className="dark:text-gray-700 inline-block align-middle text-white text-[14px]"
               />
             </div>
             <Link href={`mailto:rafidulemon@gmail.com`} className="mb-2">
@@ -192,7 +191,7 @@ const AboutPage = () => {
               />
               <Text
                 text="rafidulemon@gmail.com"
-                className="inline-block align-middle text-white text-[14px]"
+                className="dark:text-gray-700 inline-block align-middle text-white text-[14px]"
               />
             </Link>
             <Link href={"/contact"} className="w-full my-2">
@@ -209,9 +208,9 @@ const AboutPage = () => {
           <Text
             text="My Professional Skills"
             isBold
-            className="text-[16px] text-cyan-300 mb-4"
+            className="dark:text-primary_dark text-[16px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] text-[14px] mb-4 text-justify">
+          <p className="dark:text-gray-700 text-[#ADB7BE] text-[14px] mb-4 text-justify">
             With expertise spanning web development encompassing JavaScript,
             TypeScript, React.js, Next.js, and database management tools like
             MySQL, MongoDB, and Prisma, alongside mobile app development
@@ -232,9 +231,9 @@ const AboutPage = () => {
           <Text
             text="Md. Rafidul Islam"
             isBold
-            className="md:text-[20px] lg:text-[22px] xl:text-[24px] text-cyan-300 mb-4"
+            className="dark:text-primary_dark md:text-[20px] lg:text-[22px] xl:text-[24px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
+          <p className="dark:text-gray-700 text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
             Crafted by a skilled Software Engineer, specializing in Mobile App
             Development and Web Development, the digital experiences by this
             innovative mind blend technology and creativity seamlessly.
@@ -250,7 +249,7 @@ const AboutPage = () => {
               />
               <Text
                 text="Patiya, Chittagong, Bangladesh"
-                className="inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
+                className="dark:text-gray-700 inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
               />
             </div>
             <div>
@@ -261,7 +260,7 @@ const AboutPage = () => {
               />
               <Text
                 text="+8801990497796"
-                className="inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
+                className="dark:text-gray-700 inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
               />
             </div>
             <Link href={`mailto:rafidulemon@gmail.com`}>
@@ -272,7 +271,7 @@ const AboutPage = () => {
               />
               <Text
                 text="rafidulemon@gmail.com"
-                className="inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
+                className="dark:text-gray-700 inline-block align-middle text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
               />
             </Link>
             <Link href={"/contact"} className="mt-4">
@@ -309,9 +308,8 @@ const AboutPage = () => {
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
                 />
               </a>
-              <a href="https://github.com/Rafidulemon" target="_blank">
+              <a href="https://github.com/Rafidulemon" target="_blank" className="text-white dark:text-gray-600">
                 <FaGithub
-                  color="#FFFFFF"
                   className="md:text-[24px] md:text-[28px] md:text-[30px]"
                 />
               </a>
@@ -328,9 +326,9 @@ const AboutPage = () => {
           <Text
             text="My Professional Skills"
             isBold
-            className="md:text-[20px] lg:text-[22px] xl:text-[24px] text-cyan-300 mb-4"
+            className="dark:text-primary_dark md:text-[20px] lg:text-[22px] xl:text-[24px] text-cyan-300 mb-4"
           />
-          <p className="text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
+          <p className="dark:text-gray-700 text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
             With expertise spanning web development encompassing JavaScript,
             TypeScript, React.js, Next.js, and database management tools like
             MySQL, MongoDB, and Prisma, alongside mobile app development
@@ -352,7 +350,7 @@ const AboutPage = () => {
           <Text
             text="My Projects"
             isNosifer
-            className="text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
+            className="dark:text-primary_dark text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
           />
           <Line className="w-full border-cyan-500" />
         </div>
@@ -362,9 +360,9 @@ const AboutPage = () => {
           <button
             className={`${
               showPersonalProjects
-                ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
-                : "border border-cyan-500 rounded-xl py-1 px-4"
-            } text-white text-[16px] md:text-[24px] focus:outline-none`}
+                ? "bg-primary text-white py-1 px-4 rounded-xl"
+                : "border border-primary dark:text-primary text-white rounded-xl py-1 px-4"
+            } text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(true)}
           >
             Personal Projects
@@ -373,9 +371,9 @@ const AboutPage = () => {
           <button
             className={`${
               !showPersonalProjects
-                ? "bg-cyan-500 text-white py-1 px-4 rounded-xl"
-                : "border border-cyan-500 rounded-xl py-1 px-4"
-            } text-white text-[16px] md:text-[24px] focus:outline-none`}
+                ? "bg-primary text-white py-1 px-4 rounded-xl"
+                : "border border-primary dark:text-primary text-white rounded-xl py-1 px-4"
+            } text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(false)}
           >
             Professional Projects
@@ -403,7 +401,7 @@ const AboutPage = () => {
           >
             <Text
               text="See More..."
-              className="text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]"
+              className="dark:text-primary text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]"
             />
           </Link>
         </div>
