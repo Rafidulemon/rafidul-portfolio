@@ -4,6 +4,7 @@ type Props = {
     className?: string;
     isNosifer?: boolean;
     isPoppins?: boolean;
+    isCode?: boolean;
     isBold?: boolean;
     dataCy?: string;
     isRequired?: boolean;
@@ -17,6 +18,7 @@ type Props = {
       className,
       isNosifer = false,
       isPoppins = false,
+      isCode = false,
       isBold = false,
       dataCy,
       isRequired = false,
@@ -25,7 +27,7 @@ type Props = {
     return (
       <span
         className={`whitespace-normal  ${className} ${
-            isNosifer ? "font-nosifer" : isPoppins ? "font-poppins" : "font-mplus_1p"
+            isNosifer ? "font-nosifer" : isPoppins ? "font-poppins" : isCode ? "font-fira_code" : "font-mplus_1p"
           } ${
           isBold && "font-bold"
         }`}

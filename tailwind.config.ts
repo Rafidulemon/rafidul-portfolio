@@ -21,6 +21,7 @@ const config: Config = {
       notable: '"Notable", sans-serif',
       nosifer: '"Nosifer Caps"',
       poppins: '"Poppins", sans-serif',
+      fira_code: '"Fira Code", monospace',
     },
     extend: {
       backgroundImage: {
