@@ -5,7 +5,7 @@ const ClaudeAiBlogDescription = () => {
     <div>
       <p>
         Claude is an advanced AI assistant designed to revolutionize human-computer interaction. In this blog, we dive 
-        into Claude's capabilities, how it differs from existing AI assistants, and its potential impact on the future.
+        into Claude&apos;s capabilities, how it differs from existing AI assistants, and its potential impact on the future.
       </p>
       <h3 className="text-xl font-semibold mt-6">What Makes Claude Different?</h3>
       <p className="mt-2">
@@ -19,7 +19,7 @@ const ClaudeAiBlogDescription = () => {
         <li>Increased multitasking capabilities: Claude can handle complex requests and juggle multiple tasks at once.</li>
         <li>Personalized recommendations based on user behavior and preferences.</li>
       </ul>
-      <h3 className="text-xl font-semibold mt-6">Claude's Impact on Human-Computer Interaction:</h3>
+      <h3 className="text-xl font-semibold mt-6">Claude&apos;s Impact on Human-Computer Interaction:</h3>
       <p className="mt-2">
         Claude represents a major leap forward in how we interact with AI systems. Its intuitive and intelligent design allows 
         for a more seamless and efficient experience in areas ranging from customer support to personal assistants and beyond.

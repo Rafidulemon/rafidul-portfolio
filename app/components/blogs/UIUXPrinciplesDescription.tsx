@@ -36,16 +36,16 @@ const UIUXPrinciplesDescription = () => {
         buttons, and layouts throughout the site, they can quickly learn how to navigate and interact with the interface. 
         Maintaining consistent design elements such as fonts, colors, and button styles helps create a cohesive experience.
       </p>
-      <h3 className="text-xl font-semibold mt-6">Visual Hierarchy: Guide the User’s Focus</h3>
+      <h3 className="text-xl font-semibold mt-6">Visual Hierarchy: Guide the User&apos;s Focus</h3>
       <p className="mt-2">
         Visual hierarchy refers to the arrangement of elements on a page in a way that clearly indicates their importance. 
-        By using size, color, contrast, and positioning, designers can guide the user’s focus to key elements like headings, 
+        By using size, color, contrast, and positioning, designers can guide the user&apos;s focus to key elements like headings, 
         calls to action, or important information. A well-organized visual hierarchy ensures that users can quickly find what 
         they need.
       </p>
-      <h3 className="text-xl font-semibold mt-6">Feedback: Let Users Know What’s Happening</h3>
+      <h3 className="text-xl font-semibold mt-6">Feedback: Let Users Know What&apos;s Happening</h3>
       <p className="mt-2">
-        Feedback is crucial for a great user experience. Whether it's a visual change when a button is clicked or a loading 
+        Feedback is crucial for a great user experience. Whether it&apos;s a visual change when a button is clicked or a loading 
         indicator while content is loading, feedback lets users know that the system is responding to their actions. This 
         creates a sense of control and prevents frustration.
       </p>

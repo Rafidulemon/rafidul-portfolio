@@ -24,7 +24,7 @@ const DigitalMarketingAIDescription = () => {
       <p className="mt-2">
         Content creation is also being enhanced by AI. Tools like GPT-3 and other content-generation models can assist in 
         producing high-quality, engaging content quickly and at scale. AI can also help marketers personalize content to individual 
-        customers' preferences, increasing engagement and customer loyalty.
+        customers&apos; preferences, increasing engagement and customer loyalty.
       </p>
       <h3 className="text-xl font-semibold mt-6">Chatbots and Customer Service:</h3>
       <p className="mt-2">
@@ -41,7 +41,7 @@ const DigitalMarketingAIDescription = () => {
       </p>
       <p className="mt-4">
         With AI transforming the landscape, marketers who adopt these new technologies early will have a competitive edge. The 
-        integration of AI into digital marketing strategies is no longer optional; it's essential for staying relevant and 
+        integration of AI into digital marketing strategies is no longer optional; it&apos;s essential for staying relevant and 
         thriving in the age of automation.
       </p>
     </div>

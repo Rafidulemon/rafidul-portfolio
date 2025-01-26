@@ -17,9 +17,9 @@ const NextAppRouterThemeChangeDescription = () => {
       </p>
       <h3 className="text-xl font-semibold mt-6">Why Theme Persistence Matters</h3>
       <p className="mt-2">
-        When building an app with theme switching, it's important to maintain the theme state between sessions. 
-        This ensures a smooth user experience, as users won't need to select their preferred theme every time they visit 
-        the site. Using cookies or local storage, we can store the user's theme preference, making it persist even after 
+        When building an app with theme switching, it&apos;s important to maintain the theme state between sessions. 
+        This ensures a smooth user experience, as users won&apos;t need to select their preferred theme every time they visit 
+        the site. Using cookies or local storage, we can store the user&apos;s theme preference, making it persist even after 
         the app is reloaded.
       </p>
       <h3 className="text-xl font-semibold mt-6">Steps to Implement Theme Switching in Next.js</h3>
@@ -45,7 +45,7 @@ const NextAppRouterThemeChangeDescription = () => {
       </ol>
       <h3 className="text-xl font-semibold mt-6">Code Example: Switching Theme in Next.js</h3>
       <p className="mt-2">
-        Here's a simple implementation of a theme switcher in Next.js using React Context and localStorage.
+        Here&apos;s a simple implementation of a theme switcher in Next.js using React Context and localStorage.
       </p>
       <pre className="bg-gray-800 text-white p-4 rounded mt-4">
         {`

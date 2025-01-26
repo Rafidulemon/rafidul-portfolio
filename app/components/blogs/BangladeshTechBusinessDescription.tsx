@@ -18,8 +18,8 @@ const BangladeshTechBusinessDescription = () => {
       </p>
       <h3 className="text-xl font-semibold mt-6">Fintech: Transforming Financial Services</h3>
       <p className="mt-2">
-        Bangladesh's fintech landscape is thriving, with innovations in mobile banking, digital wallets, payment gateways, 
-        and micro-financing. As more people gain access to smartphones and the internet, there’s a significant opportunity 
+        Bangladesh&apos;s fintech landscape is thriving, with innovations in mobile banking, digital wallets, payment gateways, 
+        and micro-financing. As more people gain access to smartphones and the internet, there&apos;s a significant opportunity 
         to offer financial services to the unbanked population. Entrepreneurs can explore developing solutions that bridge 
         gaps in accessibility and enhance financial inclusion.
       </p>
@@ -67,9 +67,9 @@ const BangladeshTechBusinessDescription = () => {
       </p>
       <h3 className="text-xl font-semibold mt-6">Final Thoughts: The Growing Tech Ecosystem in Bangladesh</h3>
       <p className="mt-2">
-        Bangladesh’s tech ecosystem is poised for massive growth, with opportunities in AI, fintech, SaaS, and various other 
+        Bangladesh&apos;s tech ecosystem is poised for massive growth, with opportunities in AI, fintech, SaaS, and various other 
         sectors. Entrepreneurs who can identify gaps in the market and offer innovative solutions will thrive in this rapidly 
-        evolving landscape. With the right mindset and strategic approach, you can seize the opportunities in Bangladesh's 
+        evolving landscape. With the right mindset and strategic approach, you can seize the opportunities in Bangladesh&apos;s 
         growing tech scene and build a successful business.
       </p>
     </div>
