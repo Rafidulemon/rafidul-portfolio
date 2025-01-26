@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark:bg-[#f6fefe] bg-black">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class">
           <div>
             <div className="fixed top-0 left-0 right-0 z-10">
               <Header />
