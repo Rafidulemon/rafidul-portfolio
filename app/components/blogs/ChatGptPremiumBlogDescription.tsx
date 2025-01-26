@@ -147,8 +147,8 @@ const ChatGptPremiumBlogDescription = () => {
           </tr>
           <tr>
             <td className="border border-gray-300 px-4 py-2">Customization</td>
-            <td className="border border-gray-300 px-4 py-2">Limited Customization</td>
-            <td className="border border-gray-300 px-4 py-2">Full Customization</td>
+            <td className="border border-gray-300 px-4 py-2">Limited Customize</td>
+            <td className="border border-gray-300 px-4 py-2">Full Customize</td>
           </tr>
         </tbody>
       </table>

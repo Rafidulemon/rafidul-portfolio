@@ -27,19 +27,16 @@ function Footer() {
             isBold
           />
           <div className="flex w-full flex-row items-center justify-center mt-6 gap-x-8 mb-10">
-            <a href="https://www.facebook.com/" target="_blank">
+            <a href="https://www.facebook.com/rafidul.emon.50" target="_blank">
               <FaFacebook size={30} color="#1877F2" />
             </a>
-            <a href="https://www.facebook.com/" target="_blank">
+            <a href="https://www.instagram.com/rafidulemon" target="_blank">
               <FaInstagram size={30} color="#E1306C" />
             </a>
-            <a href="https://www.facebook.com/" target="_blank" className="text-white dark:text-gray-600">
+            <a href="https://github.com/Rafidulemon" target="_blank" className="text-white dark:text-gray-600">
               <FaGithub size={30} />
             </a>
-            <a href="https://www.facebook.com/" target="_blank">
-              <FaTwitter size={30} color="#1DA1F2" />
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
+            <a href="https://www.linkedin.com/in/md-rafidul-islam-8b013118b/" target="_blank">
               <FaLinkedin size={30} color="#0077B5" />
             </a>
           </div>

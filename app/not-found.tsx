@@ -1,30 +1,38 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Header from "./components/navigations/Header";
-import Footer from "./components/navigations/Footer";
 
 const Error404 = () => {
   const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <div className="w-[90%] min-h-[calc(80vh-10px)] flex flex-col items-center justify-center text-center">
-        {/* <div className="w-full max-w-[60%] md:max-w-md">
+      <div className="w-[90%] min-h-[calc(80vh-10px)] flex flex-col items-center justify-center text-center -mt-8 md:-mt-20">
+        <div className="w-full max-w-[60%] md:max-w-md">
           <Image
-            src="/images/404-snow.gif"
+            src="/images/404_snow.gif"
             alt="404 Page Not Found"
             width={500}
             height={380}
-            className="w-full"
+            className="w-full hidden dark:flex"
           />
-        </div> */}
+        </div>
+
+        <div className="w-full w-full md:w-[30%]">
+          <Image
+            src="/images/dark_404_1.gif"
+            alt="404 Page Not Found"
+            width={500}
+            height={500}
+            className="w-full h-full dark:hidden"
+          />
+        </div>
 
         <h1 className="text-5xl font-bold text-primary mb-4">Opps</h1>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+        <h2 className="text-2xl font-semibold text-white dark:text-gray-800 mb-2">
           Page Not Found
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-white dark:text-gray-600 mb-6">
           Oops! The page you are looking for doesn’t exist or has been moved.
         </p>
 
