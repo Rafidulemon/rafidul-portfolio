@@ -62,7 +62,7 @@ const FutureAiBlogDescription = () => {
       <h3 className="text-xl font-semibold mt-6">Comparative Analysis of AI Techniques:</h3>
       <table className="table-auto border-collapse border border-gray-300 w-full text-left mt-4">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="dark:bg-gray-100 bg-[#111111]">
             <th className="border border-gray-300 px-4 py-2">AI Technique</th>
             <th className="border border-gray-300 px-4 py-2">Strengths</th>
             <th className="border border-gray-300 px-4 py-2">Challenges</th>
