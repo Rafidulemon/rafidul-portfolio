@@ -54,24 +54,41 @@ const ChatbotModal = ({
     localStorage.setItem("chatMessages", JSON.stringify(messages));
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim()) {
       const userMessage = { sender: "user" as "user", text: inputValue.trim() };
       setMessages((prev) => [...prev, userMessage]);
       setInputValue(""); // Clear input field
       setHasStartedChatting(true); // Hide common questions
-
-      // Simulate bot typing delay
+  
+      // Show bot typing indicator
       setMessages((prev) => [...prev, { sender: "bot", text: "Typing..." }]);
-
-      setTimeout(() => {
+  
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: userMessage.text }),
+        });
+  
+        const data = await response.json();
+  
         setMessages((prev) => [
           ...prev.slice(0, -1), // Remove "Typing..."
-          { sender: "bot", text: "Thank you for your message. I'll respond shortly." },
+          { sender: "bot", text: data.reply || "Sorry, no response received." },
         ]);
-      }, 1500);
+      } catch (error) {
+        console.error("Error fetching AI response:", error);
+        setMessages((prev) => [
+          ...prev.slice(0, -1), // Remove "Typing..."
+          { sender: "bot", text: "Failed to get a response. Please try again." },
+        ]);
+      }
     }
   };
+  
 
   const handleFaqClick = (answer: string) => {
     const botResponse = { sender: "bot" as "bot", text: answer };
@@ -171,7 +188,7 @@ const ChatbotModal = ({
                 className={`${
                   message.sender === "user"
                     ? "bg-primary_dark text-white"
-                    : "bg-gray-800 text-white dark:bg-gray-100 dark:text-black"
+                    : "dark:bg-gray-800 dark:text-white bg-gray-100 text-black"
                 } p-3 my-1 md:my-2 rounded-lg max-w-[75%] break-words whitespace-pre-wrap`}
               >
                 {message.text}
