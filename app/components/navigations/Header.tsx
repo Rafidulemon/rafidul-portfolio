@@ -20,12 +20,11 @@ const NAV_ITEMS = [
 const Header = () => {
   const path = usePathname();
   const { resolvedTheme, theme, setTheme } = useTheme();
-
   const [navbar, setNavbar] = useState(false);
 
   return (
     <div>
-      <nav className="w-full dark:bg-white bg-[#111111] border-b border-gray-200 dark:border-primary">
+      <nav className="w-full bg-white dark:bg-[#111111] border-b dark:border-gray-200 border-primary">
         <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-10">
           {/* Logo Section */}
           <div>
@@ -34,7 +33,7 @@ const Header = () => {
                 href={"/"}
                 className="flex flex-row gap-2 md:gap-4 items-center"
               >
-                <div className="w-12 h-12 md:w-[70px] md:h-[70px] bg-black dark:bg-white rounded-full shadow-md shadow-primary dark:shadow-gray-500">
+                <div className="w-12 h-12 md:w-[70px] md:h-[70px] dark:bg-black bg-white rounded-full shadow-md dark:shadow-primary shadow-gray-500">
                   <Image
                     src="/images/hero-image.png"
                     alt="Logo"
@@ -67,7 +66,7 @@ const Header = () => {
 
           {/* Navigation Links */}
           <div
-            className={`fixed top-0 right-0 h-full z-20 bg-[#111111] dark:bg-white transition-transform duration-500 ease-in-out ${
+            className={`fixed top-0 right-0 h-full z-20 dark:bg-[#111111] bg-white transition-transform duration-500 ease-in-out ${
               navbar ? "translate-x-0" : "translate-x-full"
             } w-[60%] md:w-auto md:static md:translate-x-0`}
           >
@@ -83,7 +82,7 @@ const Header = () => {
                 />
               </Link>
               <div
-                className="flex flex-col items-center justify-center cursor-pointer text-primary dark:text-black text-3xl"
+                className="flex flex-col items-center justify-center cursor-pointer text-primary text-3xl"
                 onClick={() => setNavbar(false)}
               >
                 <IoCloseCircleSharp />
@@ -96,8 +95,8 @@ const Header = () => {
                   className={`py-4 md:py-0 md:text-xl text-center transition-colors duration-300 ${
                     path === itemPath
                       ? "text-cyan-500"
-                      : "text-white dark:text-black"
-                  } hover:text-cyan-600 md:hover:text-cyan-600 border-cyan-900 dark:border-primary`}
+                      : "dark:text-white text-black"
+                  } hover:text-cyan-600 md:hover:text-cyan-600 dark:border-cyan-900 border-primary`}
                 >
                   <Link href={itemPath} onClick={() => setNavbar(false)}>
                     <Text text={name} />
@@ -112,7 +111,7 @@ const Header = () => {
                   setTheme(resolvedTheme === "light" ? "dark" : "light");
                 }}
               >
-                {resolvedTheme === "dark" ? <MdDarkMode /> : <MdLightMode />}
+                {resolvedTheme === "dark" ? <MdLightMode /> : <MdDarkMode />}
               </li>
               <li
                 className="mt-10 md:hidden flex flex-row items-center justify-center gap-6 cursor-pointer py-4 text-center"
@@ -122,20 +121,20 @@ const Header = () => {
               >
                 <div
                   className={`flex flex-row gap-1 h-full items-center justify-center ${
-                    theme === "dark" ? "text-black" : "text-yellow-500"
-                  }`}
-                >
-                  <MdDarkMode />
-                  <Text text="Dark" />
-                </div>
-
-                <div
-                  className={`flex flex-row gap-1 h-full items-center justify-center ${
-                    theme === "light" ? "text-white" : "text-yellow-500"
+                    theme === "dark" ? "text-white" : "text-yellow-500"
                   }`}
                 >
                   <MdLightMode />
                   <Text text="Light" />
+                </div>
+
+                <div
+                  className={`flex flex-row gap-1 h-full items-center justify-center ${
+                    theme === "light" ? "text-black" : "text-yellow-500"
+                  }`}
+                >
+                  <MdDarkMode />
+                  <Text text="Dark" />
                 </div>
               </li>
             </ul>

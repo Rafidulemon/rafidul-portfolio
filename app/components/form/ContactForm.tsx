@@ -120,7 +120,7 @@ const ContactForm: React.FC = () => {
         <div className="w-full flex flex-col gap-6 mb-2 justify-center items-center">
           <Text
             text={popupMessage}
-            className="dark:text-gray-800 text-gray-300 text-[14px] md:text-[16px]"
+            className="text-gray-800 dark:text-gray-300 text-[14px] md:text-[16px]"
           />
           <Link href={"/"} onClick={() => setOpen(false)} className="w-full md:w-fit rounded-lg md:rounded-xl bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white px-2 py-1 md:px-4 text-center">
             Back to Home

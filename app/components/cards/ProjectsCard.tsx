@@ -15,7 +15,7 @@ function ProjectsCard(props: ProjectsCardProps) {
   const { src = "", project_title = "", project_details = "", github_link = "#", live_link = "#" } = props;
 
   return (
-    <div className="relative dark:bg-white bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col overflow-hidden">
+    <div className="relative bg-white dark:bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col overflow-hidden">
       {/* Image Section */}
       <div className="relative md:w-[450px] h-[200px] md:h-[250px]">
         <Image
@@ -32,21 +32,21 @@ function ProjectsCard(props: ProjectsCardProps) {
         <Text
           text={project_title}
           isBold
-          className="dark:text-primary_dark text-white text-[16px] md:text-[20px]"
+          className="text-primary_dark dark:text-white text-[16px] md:text-[20px]"
         />
 
         {/* Details and Links (Always visible on mobile) */}
         <div className="md:hidden flex-col items-center justify-center gap-4 mt-4">
           <Text
             text={project_details}
-            className="dark:text-black text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
+            className="text-black dark:text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
           />
           <div className="w-full flex flex-row items-center justify-center gap-6 mt-4">
             <a
               href={github_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="dark:text-primary_dark text-cyan-500 text-[20px] hover:text-white transition"
+              className="text-primary_dark dark:text-cyan-500 text-[20px] hover:text-white transition"
             >
               <FaGithub />
             </a>
@@ -54,7 +54,7 @@ function ProjectsCard(props: ProjectsCardProps) {
               href={live_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="dark:text-primary_dark text-cyan-500 text-[20px] hover:text-white transition"
+              className="text-primary_dark dark:text-cyan-500 text-[20px] hover:text-white transition"
             >
               <FaExternalLinkAlt />
             </a>
@@ -63,17 +63,17 @@ function ProjectsCard(props: ProjectsCardProps) {
       </div>
 
       {/* Overlay for Larger Screens */}
-      <div className="absolute inset-0 dark:bg-primary_light bg-black bg-opacity-90 opacity-0 hover:opacity-100 md:flex md:opacity-0 hidden flex-col items-center justify-center gap-4 p-4">
+      <div className="absolute inset-0 bg-primary_light dark:bg-black bg-opacity-90 opacity-0 hover:opacity-100 md:flex md:opacity-0 hidden flex-col items-center justify-center gap-4 p-4">
         <Text
           text={project_details}
-          className="dark:text-black text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
+          className="text-black dark:text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
         />
         <div className="flex gap-6">
           <a
             href={github_link}
             target="_blank"
             rel="noopener noreferrer"
-            className="dark:text-primary_dark text-cyan-500 text-[20px] hover:text-white transition"
+            className="text-primary_dark dark:text-cyan-500 text-[20px] hover:text-white transition"
           >
             <FaGithub />
           </a>
@@ -81,7 +81,7 @@ function ProjectsCard(props: ProjectsCardProps) {
             href={live_link}
             target="_blank"
             rel="noopener noreferrer"
-            className="dark:text-primary_dark text-cyan-500 text-[20px] hover:text-white transition"
+            className="text-primary_dark dark:text-cyan-500 text-[20px] hover:text-white transition"
           >
             <FaExternalLinkAlt />
           </a>

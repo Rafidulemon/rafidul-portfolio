@@ -17,10 +17,10 @@ export const PopUp = (props: Props) => {
   return (
     <div className="z-[100] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div
-        className={`relative dark:bg-white bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col justify-between ${className}`}
+        className={`relative bg-white dark:bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col justify-between ${className}`}
       >
         <div className="flex flex-row w-full justify-between">
-          <span className="py-2 px-4 md:px-6 flex w-full flex-row justify-between font-bold text-[16px] md:text-[20px] dark:text-primary_dark text-white">
+          <span className="py-2 px-4 md:px-6 flex w-full flex-row justify-between font-bold text-[16px] md:text-[20px] text-primary_dark dark:text-white">
             {title}
           </span>
 
@@ -31,7 +31,7 @@ export const PopUp = (props: Props) => {
         </div>
         <hr className="w-full border-black" />
 
-        <div className="px-4 md:px-6 py-2 text-white dark:text-gray-800">{children}</div>
+        <div className="px-4 md:px-6 py-2 dark:text-white text-gray-800">{children}</div>
       </div>
     </div>
   );

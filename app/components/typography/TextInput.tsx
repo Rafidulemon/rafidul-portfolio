@@ -32,7 +32,7 @@ function TextInput(props: Props) {
   return (
     <div className={`flex flex-col ${className}`}>
       <div className="flex flex-row gap-[5px] mb-2">
-        <label htmlFor={id} className="text-[16px] font-bold dark:text-primary_dark text-white">
+        <label htmlFor={id} className="text-[16px] font-bold text-primary_dark dark:text-white">
           {label}
         </label>
         {isRequired && (
@@ -42,7 +42,7 @@ function TextInput(props: Props) {
       <input
         id={id}
         type="text"
-        className={`text-white dark:text-black dark:bg-white bg-black border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
+        className={`dark:text-white text-black bg-white dark:bg-black border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 ${
           error ? "border-tertiary" : "border-primary"
         } ${className}`}
         defaultValue={defaultValue}

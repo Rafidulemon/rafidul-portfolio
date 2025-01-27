@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/icon.png",
   },
+  keywords: ["Md. Rafidul Islam", "Portfolio", "Md. Rafidul Islam Portfolio"],
 };
 
 export default function RootLayout({
@@ -20,8 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark:bg-[#f6fefe] bg-black">
-        <ThemeProvider attribute="class">
+      <body className="bg-[#f6fefe] dark:bg-black">
+        <ThemeProvider defaultTheme="system" attribute="class">
           <div>
             <div className="fixed top-0 left-0 right-0 z-10">
               <Header />

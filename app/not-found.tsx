@@ -14,7 +14,7 @@ const Error404 = () => {
             alt="404 Page Not Found"
             width={500}
             height={380}
-            className="w-full hidden dark:flex"
+            className="w-full dark:hidden"
           />
         </div>
 
@@ -24,15 +24,15 @@ const Error404 = () => {
             alt="404 Page Not Found"
             width={500}
             height={500}
-            className="w-full h-full dark:hidden"
+            className="w-full h-full hidden dark:flex"
           />
         </div>
 
         <h1 className="text-5xl font-bold text-primary mb-4">Opps</h1>
-        <h2 className="text-2xl font-semibold text-white dark:text-gray-800 mb-2">
+        <h2 className="text-2xl font-semibold dark:text-white text-gray-800 mb-2">
           Page Not Found
         </h2>
-        <p className="text-white dark:text-gray-600 mb-6">
+        <p className="dark:text-white text-gray-600 mb-6">
           Oops! The page you are looking for doesn’t exist or has been moved.
         </p>
 

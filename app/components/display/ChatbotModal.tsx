@@ -81,7 +81,7 @@ const ChatbotModal = ({
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-full md:w-[30%] bg-[#111111] dark:bg-white shadow-lg transform ${
+      className={`fixed top-0 right-0 h-full w-full md:w-[30%] dark:bg-[#111111] bg-white shadow-lg transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } transition-transform duration-1000 z-50`}
     >
@@ -92,7 +92,7 @@ const ChatbotModal = ({
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 dark:text-gray-800 text-white hover:text-gray-200"
+          className="absolute top-3 right-3 text-gray-800 dark:text-white hover:text-gray-200"
         >
           <FaTimes size={24} />
         </button>
@@ -100,7 +100,7 @@ const ChatbotModal = ({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <Link href={"/"} className="flex flex-row gap-2 md:gap-4 items-center">
-              <div className="w-12 h-12 md:w-[70px] md:h-[70px] bg-black dark:bg-white rounded-full shadow-md shadow-primary dark:shadow-gray-500">
+              <div className="w-12 h-12 md:w-[70px] md:h-[70px] dark:bg-black bg-white rounded-full shadow-md dark:shadow-primary shadow-gray-500">
                 <Image
                   src="/images/hero-image.png"
                   alt="Logo"
@@ -111,10 +111,10 @@ const ChatbotModal = ({
               </div>
             </Link>
             <div className="ml-4">
-              <h3 className="font-semibold text-xl dark:text-primary_dark text-white">
+              <h3 className="font-semibold text-xl text-primary_dark dark:text-white">
                 Ask Me
               </h3>
-              <p className="text-sm dark:text-gray-800 text-gray-200">
+              <p className="text-sm text-gray-800 dark:text-gray-200">
                 How can I assist you today?
               </p>
             </div>
@@ -129,14 +129,14 @@ const ChatbotModal = ({
           {/* Show Common Questions if chat hasn't started */}
           {!hasStartedChatting && (
             <div className="space-y-4 mb-4">
-              <div className="text-sm dark:text-gray-800 text-gray-200">
+              <div className="text-sm text-gray-800 dark:text-gray-200">
                 Common questions are:
               </div>
               <div className="space-y-2">
                 {faq.map((item, index) => (
                   <div
                     key={index}
-                    className="cursor-pointer w-full bg-gradient-to-l from-gray-900 to-black dark:from-cyan-900 dark:to-primary_dark px-4 py-1 md:py-2 rounded-lg text-white shadow-md"
+                    className="cursor-pointer w-full bg-gradient-to-l dark:from-gray-900 dark:to-black from-cyan-900 to-primary_dark px-4 py-1 md:py-2 rounded-lg text-white shadow-md"
                     onClick={() => handleFaqClick(item.answer)}
                   >
                     {item.question}
@@ -182,10 +182,10 @@ const ChatbotModal = ({
 
         {/* Message Input */}
         <div className="absolute bottom-4 left-0 right-0 px-4 md:px-6">
-          <div className="flex items-center w-full px-2 md:px-3 rounded-md md:rounded-lg dark:text-black text-white dark:bg-white bg-black border border-primary">
+          <div className="flex items-center w-full px-2 md:px-3 rounded-md md:rounded-lg text-black dark:text-white bg-white dark:bg-black border border-primary">
             <input
               type="text"
-              className="w-full focus:outline-none dark:bg-white bg-black"
+              className="w-full focus:outline-none bg-white dark:bg-black"
               placeholder="Type your message..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
