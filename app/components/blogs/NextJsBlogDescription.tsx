@@ -44,7 +44,7 @@ const NextJsBlogDescription = () => {
       <h3 className="text-xl font-semibold mt-6">Types of Routers in Next.js:</h3>
       <table className="table-auto border-collapse border border-gray-300 w-full text-left mt-4">
         <thead>
-          <tr className="dark:bg-gray-100 bg-[#111111]">
+          <tr className="bg-gray-100 dark:bg-[#111111]">
             <th className="border border-gray-300 px-4 py-2">Feature</th>
             <th className="border border-gray-300 px-4 py-2">App Router</th>
             <th className="border border-gray-300 px-4 py-2">Page Router</th>

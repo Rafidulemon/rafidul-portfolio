@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const PersonalDetails = () => {
   return (
-    <div className="p-10 rounded shadow-lg shadow-teal-700 bg-black dark:bg-white">
+    <div className="p-10 rounded shadow-lg shadow-teal-700 dark:bg-black bg-white">
       <div>
         <div className="pb-6 flex flex-row justify-center">
           <MotionDiv
@@ -18,7 +18,7 @@ const PersonalDetails = () => {
         </div>
         <Grid
           colCount={2}
-          className="gap-4 md:gap-6 lg:gap-7 xl:gap-8 dark:text-black text-white text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px]"
+          className="gap-4 md:gap-6 lg:gap-7 xl:gap-8 text-black dark:text-white text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px]"
         >
           <div>
             <Text text="Name " isBold />

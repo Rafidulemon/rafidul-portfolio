@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark:bg-[#f6fefe] bg-black">
+      <body className="bg-[#f6fefe] dark:bg-black">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}
         </ThemeProvider>
@@ -132,7 +132,7 @@ export default Header;
         React Context and localStorage.
       </p>
 
-      <div className="flex flex-col mt-6 gap-4 text-gray-300 dark:text-gray-800">
+      <div className="flex flex-col mt-6 gap-4 dark:text-gray-300 text-gray-800">
         <div className="flex flex-col gap-2 mb-4">
           <Text
             text="Update tailwind.config.ts"

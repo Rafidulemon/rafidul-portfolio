@@ -179,7 +179,7 @@ const BlogsPage = () => {
           placeholder="Search blogs..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className="w-full md:w-[300px] text-white dark:text-black dark:bg-white bg-black border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 border-primary"
+          className="w-full md:w-[300px] dark:text-white text-black bg-white dark:bg-black border rounded-lg px-3 py-2 text-[12px] md:text-[16px] focus:outline-none focus:border-cyan-900 border-primary"
         />
       </div>
 

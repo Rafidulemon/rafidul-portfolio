@@ -49,14 +49,14 @@ const SkillBar = ({ label, level }: SkillBarProps) => {
     <div className="mb-6">
       {/* Label and Percentage */}
       <div className="flex justify-between items-center mb-2">
-        <p className="dark:text-black text-white text-[14px] md:text-[16px]">{label}</p>
-        <span className="dark:text-black text-white text-[14px] md:text-[16px]">
+        <p className="text-black dark:text-white text-[14px] md:text-[16px]">{label}</p>
+        <span className="text-black dark:text-white text-[14px] md:text-[16px]">
           {Math.round(width)}%
         </span>
       </div>
 
       {/* Progress Bar */}
-      <div className="dark:bg-gray-300 bg-white h-2 md:h-3 lg:h-4 w-full rounded-full">
+      <div className="bg-gray-300 dark:bg-white h-2 md:h-3 lg:h-4 w-full rounded-full">
         <div
           className={`h-2 md:h-3 lg:h-4 rounded-full ${bgColorRef.current}`}
           style={{ width: `${width}%` }}

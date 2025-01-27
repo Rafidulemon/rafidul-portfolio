@@ -233,7 +233,7 @@ export default function Home() {
 `;
 
   return (
-    <div className="flex flex-col gap-4 text-gray-300 dark:text-gray-800">
+    <div className="flex flex-col gap-4 dark:text-gray-300 text-gray-800">
       <Text
         text="Next.js App Router provides a robust way to manage translations with the `next-intl` package. This guide will help you set up internationalization in your Next.js app."
         isPoppins
@@ -589,7 +589,7 @@ export default function Home() {
           text="For any further queries, feel free to "
         />
         <Link href={"/contact"}>
-          <Text className="hidden md: flex hover:underline hover:text-primary_dark" isBold text="CONTACT ME"/>
+          <Text className="hidden md:flex hover:underline hover:text-primary_dark" isBold text="CONTACT ME"/>
           <Text className="md:hidden text-primary_dark underline" isBold text="CONTACT ME"/>
         </Link>
       </div>

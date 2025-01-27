@@ -111,11 +111,11 @@ const HomePage = () => {
               Hello, I&apos;m{" "}
             </span>
             <br></br>
-            <div className="text-white dark:text-black">
+            <div className="dark:text-white text-black">
               <TyAnimation />
             </div>
           </h1>
-          <p className="text-[#ADB7BE] dark:text-gray-700 text-[14px] md:text-[24px] mb-4 md:mb-6 lg:mb-10 xl:mb-14 sm:leading-[20px] md:leading-normal text-justify">
+          <p className="dark:text-[#ADB7BE] text-gray-700 text-[14px] md:text-[24px] mb-4 md:mb-6 lg:mb-10 xl:mb-14 sm:leading-[20px] md:leading-normal text-justify">
             Crafted by a skilled Software Engineer, specializing in Mobile App
             Development and Web Development, the digital experiences by this
             innovative mind blend technology and creativity seamlessly.
@@ -156,7 +156,7 @@ const HomePage = () => {
           <Text
             text="My Skills"
             isNosifer
-            className="text-white dark:text-primary_dark text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
+            className="dark:text-white text-primary_dark text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
           />
           <Line className="w-full border-cyan-500" />
         </div>
@@ -208,7 +208,7 @@ const HomePage = () => {
           <Text
             text="My Services"
             isNosifer
-            className="dark:text-primary_dark text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
+            className="text-primary_dark dark:text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
           />
           <Line className="w-full border-cyan-500" />
         </div>
@@ -243,7 +243,7 @@ const HomePage = () => {
         >
           <Text
             text="See More..."
-            className="dark:text-primary text-cyan-200 xl:text-[12px] xl:text-[16px] xl:text-[20px] xl:text-[24px]"
+            className="text-primary dark:text-cyan-200 xl:text-[12px] xl:text-[16px] xl:text-[20px] xl:text-[24px]"
           />
         </Link>
       </div>
@@ -255,7 +255,7 @@ const HomePage = () => {
           <Text
             text="My Projects"
             isNosifer
-            className="dark:text-primary_dark text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
+            className="text-primary_dark dark:text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
           />
           <Line className="w-full border-cyan-500" />
         </div>
@@ -266,7 +266,7 @@ const HomePage = () => {
             className={`${
               showPersonalProjects
                 ? "bg-primary text-white py-1 px-4 rounded-xl"
-                : "border border-primary dark:text-primary text-white rounded-xl py-1 px-4"
+                : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
             } text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(true)}
           >
@@ -277,7 +277,7 @@ const HomePage = () => {
             className={`${
               !showPersonalProjects
                 ? "bg-primary text-white py-1 px-4 rounded-xl"
-                : "border border-primary dark:text-primary text-white rounded-xl py-1 px-4"
+                : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
             } text-[16px] md:text-[24px] focus:outline-none`}
             onClick={() => setShowPersonalProjects(false)}
           >
@@ -306,7 +306,7 @@ const HomePage = () => {
           >
             <Text
               text="See More..."
-              className="dark:text-primary text-cyan-200 text-[16px] lg:text-[20px] xl:text-[24px]"
+              className="text-primary dark:text-cyan-200 text-[16px] lg:text-[20px] xl:text-[24px]"
             />
           </Link>
         </div>

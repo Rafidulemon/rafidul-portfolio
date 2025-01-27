@@ -168,17 +168,17 @@ export default function BlogPage({ params }: { params: { id: string } }) {
   return (
     <div className="w-full py-6 md:px-10">
       <div className="w-full md:w-[80%] lg:w-[60%] xl:w-[50%] mx-auto">
-        <h1 className="text-white dark:text-primary_dark text-3xl font-bold mb-4 md:mb-6">
+        <h1 className="dark:text-white text-primary_dark text-3xl font-bold mb-4 md:mb-6">
           {blog.title}
         </h1>
-        <p className="text-gray-200 dark:text-gray-700 mb-1 md:mb-2">
+        <p className="dark:text-gray-200 text-gray-700 mb-1 md:mb-2">
           {blog.date}
         </p>
-        <p className="text-gray-400 dark:text-gray-500">{blog.author}</p>
+        <p className="dark:text-gray-400 text-gray-500">{blog.author}</p>
         <div className="my-8">
           <img src={blog.image} alt={blog.title} className="w-full h-auto" />
         </div>
-        <div className="text-gray-300 dark:text-gray-800 mt-4 text-justify">
+        <div className="dark:text-gray-300 text-gray-800 mt-4 text-justify">
           {blog.description}
         </div>
       </div>

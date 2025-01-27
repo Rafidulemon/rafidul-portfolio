@@ -9,7 +9,7 @@ import { Text } from "../components/typography/Text";
 
 const ServicesPage = () => {
   return (
-    <div className="w-full pt-16 md:py-20">
+    <div className="w-full">
       <PageTitle name="SERVICES" />
       <div className="w-full flex flex-col my-4 md:my-6 md:flex-row justify-center gap-6">
           <ServicessCard
