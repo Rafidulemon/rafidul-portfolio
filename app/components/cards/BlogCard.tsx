@@ -22,8 +22,8 @@ const BlogCard = ({
         <Image
           src={image}
           alt={title}
-          width={500}
-          height={350}
+          width={1472}
+          height={832}
           className="w-full h-full object-cover rounded-t-xl"
         />
       </div>

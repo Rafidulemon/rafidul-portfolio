@@ -14,7 +14,7 @@ import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/Software
 import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
 import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
 import { notFound } from "next/navigation";
-import { ReactNode, useState } from "react";
+import Image from "next/image";
 import {
   FacebookIcon,
   TwitterIcon,
@@ -25,6 +25,8 @@ import {
   LinkedinShareButton,
   WhatsappShareButton,
 } from "react-share";
+import { FaCopy } from "react-icons/fa";
+import { useState } from "react";
 
 const blogData = [
   {
@@ -169,16 +171,6 @@ const blogData = [
   },
 ];
 
-interface Blog {
-  id: string;
-  title: string;
-  description: ReactNode;
-  description_summary: string;
-  date: string;
-  image: string;
-  author: string;
-}
-
 export default function BlogPage({ params }: { params: { id: string } }) {
   const blog = blogData.find((b) => b.id === params.id);
   const currentUrl = `https://rafidul-portfolio.vercel.app//blogs/${params.id}`;
@@ -186,6 +178,13 @@ export default function BlogPage({ params }: { params: { id: string } }) {
     notFound();
   }
 
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(currentUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   return (
     <div className="w-full py-6 md:px-10">
       <div className="w-full md:w-[80%] lg:w-[60%] xl:w-[50%] mx-auto">
@@ -197,15 +196,22 @@ export default function BlogPage({ params }: { params: { id: string } }) {
         </p>
         <p className="dark:text-gray-400 text-gray-500">{blog.author}</p>
         <div className="my-8">
-          <img src={blog.image} alt={blog.title} className="w-full h-auto" />
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            width={1472}
+            height={832}
+            className="w-full h-auto"
+          />
         </div>
         <div className="dark:text-gray-300 text-gray-800 mt-4 text-justify text-[14px] md:text-[16px]">
           {blog.description}
         </div>
 
-        <div className="mt-6 flex items-center text-[16] md:text-[20px]">Share this blog:</div>
+        <div className="mt-6 flex items-center text-[16] md:text-[20px]">
+          Share this blog:
+        </div>
         <div className="mt-2 flex space-x-4">
-          
           <FacebookShareButton url={currentUrl} title={blog.title}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>
@@ -218,6 +224,15 @@ export default function BlogPage({ params }: { params: { id: string } }) {
           <WhatsappShareButton url={currentUrl} title={blog.title}>
             <WhatsappIcon size={32} round />
           </WhatsappShareButton>
+          <button
+            onClick={handleCopy}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-white transition duration-200 hover:bg-gray-400 dark:hover:bg-gray-600"
+          >
+            <FaCopy size={20} color="black" className="dark:text-white" />
+          </button>
+          {copied && (
+            <span className="text-green-500 text-sm">Link Copied!</span>
+          )}
         </div>
       </div>
     </div>
