@@ -104,15 +104,28 @@ const Header = () => {
                 </li>
               ))}
 
-              {/* Theme Toggle */}
-              <li
-                className="hidden md:block cursor-pointer py-4 md:py-0 md:text-[30px] text-center border-b-2 md:border-b-0 text-yellow-500"
-                onClick={() => {
-                  setTheme(resolvedTheme === "light" ? "dark" : "light");
-                }}
-              >
-                {resolvedTheme === "dark" ? <MdLightMode /> : <MdDarkMode />}
+              <li className="hidden md:flex flex-row items-center justify-center">
+                <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                  <input
+                    type="checkbox"
+                    id="theme-toggle"
+                    checked={resolvedTheme === "dark"}
+                    onChange={() => {
+                      setTheme(resolvedTheme === "light" ? "dark" : "light");
+                    }}
+                    className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white dark:bg-gray-800 border-4 appearance-none cursor-pointer"
+                  />
+                  <label
+                    htmlFor="theme-toggle"
+                    className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer"
+                  ></label>
+                </div>
+
+                <div className="text-[30px]">
+                  {resolvedTheme === "dark" ? <MdDarkMode className="text-[#F6F1D5]"/> : <MdLightMode className="text-yellow-500"/>}
+                </div>
               </li>
+
               <li
                 className="mt-10 md:hidden flex flex-row items-center justify-center gap-6 cursor-pointer py-4 text-center"
                 onClick={() => {

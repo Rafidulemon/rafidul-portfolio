@@ -282,7 +282,7 @@ export default Header;
 
         <Text
           className="text-lg mb-2"
-          text="That's it! Your translation should work properly now."
+          text="That's it! Your theme changer should work properly now."
           isBold
           isPoppins
         />

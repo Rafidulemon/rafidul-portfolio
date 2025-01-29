@@ -3,6 +3,7 @@ import BangladeshTechBusinessDescription from "@/app/components/blogs/Bangladesh
 import ChatGptPremiumBlogDescription from "@/app/components/blogs/ChatGptPremiumBlogDescription";
 import ClaudeAiBlogDescription from "@/app/components/blogs/ClaudeAiBlogDescription";
 import CryptoFutureDescription from "@/app/components/blogs/CryptoFutureDescription";
+import DeepSeekBlogDescription from "@/app/components/blogs/DeepSeekBlogDescription";
 import DigitalMarketingAIDescription from "@/app/components/blogs/DigitalMarketingAIDescription";
 import FutureAiBlogDescription from "@/app/components/blogs/FutureAiBlogDescription";
 import MetaverseBlogDescription from "@/app/components/blogs/MetaverseBlogDescription";
@@ -13,7 +14,17 @@ import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/Software
 import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
 import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
 import { notFound } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import {
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+} from "react-share";
 
 const blogData = [
   {
@@ -146,6 +157,16 @@ const blogData = [
     image: "/images/blogs/bangladesh_tech.jpg",
     author: "Md. Rafidul Islam",
   },
+  {
+    id: "14",
+    title: "DeepSeek AI: The New Rising LLM",
+    date: "29 January, 2025",
+    description: <DeepSeekBlogDescription />,
+    description_summary:
+      "DeepSeek AI is an emerging large language model that challenges ChatGPT. Explore its capabilities, differences, and limitations.",
+    image: "/images/blogs/deepseek.jpg",
+    author: "Md. Rafidul Islam",
+  },
 ];
 
 interface Blog {
@@ -160,7 +181,7 @@ interface Blog {
 
 export default function BlogPage({ params }: { params: { id: string } }) {
   const blog = blogData.find((b) => b.id === params.id);
-
+  const currentUrl = `https://rafidul-portfolio.vercel.app//blogs/${params.id}`;
   if (!blog) {
     notFound();
   }
@@ -178,8 +199,25 @@ export default function BlogPage({ params }: { params: { id: string } }) {
         <div className="my-8">
           <img src={blog.image} alt={blog.title} className="w-full h-auto" />
         </div>
-        <div className="dark:text-gray-300 text-gray-800 mt-4 text-justify">
+        <div className="dark:text-gray-300 text-gray-800 mt-4 text-justify text-[14px] md:text-[16px]">
           {blog.description}
+        </div>
+
+        <div className="mt-6 flex items-center text-[16] md:text-[20px]">Share this blog:</div>
+        <div className="mt-2 flex space-x-4">
+          
+          <FacebookShareButton url={currentUrl} title={blog.title}>
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+          <TwitterShareButton url={currentUrl} title={blog.title}>
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+          <LinkedinShareButton url={currentUrl} title={blog.title}>
+            <LinkedinIcon size={32} round />
+          </LinkedinShareButton>
+          <WhatsappShareButton url={currentUrl} title={blog.title}>
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
         </div>
       </div>
     </div>

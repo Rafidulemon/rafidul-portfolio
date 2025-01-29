@@ -27,6 +27,18 @@
 }
 
 .scrollbar-hidden {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.toggle-checkbox:checked {
+  transform: translateX(1.5rem);
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #037887;
+}
+
+.toggle-checkbox:not(:checked) + .toggle-label {
+  background-color: #037887;
 }

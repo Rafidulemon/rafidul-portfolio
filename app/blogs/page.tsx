@@ -16,6 +16,7 @@ import NextJsIntlDescription from "@/app/components/blogs/NextJsIntlDescription"
 import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/SoftwareEntrepreneurshipDescription";
 import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
 import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
+import DeepSeekBlogDescription from "../components/blogs/DeepSeekBlogDescription";
 
 const blogData = [
   {
@@ -148,6 +149,16 @@ const blogData = [
     image: "/images/blogs/bangladesh_tech.jpg",
     author: "Md. Rafidul Islam",
   },
+  {
+    id: "14",
+    title: "DeepSeek AI: The New Rising LLM",
+    date: "29 January, 2025",
+    description: <DeepSeekBlogDescription />,
+    description_summary:
+      "DeepSeek AI is an emerging large language model that challenges ChatGPT. Explore its capabilities, differences, and limitations.",
+    image: "/images/blogs/deepseek.jpg",
+    author: "Md. Rafidul Islam",
+  },
 ];
 
 const BlogsPage = () => {
@@ -162,13 +173,16 @@ const BlogsPage = () => {
     setSearchTerm(e.target.value.toLowerCase());
   };
 
-  const filteredBlogs = blogData.filter((blog) => {
+  const filteredBlogs = blogData
+  .filter((blog) => {
     const titleMatch = blog.title.toLowerCase().includes(searchTerm);
     const descriptionMatch = blog.description_summary
       .toLowerCase()
       .includes(searchTerm);
     return titleMatch || descriptionMatch;
-  });
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
+
 
   return (
     <div className="w-full">
