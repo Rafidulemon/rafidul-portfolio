@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#f6fefe] dark:bg-black">
-        <ThemeProvider defaultTheme="system" attribute="class">
+        <ThemeProvider defaultTheme="dark" attribute="class">
           <div>
             <div className="fixed top-0 left-0 right-0 z-10">
               <Header />

@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#f6fefe] dark:bg-black">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider  defaultTheme="dark" attribute="class">
               {children}
         </ThemeProvider>
       </body>
@@ -64,6 +64,11 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Header = () => {
 const { resolvedTheme, theme, setTheme } = useTheme();
+const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
 return (
     <div className="flex justify-between items-center py-4">
@@ -73,7 +78,15 @@ return (
             setTheme(resolvedTheme === "light" ? "dark" : "light");
         }}
         >
-            {resolvedTheme === "dark" ? <MdLightMode /> : <MdDarkMode />}
+          {mounted && (
+            <div className="text-[30px]">
+                {resolvedTheme === "dark" ? (
+                  <MdDarkMode className="text-[#F6F1D5]" />
+                ) : (
+                  <MdLightMode className="text-yellow-500" />
+                )}
+            </div>
+          )}
         </li>
     </div>
 );
@@ -198,33 +211,6 @@ export default Header;
                 <MdContentCopy size={20} />
               </button>
             </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2 mb-4">
-          <Text
-            text="Update tailwind.config.ts"
-            isBold
-            isPoppins
-            className="text-lg mb-2"
-          />
-          <Text
-            text="Add the following line in your tailwind.config.ts file"
-            isPoppins
-            className="mb-2"
-          />
-
-          <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md">
-            <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-8">
-              {tailwindCode}
-            </pre>
-            <button
-              className="absolute top-2 right-2 text-gray-300 hover:text-white"
-              onClick={() => handleCopy(tailwindCode)}
-              aria-label="Copy command"
-            >
-              <MdContentCopy size={20} />
-            </button>
           </div>
         </div>
 

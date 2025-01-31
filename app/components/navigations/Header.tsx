@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMenu, IoCloseCircleSharp } from "react-icons/io5";
 import { Text } from "../typography/Text";
 import { usePathname } from "next/navigation";
@@ -21,6 +21,12 @@ const Header = () => {
   const path = usePathname();
   const { resolvedTheme, theme, setTheme } = useTheme();
   const [navbar, setNavbar] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  console.log("Resolved theme:", resolvedTheme);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div>
@@ -120,35 +126,51 @@ const Header = () => {
                     className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer"
                   ></label>
                 </div>
-
-                <div className="text-[30px]">
-                  {resolvedTheme === "dark" ? <MdDarkMode className="text-[#F6F1D5]"/> : <MdLightMode className="text-yellow-500"/>}
-                </div>
+                {mounted && (
+                  <div className="text-[30px]">
+                    {resolvedTheme === "dark" ? (
+                      <MdDarkMode className="text-[#F6F1D5]" />
+                    ) : (
+                      <MdLightMode className="text-yellow-500" />
+                    )}
+                  </div>
+                )}
               </li>
 
               <li
                 className="mt-10 md:hidden flex flex-row items-center justify-center gap-6 cursor-pointer py-4 text-center"
-                onClick={() => {
-                  setTheme(resolvedTheme === "light" ? "dark" : "light");
-                }}
               >
-                <div
-                  className={`flex flex-row gap-1 h-full items-center justify-center ${
-                    theme === "dark" ? "text-white" : "text-yellow-500"
-                  }`}
-                >
-                  <MdLightMode />
-                  <Text text="Light" />
-                </div>
+                {mounted && (
+                  <>
+                    <div
+                      className={`flex flex-row gap-1 h-full items-center justify-center ${
+                        resolvedTheme === "dark"
+                          ? "text-white"
+                          : "text-yellow-500"
+                      }`}
+                      onClick={() => {
+                        setTheme("light");
+                      }}
+                    >
+                      <MdLightMode />
+                      <Text text="Light" />
+                    </div>
 
-                <div
-                  className={`flex flex-row gap-1 h-full items-center justify-center ${
-                    theme === "light" ? "text-black" : "text-yellow-500"
-                  }`}
-                >
-                  <MdDarkMode />
-                  <Text text="Dark" />
-                </div>
+                    <div
+                      className={`flex flex-row gap-1 h-full items-center justify-center ${
+                        resolvedTheme === "light"
+                          ? "text-black"
+                          : "text-yellow-500"
+                      }`}
+                      onClick={() => {
+                        setTheme("dark");
+                      }}
+                    >
+                      <MdDarkMode />
+                      <Text text="Dark" />
+                    </div>
+                  </>
+                )}
               </li>
             </ul>
           </div>
