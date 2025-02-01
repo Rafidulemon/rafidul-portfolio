@@ -22,7 +22,6 @@ const Header = () => {
   const { resolvedTheme, theme, setTheme } = useTheme();
   const [navbar, setNavbar] = useState(false);
   const [mounted, setMounted] = useState(false);
-  console.log("Resolved theme:", resolvedTheme);
 
   useEffect(() => {
     setMounted(true);
