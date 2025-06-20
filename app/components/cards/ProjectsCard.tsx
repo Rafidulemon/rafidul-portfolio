@@ -7,8 +7,8 @@ interface ProjectsCardProps {
   src: string;
   project_title: string;
   project_details: string;
-  github_link: string;
-  live_link: string;
+  github_link?: string;
+  live_link?: string;
 }
 
 function ProjectsCard(props: ProjectsCardProps) {

@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "type": "ai",
+    "category": "personal",
+    "src": "/images/projects/alizaAi.jpg",
+    "project_title": "Virtual Assistant",
+    "project_details": "AI-based assistant that helps with daily tasks.",
+    "github_link": "https://github.com/Rafidulemon/myVirtualAssistant"
+  },
+  {
+    "id": 2,
+    "type": "web",
+    "category": "personal",
+    "src": "/images/projects/portfolio-web.png",
+    "project_title": "Portfolio Website",
+    "project_details": "Personal portfolio website showcasing my work.",
+    "github_link": "https://github.com/Rafidulemon/rafidul-portfolio",
+    "live_link": "https://rafidul-portfolio.vercel.app/"
+  },
+  {
+    "id": 3,
+    "type": "web",
+    "category": "personal",
+    "src": "/images/projects/hr-mgt.jpg",
+    "project_title": "HR Management App",
+    "project_details": "Tool for managing employee data and workflow.",
+    "github_link": "https://github.com/Rafidulemon/hr_mgt",
+    "live_link": "https://hr-mgt.netlify.app/"
+  },
+  {
+    "id": 4,
+    "type": "web",
+    "category": "personal",
+    "src": "/images/projects/ecom-website.png",
+    "project_title": "E-Commerce Website",
+    "project_details": "Full-featured e-commerce website for a clothing brand named Alphee.",
+    "github_link": "https://github.com/Rafidulemon/alphee",
+    "live_link": "https://alphee.vercel.app/"
+  },
+  {
+    "id": 5,
+    "type": "web",
+    "category": "personal",
+    "src": "/images/projects/hospital.jpg",
+    "project_title": "Demo hospital Website",
+    "project_details": "Full-featured hospital website.",
+    "github_link": "https://github.com/Rafidulemon/demo_hospital",
+    "live_link": "https://demo-hospital-theta.vercel.app/en"
+  },
+  {
+    "id": 6,
+    "type": "web",
+    "category": "personal",
+    "src": "/images/projects/career.jpg",
+    "project_title": "Company Website",
+    "project_details": "Full-featured company website for a HR agency named Carriastic.",
+    "github_link": "https://github.com/Rafidulemon/carriastic",
+    "live_link": "https://carriasticapp.vercel.app/"
+  },
+  {
+    "id": 7,
+    "type": "mobile",
+    "category": "personal",
+    "src": "/images/projects/hr-mgt.jpg",
+    "project_title": "HR Management App",
+    "project_details": "Tool for managing employee data and workflow.",
+    "github_link": "https://github.com/Rafidulemon/Nexkraft-Mobile-App"
+  },
+  {
+    "id": 8,
+    "type": "web",
+    "category": "professional",
+    "src": "/images/projects/moeguide.png",
+    "project_title": "MoeGuide",
+    "project_details": "A comprehensive guide application featuring detailed itineraries, activities, and location-based recommendations.",
+    "live_link": "https://moeguide-app.vercel.app/"
+  },
+  {
+    "id": 9,
+    "type": "web",
+    "category": "professional",
+    "src": "/images/projects/suiri.png",
+    "project_title": "Suirikyou",
+    "project_details": "A plafrorm for online test and getting results, certificates, and scholarships.",
+    "live_link": "https://suirikyou.vercel.app/"
+  },
+  {
+    "id": 10,
+    "type": "ai",
+    "category": "professional",
+    "src": "/images/projects/rag.png",
+    "project_title": "Raggie",
+    "project_details": "An inhouse gpt platform for ai chatting",
+    "live_link": "https://raggie-swart.vercel.app/"
+  },
+  {
+    "id": 11,
+    "type": "mobile",
+    "category": "professional",
+    "src": "/images/projects/benrimono.png",
+    "project_title": "Benrimono",
+    "project_details": "A platform for user and driver management including live location, calling the driver.",
+    "live_link": "https://benrimono-api-next.vercel.app"
+  }
+]
