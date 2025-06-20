@@ -17,6 +17,8 @@ import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/Software
 import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
 import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
 import DeepSeekBlogDescription from "../components/blogs/DeepSeekBlogDescription";
+import JS_DOM_Blog from "../components/blogs/JSDom";
+import MCP_Blog from "../components/blogs/MCP_Blog";
 
 const blogData = [
   {
@@ -159,6 +161,26 @@ const blogData = [
     image: "/images/blogs/deepseek.jpg",
     author: "Md. Rafidul Islam",
   },
+  {
+    id: "15",
+    title: "JavaScript DOM (Document Object Model)",
+    date: "19 June, 2025",
+    description: <JS_DOM_Blog />,
+    description_summary:
+      "An easy-to-understand guide explaining the JavaScript DOM, how to access and manipulate HTML elements, handle events, and build interactive web pages.",
+    image: "/images/blogs/js_dom.jpg",
+    author: "Md. Rafidul Islam",
+  },
+  {
+    id: "16",
+    title: "Model Context Protocol (MCP)",
+    date: "20 June, 2025",
+    description: <MCP_Blog />,
+    description_summary:
+      "An in-depth beginner-friendly guide to Model Context Protocol (MCP), the open standard that enables LLMs to interact with external tools, APIs, and context dynamically using a unified JSON-RPC format.",
+    image: "/images/blogs/mcp_protocol.jpg",
+    author: "Md. Rafidul Islam",
+  },
 ];
 
 const BlogsPage = () => {
@@ -174,15 +196,14 @@ const BlogsPage = () => {
   };
 
   const filteredBlogs = blogData
-  .filter((blog) => {
-    const titleMatch = blog.title.toLowerCase().includes(searchTerm);
-    const descriptionMatch = blog.description_summary
-      .toLowerCase()
-      .includes(searchTerm);
-    return titleMatch || descriptionMatch;
-  })
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
-
+    .filter((blog) => {
+      const titleMatch = blog.title.toLowerCase().includes(searchTerm);
+      const descriptionMatch = blog.description_summary
+        .toLowerCase()
+        .includes(searchTerm);
+      return titleMatch || descriptionMatch;
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
 
   return (
     <div className="w-full">

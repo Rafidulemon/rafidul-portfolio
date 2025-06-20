@@ -13,6 +13,7 @@ import NextJsIntlDescription from "@/app/components/blogs/NextJsIntlDescription"
 import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/SoftwareEntrepreneurshipDescription";
 import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
 import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
+import JS_DOM_Blog from "@/app/components/blogs/JSDom";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import {
@@ -27,6 +28,7 @@ import {
 } from "react-share";
 import { FaCopy } from "react-icons/fa";
 import { useState } from "react";
+import MCP_Blog from "@/app/components/blogs/MCP_Blog";
 
 const blogData = [
   {
@@ -167,6 +169,26 @@ const blogData = [
     description_summary:
       "DeepSeek AI is an emerging large language model that challenges ChatGPT. Explore its capabilities, differences, and limitations.",
     image: "/images/blogs/deepseek.jpg",
+    author: "Md. Rafidul Islam",
+  },
+  {
+    id: "15",
+    title: "JavaScript DOM (Document Object Model)",
+    date: "19 June, 2025",
+    description: <JS_DOM_Blog />,
+    description_summary:
+      "An easy-to-understand guide explaining the JavaScript DOM, how to access and manipulate HTML elements, handle events, and build interactive web pages.",
+    image: "/images/blogs/js_dom.jpg",
+    author: "Md. Rafidul Islam",
+  },
+  {
+    id: "16",
+    title: "Model Context Protocol (MCP)",
+    date: "20 June, 2025",
+    description: <MCP_Blog />,
+    description_summary:
+      "An in-depth beginner-friendly guide to Model Context Protocol (MCP), the open standard that enables LLMs to interact with external tools, APIs, and context dynamically using a unified JSON-RPC format.",
+    image: "/images/blogs/mcp_protocol.jpg",
     author: "Md. Rafidul Islam",
   },
 ];
