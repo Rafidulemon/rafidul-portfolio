@@ -1,0 +1,192 @@
+[
+    {
+        "id": 1,
+        "skill_name": "JavaScript",
+        "proficiency": "advanced",
+        "icon": "/images/skills/javascript.png",
+        "category": "programming_language",
+        "details": "Experienced in ES6+, asynchronous programming, and DOM manipulation.",
+        "years_of_experience": 4,
+        "percentage": 90
+    },
+    {
+        "id": 2,
+        "skill_name": "TypeScript",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/typeScript.jpg",
+        "category": "programming_language",
+        "details": "Proficient in static typing, interfaces, and type inference.",
+        "years_of_experience": 2,
+        "percentage": 75
+    },
+    {
+        "id": 3,
+        "skill_name": "React",
+        "proficiency": "advanced",
+        "icon": "/images/skills/react.png",
+        "category": "framework",
+        "details": "Skilled in building SPAs, hooks, and state management with Redux.",
+        "years_of_experience": 4,
+        "percentage": 80
+    },
+    {
+        "id": 4,
+        "skill_name": "Node.js",
+        "proficiency": "advanced",
+        "icon": "/images/skills/nodejs.jpg",
+        "category": "runtime_environment",
+        "details": "Experienced in building RESTful APIs, middleware, and server-side rendering.",
+        "years_of_experience": 4,
+        "percentage": 85
+    },
+    {
+        "id": 5,
+        "skill_name": "MongoDB",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/mongodb.jpg",
+        "category": "database",
+        "details": "Proficient in schema design, aggregation framework, and indexing.",
+        "years_of_experience": 3,
+        "percentage": 70
+    },
+    {
+        "id": 6,
+        "skill_name": "Next.js",
+        "proficiency": "advanced",
+        "icon": "/images/skills/nextjs.png",
+        "category": "framework",
+        "details": "Skilled in server-side rendering, static site generation, and API routes.",
+        "years_of_experience": 3,
+        "percentage": 90
+    },
+    {
+        "id": 7,
+        "skill_name": "Tailwind CSS",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/tailwindcss.png",
+        "category": "css_framework",
+        "details": "Proficient in utility-first CSS, responsive design, and theming.",
+        "years_of_experience": 2,
+        "percentage": 95
+    },
+    {
+        "id": 8,
+        "skill_name": "Git",
+        "proficiency": "advanced",
+        "icon": "/images/skills/git.png",
+        "category": "version_control",
+        "details": "Experienced in branching, merging, and collaborative workflows.",
+        "years_of_experience": 4,
+        "percentage": 90
+    },
+    {
+        "id": 9,
+        "skill_name": "Docker",
+        "proficiency": "beginner",
+        "icon": "/images/skills/docker.jpg",
+        "category": "containerization",
+        "details": "Familiar with containerizing applications and using Docker Compose.",
+        "years_of_experience": 1,
+        "percentage": 50
+    },
+    {
+        "id": 10,
+        "skill_name": "Express.js",
+        "proficiency": "advanced",
+        "icon": "/images/skills/expressjs.png",
+        "category": "framework",
+        "details": "Skilled in building RESTful APIs, middleware, and routing.",
+        "years_of_experience": 4,
+        "percentage": 75
+    },
+    {
+        "id": 11,
+        "skill_name": "Zod",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/zod.jpeg",
+        "category": "validation_library",
+        "details": "Proficient in schema validation and type inference for TypeScript.",
+        "years_of_experience": 2,
+        "percentage": 85
+    },
+    {
+        "id": 12,
+        "skill_name": "Java",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/java.jpg",
+        "category": "programming_language",
+        "details": "Familiar with OOP concepts, data structures, and JavaFX for GUI development.",
+        "years_of_experience": 2,
+        "percentage": 65
+    },
+    {
+        "id": 13,
+        "skill_name": "Python",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/python.png",
+        "category": "programming_language",
+        "details": "Experienced in scripting, data analysis, and web development with Django.",
+        "years_of_experience": 3,
+        "percentage": 75
+    },
+    {
+        "id": 14,
+        "skill_name": "PostgreSQL",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/postgresql.png",
+        "category": "database",
+        "details": "Proficient in relational database design, SQL queries, and performance optimization.",
+        "years_of_experience": 2,
+        "percentage": 80
+    },
+    {
+        "id": 15,
+        "skill_name": "MySQL",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/mysql.png",
+        "category": "database",
+        "details": "Proficient in relational database design, SQL queries, and stored procedures.",
+        "years_of_experience": 2,
+        "percentage": 70
+    },
+    {
+        "id": 16,
+        "skill_name": "Prisma",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/prisma.jpg",
+        "category": "orm",
+        "details": "Proficient in database modeling, migrations, and type-safe database access.",
+        "years_of_experience": 2,
+        "percentage": 85
+    },
+    {
+        "id": 17,
+        "skill_name": "tRPC",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/trpc.jpeg",
+        "category": "rpc_framework",
+        "details": "Proficient in building type-safe APIs with end-to-end type safety.",
+        "years_of_experience": 2,
+        "percentage": 80
+    },
+    {
+        "id": 18,
+        "skill_name": "Redux",
+        "proficiency": "advanced",
+        "icon": "/images/skills/redux.png",
+        "category": "state_management",
+        "details": "Skilled in state management, middleware, and asynchronous actions.",
+        "years_of_experience": 3,
+        "percentage": 75
+    },
+    {
+        "id": 19,
+        "skill_name": "Figma",
+        "proficiency": "intermediate",
+        "icon": "/images/skills/figma.png",
+        "category": "design_tool",
+        "details": "Proficient in UI/UX design, prototyping, and collaboration.",
+        "years_of_experience": 2,
+        "percentage": 80
+    }
+]

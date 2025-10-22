@@ -12,7 +12,7 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 const NAV_ITEMS = [
   { path: "/", name: "Home" },
   { path: "/about", name: "About" },
-  { path: "/services", name: "Services" },
+  { path: "/projects", name: "Projects" },
   { path: "/blogs", name: "Blogs" },
   { path: "/contact", name: "Contact" },
 ];

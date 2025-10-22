@@ -19,92 +19,15 @@ import {
 } from "react-icons/fa";
 import Details from "../components/about-details/Details";
 import Link from "next/link";
+import projectData from "../data/projects.json";
 
 const AboutPage = () => {
   const [showPersonalProjects, setShowPersonalProjects] = useState(true);
   
-    const personalProjects = [
-      {
-        src: "/images/projects/alizaAi.jpg",
-        title: "Virtual Assistant",
-        details:
-          "An AI-powered virtual assistant capable of handling user queries, setting reminders, and performing various tasks.",
-        github: "https://github.com/Rafidulemon/myVirtualAssistant",
-        link: "#",
-      },
-      {
-        src: "/images/projects/portfolio-web.png",
-        title: "Portfolio Website",
-        details:
-          "A visually stunning and responsive portfolio website showcasing skills, projects, and achievements.",
-        github: "https://github.com/Rafidulemon/rafidul-portfolio",
-        link: "https://rafidul-portfolio.vercel.app",
-      },
-      {
-        src: "/images/projects/hr_mgt.jpeg",
-        title: "HR Management App",
-        details:
-          "A modern HR management application to handle employee records, payroll, and organizational tasks effectively.",
-        github: "https://github.com/Rafidulemon/hr_mgt",
-        link: "https://hr-mgt.netlify.app/",
-      },
-      {
-        src: "/images/projects/hospital.jpg",
-        title: "Hospital App",
-        details:
-          "A hospital management web app featuring patient records, doctor schedules, and appointment booking.",
-        github: "https://github.com/Rafidulemon/demo_hospital",
-        link: "https://demo-hospital-theta.vercel.app",
-      },
-      {
-        src: "/images/projects/career.jpg",
-        title: "Carriastic Website",
-        details:
-          "A carrer development website showcasing various job opportunities and resources for career growth.",
-        github: "https://github.com/Rafidulemon/carriastic",
-        link: "https://carriasticapp.vercel.app/",
-      },
-    ];
-    
-    const professionalProjects = [
-      {
-        src: "/images/projects/moeguide.png",
-        title: "MoeGuide",
-        details:
-          "A comprehensive guide application featuring detailed itineraries, activities, and location-based recommendations.",
-        link: "https://moeguide-app.vercel.app/",
-        github: "https://github.com/",
-      },
-      {
-        src: "/images/projects/suiri.png",
-        title: "Suirikyou",
-        details:
-          "A plafrorm for online test and getting results, certificates, and scholarships.",
-        link: "https://suirikyou.vercel.app/",
-        github: "https://github.com/",
-      },
-      {
-        src: "/images/projects/rag.png",
-        title: "Raggie",
-        details:
-          "An inhouse gpt platform for ai chatting",
-        link: "https://raggie-swart.vercel.app/",
-        github: "https://github.com/",
-      },
-      {
-        src: "/images/projects/benrimono.png",
-        title: "Benrimono",
-        details:
-          "A platform for user and driver management including live location, calling the driver",
-        link: "https://benrimono-api-next.vercel.app",
-        github: "https://github.com/",
-      },
-    ];
-    
-  
-    const currentProjects = showPersonalProjects
-      ? personalProjects
-      : professionalProjects;
+  const personalProjects = projectData.filter((project: { category: string; }) => project.category === "personal");
+  const professionalProjects = projectData.filter((project: { category: string; }) => project.category === "professional");
+
+  const currentProjects = showPersonalProjects ? personalProjects : professionalProjects;
   return (
     <div className="w-full">
       <PageTitle name="ABOUT ME" />
@@ -387,10 +310,11 @@ const AboutPage = () => {
               <ProjectsCard
                 key={index}
                 src={project.src}
-                project_title={project.title}
-                project_details={project.details}
-                github_link={project.github}
-                live_link={project.link}
+                project_title={(project as any).title ?? (project as any).project_title}
+                project_details={(project as any).details ?? (project as any).project_details}
+                github_link={(project as any).github ?? (project as any).github_link}
+                live_link={(project as any).link ?? (project as any).live_link}
+                stack={project.stack}
               />
             ))}
           </div>

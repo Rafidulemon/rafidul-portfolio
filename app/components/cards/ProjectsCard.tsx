@@ -9,10 +9,11 @@ interface ProjectsCardProps {
   project_details: string;
   github_link?: string;
   live_link?: string;
+  stack?: string[];
 }
 
 function ProjectsCard(props: ProjectsCardProps) {
-  const { src = "", project_title = "", project_details = "", github_link = "#", live_link = "#" } = props;
+  const { src = "", project_title = "", project_details = "", github_link = "#", live_link = "#", stack = [] } = props;
 
   return (
     <div className="relative bg-white dark:bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col overflow-hidden">
@@ -41,6 +42,18 @@ function ProjectsCard(props: ProjectsCardProps) {
             text={project_details}
             className="text-black dark:text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
           />
+          {stack.length > 0 && (
+            <div className="w-full flex flex-wrap items-center justify-center gap-2 mt-2">
+              {stack.map((tech, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-[12px] md:text-[14px] px-2 py-1 rounded"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="w-full flex flex-row items-center justify-center gap-6 mt-4">
             <a
               href={github_link}
@@ -68,6 +81,18 @@ function ProjectsCard(props: ProjectsCardProps) {
           text={project_details}
           className="text-black dark:text-[#ADB7BE] text-center text-[14px] md:text-[16px]"
         />
+        {stack.length > 0 && (
+            <div className="w-full flex flex-wrap items-center justify-center gap-2 mt-2">
+              {stack.map((tech, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-[12px] md:text-[14px] px-2 py-1 rounded"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
         <div className="flex gap-6">
           <a
             href={github_link}

@@ -13,6 +13,8 @@ import ProjectsCard from "./components/cards/ProjectsCard";
 import SkillBar from "./components/animations/SkillBar";
 import FlashScreen from "./components/FlashScreen";
 import projectsData from "./data/projects.json";
+import skillData from "./data/skills.json";
+import Image from "next/image";
 
 const HomePage = () => {
   const [showPersonalProjects, setShowPersonalProjects] = useState(true);
@@ -32,16 +34,15 @@ const HomePage = () => {
     }
   }, []);
 
-  const currentProjects = projectsData.filter(
-    (project: { category: string; }) =>
-      showPersonalProjects ? project.category === "personal" : project.category === "professional"
+  const currentProjects = projectsData.filter((project: { category: string }) =>
+    showPersonalProjects
+      ? project.category === "personal"
+      : project.category === "professional"
   );
 
   return (
     <section>
-      {showPopup && (
-        <FlashScreen/>
-      )}
+      {showPopup && <FlashScreen />}
 
       {!showPopup && (
         <div>
@@ -108,8 +109,39 @@ const HomePage = () => {
               />
               <Line className="w-full border-cyan-500" />
             </div>
+            <div className="flex flex-col items-center">
+            {skillData.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-10 lg:mb-14 xl:mb-20 md:w-[350px] lg:w-[550px] xl:w-[700px]">
+                {skillData.map((skill) => (
+                  <Image
+                    key={skill.id}
+                    src={skill.icon}
+                    alt={`${skill.skill_name} icon`}
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-contain md:h-12 md:w-12 lg:h-[60px] lg:w-[60px] rounded-md"
+                  />
+                ))}
+              </div>
+            )}
+            </div>
 
-            <div className="flex flex-col gap-6 items-center">
+            {skillData.length > 0 && (
+              <div className="flex flex-col gap-6 items-center">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4 md:w-[350px] lg:w-[550px] xl:w-[700px]">
+                  {skillData.map((skill) => (
+                    <div key={skill.id} className="w-full">
+                      <SkillBar
+                        label={skill.skill_name}
+                        level={skill.percentage}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* <div className="flex flex-col gap-6 items-center">
               <div className="w-full flex flex-row gap-10 md:w-[350px] lg:w-[550px] xl:w-[700px]">
                 <div className="w-full">
                   <SkillBar label="Javascript" level={80} />
@@ -146,7 +178,7 @@ const HomePage = () => {
                   <SkillBar label="Adobe XD" level={60} />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Services */}
@@ -238,6 +270,7 @@ const HomePage = () => {
                     project_details={project.project_details}
                     github_link={project.github_link || ""}
                     live_link={project.live_link || ""}
+                    stack={project.stack || []}
                   />
                 ))}
               </div>

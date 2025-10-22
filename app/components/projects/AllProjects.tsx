@@ -21,6 +21,7 @@ function AllProjects({ type }: AllProjectsProps) {
           project_details={project.project_details}
           github_link={project.github_link}
           live_link={project.live_link}
+          stack={project.stack}
         />
       ))}
     </div>

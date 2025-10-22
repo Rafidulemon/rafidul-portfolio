@@ -6,7 +6,8 @@
     "src": "/images/projects/alizaAi.jpg",
     "project_title": "Virtual Assistant",
     "project_details": "AI-based assistant that helps with daily tasks.",
-    "github_link": "https://github.com/Rafidulemon/myVirtualAssistant"
+    "github_link": "https://github.com/Rafidulemon/myVirtualAssistant",
+    "stack": ["Python", "OpenAi", "TensorFlow", "NLTK", "SpeechRecognition", "PyAudio", "gTTS", "OpenCV", "Web Scraping"]
   },
   {
     "id": 2,
@@ -16,7 +17,8 @@
     "project_title": "Portfolio Website",
     "project_details": "Personal portfolio website showcasing my work.",
     "github_link": "https://github.com/Rafidulemon/rafidul-portfolio",
-    "live_link": "https://rafidul-portfolio.vercel.app/"
+    "live_link": "https://rafidul-portfolio.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"]
   },
   {
     "id": 3,
@@ -26,7 +28,8 @@
     "project_title": "HR Management App",
     "project_details": "Tool for managing employee data and workflow.",
     "github_link": "https://github.com/Rafidulemon/hr_mgt",
-    "live_link": "https://hr-mgt.netlify.app/"
+    "live_link": "https://hr-mgt.netlify.app/",
+    "stack": ["React", "Node.js", "TypeScript", "Tailwind CSS", "Fast API", "MySQL", "Pydantic", "SQLAlchemy"]
   },
   {
     "id": 4,
@@ -36,7 +39,8 @@
     "project_title": "E-Commerce Website",
     "project_details": "Full-featured e-commerce website for a clothing brand named Alphee.",
     "github_link": "https://github.com/Rafidulemon/alphee",
-    "live_link": "https://alphee.vercel.app/"
+    "live_link": "https://alphee.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Stripe" ]
   },
   {
     "id": 5,
@@ -46,7 +50,8 @@
     "project_title": "Demo hospital Website",
     "project_details": "Full-featured hospital website.",
     "github_link": "https://github.com/Rafidulemon/demo_hospital",
-    "live_link": "https://demo-hospital-theta.vercel.app/en"
+    "live_link": "https://demo-hospital-theta.vercel.app/en",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS" ]
   },
   {
     "id": 6,
@@ -56,7 +61,8 @@
     "project_title": "Company Website",
     "project_details": "Full-featured company website for a HR agency named Carriastic.",
     "github_link": "https://github.com/Rafidulemon/carriastic",
-    "live_link": "https://carriasticapp.vercel.app/"
+    "live_link": "https://carriasticapp.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS" ]
   },
   {
     "id": 7,
@@ -65,7 +71,8 @@
     "src": "/images/projects/hr-mgt.jpg",
     "project_title": "HR Management App",
     "project_details": "Tool for managing employee data and workflow.",
-    "github_link": "https://github.com/Rafidulemon/Nexkraft-Mobile-App"
+    "github_link": "https://github.com/Rafidulemon/Nexkraft-Mobile-App",
+    "stack": ["Java", "Android Studio", "Firebase" ]
   },
   {
     "id": 8,
@@ -74,7 +81,8 @@
     "src": "/images/projects/moeguide.png",
     "project_title": "MoeGuide",
     "project_details": "A comprehensive guide application featuring detailed itineraries, activities, and location-based recommendations.",
-    "live_link": "https://moeguide-app.vercel.app/"
+    "live_link": "https://moeguide-app.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma" ]
   },
   {
     "id": 9,
@@ -83,7 +91,8 @@
     "src": "/images/projects/suiri.png",
     "project_title": "Suirikyou",
     "project_details": "A plafrorm for online test and getting results, certificates, and scholarships.",
-    "live_link": "https://suirikyou.vercel.app/"
+    "live_link": "https://suirikyou.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "Stripe", "Micro CMS"]
   },
   {
     "id": 10,
@@ -92,7 +101,8 @@
     "src": "/images/projects/rag.png",
     "project_title": "Raggie",
     "project_details": "An inhouse gpt platform for ai chatting",
-    "live_link": "https://raggie-swart.vercel.app/"
+    "live_link": "https://raggie-swart.vercel.app/",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAi", "Pinecone", "tRPC", "Prisma", "Lanchain"]
   },
   {
     "id": 11,
@@ -101,6 +111,7 @@
     "src": "/images/projects/benrimono.png",
     "project_title": "Benrimono",
     "project_details": "A platform for user and driver management including live location, calling the driver.",
-    "live_link": "https://benrimono-api-next.vercel.app"
+    "live_link": "https://benrimono-api-next.vercel.app",
+    "stack": ["Vitest"]
   }
 ]
