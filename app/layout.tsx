@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     "Next.js Developer",
     "React Developer",
   ],
+  icons: {
+    icon: "/images/icon.png",
+  },
   authors: [{ name: "Md. Rafidul Islam" }],
   openGraph: {
     type: "website",
