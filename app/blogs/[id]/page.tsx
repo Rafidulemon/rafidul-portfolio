@@ -29,6 +29,7 @@ import {
 import { FaCopy } from "react-icons/fa";
 import { useState } from "react";
 import MCP_Blog from "@/app/components/blogs/MCP_Blog";
+import OpenAiCodex from "@/app/components/blogs/OpenAiCodex";
 
 const blogData = [
   {
@@ -189,6 +190,16 @@ const blogData = [
     description_summary:
       "An in-depth beginner-friendly guide to Model Context Protocol (MCP), the open standard that enables LLMs to interact with external tools, APIs, and context dynamically using a unified JSON-RPC format.",
     image: "/images/blogs/mcp_protocol.jpg",
+    author: "Md. Rafidul Islam",
+  },
+  {
+    id: "17",
+    title: "OpenAI Codex: The AI That Codes with You",
+    date: "31 September, 2025",
+    description: <OpenAiCodex />,
+    description_summary:
+      "OpenAI Codex empowers developers with AI-assisted coding, smart autocomplete, and automated code reviews directly in VS Code and GitHub Actions.",
+    image: "/images/blogs/codex.jpg",
     author: "Md. Rafidul Islam",
   },
 ];
