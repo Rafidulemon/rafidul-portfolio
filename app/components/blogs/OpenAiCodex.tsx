@@ -10,7 +10,7 @@ const OpenAiCodex = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-    const codexingithub = `
+  const codexingithub = `
 name: Perform a code review when a pull request is created.
 on:
   pull_request:
@@ -91,14 +91,18 @@ jobs:
         languages. If you’ve ever used GitHub Copilot, you’ve already
         experienced the magic of Codex — because Copilot is powered by it!
       </p>
-      <h2 className="text-xl md:text-2xl font-bold mt-6">💡 What Is OpenAI Codex?</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        💡 What Is OpenAI Codex?
+      </h2>
       <p>
         <strong>OpenAI Codex</strong> is fine-tuned specifically on publicly
         available source code and natural language. It can understand plain
         English instructions and turn them into executable code.
       </p>
 
-      <h2 className="text-xl md:text-2xl font-bold mt-6">🧩 Supported Languages</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        🧩 Supported Languages
+      </h2>
       <p>Codex supports dozens of programming languages, including:</p>
       <ul className="list-disc pl-6 mt-2">
         <li>JavaScript</li>
@@ -112,7 +116,9 @@ jobs:
         <li>SQL, and more</li>
       </ul>
 
-      <h2 className="text-xl md:text-2xl font-bold mt-6">🎯 What Codex Can Do</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        🎯 What Codex Can Do
+      </h2>
       <ul className="list-disc pl-6 mt-2">
         <li>Convert comments or natural language prompts into code</li>
         <li>Explain existing code in plain English</li>
@@ -139,20 +145,20 @@ jobs:
       </h2>
       <ul className="list-disc pl-6 mt-2">
         <li>
-          No extra setup needed, just sign in with your GitHub Copilot
-          account.
+          No extra setup needed, just sign in with your GitHub Copilot account.
         </li>
         <li>
           Smarter code completions powered directly by OpenAI’s Codex model.
         </li>
         <li>
-          Context-aware coding, understands your repo, comments, and
-          functions.
+          Context-aware coding, understands your repo, comments, and functions.
         </li>
         <li>Instant explanations & suggestions via Copilot Chat.</li>
       </ul>
 
-      <h2 className="text-xl md:text-2xl font-bold mt-6">⚙️ How OpenAI Codex Works</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        ⚙️ How OpenAI Codex Works
+      </h2>
       <p>
         At its core, Codex takes textual input (prompt) and predicts the most
         likely continuation that satisfies your request — just like GPT models,
@@ -174,7 +180,9 @@ jobs:
       <h2 className="text-xl md:text-2xl font-bold mt-6">
         🧑‍💻 Getting Started with OpenAI Codex
       </h2>
-      <h2 className="text-l md:text-xl font-bold my-2">1️⃣ Create an OpenAI Account</h2>
+      <h2 className="text-l md:text-xl font-bold my-2">
+        1️⃣ Create an OpenAI Account
+      </h2>
       <p>
         Go to{" "}
         <a
@@ -240,7 +248,9 @@ OPENAI_API_KEY=your_api_key_here
         </button>
       </div>
 
-      <h2 className="text-l md:text-xl font-bold my-2">3️⃣ Use Codex in JavaScript</h2>
+      <h2 className="text-l md:text-xl font-bold my-2">
+        3️⃣ Use Codex in JavaScript
+      </h2>
       <p>
         Here’s a simple Node.js example that asks Codex to generate a function
         based on plain English instructions:
@@ -320,7 +330,28 @@ function sortArray(arr) {
         </button>
       </div>
 
-      <h2 className="text-xl md:text-2xl font-bold mt-6">🛠️ Codex GitHub Action</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6 mb-2">
+        🎥 Watch: How to Connect OpenAI Codex in VS Code
+      </h2>
+      <p>
+        Want to see how it’s actually done? Here’s a quick demo showing how to
+        install and connect the <strong>OpenAI Codex (GitHub Copilot)</strong>{" "}
+        extension in Visual Studio Code.
+      </p>
+      <div className="mt-4 aspect-video rounded-xl overflow-hidden shadow-md">
+        <iframe
+          className="w-full h-full"
+          src="/images/blogs/codex_video.mp4"
+          title="How to Connect OpenAI Codex in VS Code"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        🛠️ Codex GitHub Action
+      </h2>
       <p>
         You can now run Codex from a GitHub Actions workflow while keeping tight
         control over privileges. This action installs the Codex CLI and
@@ -334,26 +365,32 @@ function sortArray(arr) {
       <h2 className="text-l font-bold mt-6">
         ⚡ Example: Create Your Own Pull Request Bot
       </h2>
-            <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
+      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
         <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
           {codexingithub}
         </pre>
         <button
           className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() =>
-            handleCopy(codexingithub)
-          }
+          onClick={() => handleCopy(codexingithub)}
           aria-label="Copy command"
         >
           <MdContentCopy size={20} />
         </button>
       </div>
-      <h2 className="text-xl md:text-2xl font-bold mt-6">⚙️ Inputs & Safety Strategy</h2>
+      <h2 className="text-xl md:text-2xl font-bold mt-6">
+        ⚙️ Inputs & Safety Strategy
+      </h2>
       <ul className="list-disc pl-6 mt-2">
         <li>openai-api-key: Secret for API access (required).</li>
         <li>prompt / prompt-file: Inline or file-based prompts.</li>
-        <li>sandbox: Controls Codex permissions (workspace-write default, read-only, danger-full-access).</li>
-        <li>safety-strategy: Privilege control (drop-sudo, unprivileged-user, read-only, unsafe).</li>
+        <li>
+          sandbox: Controls Codex permissions (workspace-write default,
+          read-only, danger-full-access).
+        </li>
+        <li>
+          safety-strategy: Privilege control (drop-sudo, unprivileged-user,
+          read-only, unsafe).
+        </li>
       </ul>
     </div>
   );
