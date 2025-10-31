@@ -27,9 +27,10 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { FaCopy } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MCP_Blog from "@/app/components/blogs/MCP_Blog";
 import OpenAiCodex from "@/app/components/blogs/OpenAiCodex";
+import SocialShare from "@/app/components/share/SocialShare";
 
 const blogData = [
   {
@@ -206,18 +207,24 @@ const blogData = [
 
 export default function BlogPage({ params }: { params: { id: string } }) {
   const blog = blogData.find((b) => b.id === params.id);
-  const currentUrl = `https://rafidul-portfolio.vercel.app//blogs/${params.id}`;
-  if (!blog) {
-    notFound();
-  }
+  if (!blog) notFound();
 
+  const [currentUrl, setCurrentUrl] = useState("");
   const [copied, setCopied] = useState(false);
 
+  // Fix: Set the full URL client-side after the component mounts
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(currentUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (currentUrl) {
+      navigator.clipboard.writeText(currentUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
+
   return (
     <div className="w-full py-6 md:px-10">
       <div className="w-full md:w-[80%] lg:w-[60%] xl:w-[50%] mx-auto">
@@ -244,7 +251,7 @@ export default function BlogPage({ params }: { params: { id: string } }) {
         <div className="mt-6 flex items-center text-[16] md:text-[20px]">
           Share this blog:
         </div>
-        <div className="mt-2 flex space-x-4">
+        {/* <div className="mt-2 flex space-x-4 items-center">
           <FacebookShareButton url={currentUrl} title={blog.title}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>
@@ -264,9 +271,10 @@ export default function BlogPage({ params }: { params: { id: string } }) {
             <FaCopy size={20} color="black" className="dark:text-white" />
           </button>
           {copied && (
-            <span className="text-green-500 text-sm">Link Copied!</span>
+            <span className="text-green-500 text-sm ml-2">Link Copied!</span>
           )}
-        </div>
+        </div> */}
+        <SocialShare title={blog.title} />
       </div>
     </div>
   );
