@@ -80,7 +80,7 @@ const HomePage = () => {
                     />
                   </Button>
                 </Link>
-                <a href="rafid_cv.pdf" download="Md. Rafidul Islam Resume.pdf">
+                <a href="md_rafidul_islam_resume.pdf" download="Md. Rafidul Islam Resume.pdf">
                   <Button theme="secondary">
                     <Text
                       text="Download CV"
