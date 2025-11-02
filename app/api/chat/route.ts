@@ -1,24 +1,18 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
+import faqs from "../../data/faqs.json"
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export async function POST(req: Request) {
+  const { message } = await req.json();
+  const userMessage = message.toLowerCase();
 
-export async function POST(request: Request) {
-  try {
-    const { message } = await request.json(); // User's message from the frontend
+  // Find the best match
+  const match = faqs.find((faq) =>
+    faq.keywords.some((kw) => userMessage.includes(kw))
+  );
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
-    });
+  const reply =
+    match?.answer ||
+    "I'm Rafidul Islam, a Software Engineer. I might not fully understand that question — please ask about my skills, projects, or experience.";
 
-    const reply = response.choices[0]?.message?.content || "Sorry, I couldn't process that.";
-
-    return NextResponse.json({ reply });
-  } catch (error) {
-    console.error("Error with OpenAI API:", error);
-    return NextResponse.json({ error: "Failed to fetch AI response." }, { status: 500 });
-  }
+  return NextResponse.json({ reply });
 }

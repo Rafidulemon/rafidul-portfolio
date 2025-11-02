@@ -1,0 +1,194 @@
+[
+  {
+    "keywords": ["skills", "technologies", "stack", "what can you do"],
+    "answer": "I specialize in modern web technologies including Next.js (90%), React.js (87%), TypeScript (70%), and Tailwind CSS (87%). I'm also proficient in JavaScript (87%), Python (70%), Java (65%), tRPC (80%), Node.js (72%), PostgreSQL (77%), MySQL (70%), and have strong design skills with Figma (90%)."
+  },
+  {
+    "keywords": ["current job", "ninja digital innovations", "what do you do now"],
+    "answer": "I'm currently a Software Engineer at Ninja Digital Innovations where I develop and maintain web applications using modern frameworks, collaborate with cross-functional teams to define and ship new features, write clean and scalable code, participate in code reviews, and troubleshoot to optimize performance."
+  },
+  {
+    "keywords": ["experience", "company", "job", "work history", "where have you worked"],
+    "answer": "I've built my career across several companies: Currently at Ninja Digital Innovations as a Software Engineer (July 2025-Present), previously at Brand Cloud Inc. Bangladesh as a Remote Software Engineer (Aug 2023-June 2025), SoftBD Ltd. as a Jr. Business Analyst (Jan-Jul 2023), and started my career as an Associate Software Engineer at Nexkraft Limited (Nov 2021-Mar 2022). I also completed training at BJET (Bangladesh Japan ICT Engineers Training Program) from Apr-Sep 2022."
+  },
+  {
+    "keywords": ["education", "study", "university", "cse", "cgpa", "degree"],
+    "answer": "I completed my B.Sc. in Computer Science and Engineering from BRAC University (Summer 2016-Summer 2020) with a CGPA of 3.19/4.00. Before that, I completed HSC from Government City College, Chittagong (Science, 2015, GPA: 4.83/5.00) and SSC from Abdus Sobhan Rahat Ali High School (Science, 2013, GPA: 5.00/5.00)."
+  },
+  {
+    "keywords": ["thesis", "research", "machine learning", "image processing", "graduation project"],
+    "answer": "My undergraduate thesis was titled 'Smart Protection for Website Using Machine Learning and Image Processing' which was supervised by Dr. Mohammad Iqbal Hossain. It focused on developing security solutions using ML and computer vision techniques."
+  },
+  {
+    "keywords": ["projects", "professional projects", "work projects", "moeguide", "suirikyou", "raggie"],
+    "answer": "I've worked on several professional projects including: MOEGUIDE (Next.js with page router, Tailwind CSS, tRPC, TypeScript, Prisma, NextAuth), Suirikyou (Next.js with app router, Tailwind CSS, Micro CMS, TypeScript, Prisma, NextAuth), and Raggie (Next.js with app router, Tailwind CSS, tRPC, TypeScript, Prisma, NextAuth). I've also worked on NexKraft Mobile App (Android) and testing projects using Cypress and Vitest."
+  },
+  {
+    "keywords": ["personal projects", "side projects", "ai", "aliza", "virtual mouse"],
+    "answer": "My personal projects showcase my diverse interests: Aliza the AI Assistant, Virtual Mouse, Japanese Voice to English Converter, Carriastic Website, Demo Hospital Management System, HR Management System, Portfolio Website, Demo Restaurant Website, and a Nearby Diagnostic Center Search Android App."
+  },
+  {
+    "keywords": ["training", "courses", "certifications"],
+    "answer": "I've completed several training courses including Frontend Web Development using ReactJS & Redux from Bohubrihi, HTML & CSS complete course from Coursera, and Mobile App Development by Android from Bohubrihi."
+  },
+  {
+    "keywords": ["languages", "language skills"],
+    "answer": "I'm fluent in Bengali (100%), proficient in English (82%), and have basic knowledge of Japanese (50%)."
+  },
+  {
+    "keywords": ["extracurricular", "activities", "clubs", "volunteer"],
+    "answer": "During university, I was actively involved in various activities: Director of Finance & Administration at BRAC University Film Club, Additional Director of IT Student team, volunteer at AABracU Gala 2016 and 12th convocation of BRAC University 2017, and Event Coordinator of HULT PRIZE at BRACu 2018-19."
+  },
+  {
+    "keywords": ["contact", "email", "phone", "how to contact"],
+    "answer": "You can reach me via email at rafidulemon@gmail.com or phone at +8801850700054."
+  },
+  {
+    "keywords": ["portfolio", "website", "my website"],
+    "answer": "My portfolio website is: www.rafidul-portfolio.vercel.app/"
+  },
+  {
+    "keywords": ["linkedin", "linkedin profile", "linkedin link"],
+    "answer": "My LinkedIn profile is available at: [Your LinkedIn URL]"
+  },
+  {
+    "keywords": ["github", "github profile", "github link", "code", "repository"],
+    "answer": "My GitHub profile is available at: [Your GitHub URL]"
+  },
+  {
+    "keywords": ["facebook", "facebook profile", "fb"],
+    "answer": "My Facebook profile is available at: [Your Facebook URL]"
+  },
+  {
+    "keywords": ["hello", "hi", "hey", "greetings"],
+    "answer": "Hey there 👋! I'm Rafid. I'm a Software Engineer passionate about building amazing web applications. How can I help you today?"
+  },
+  {
+    "keywords": ["backend", "server", "api"],
+    "answer": "I have solid backend experience with Node.js (72%) and database management using PostgreSQL (77%) and MySQL (70%). I'm skilled in building REST APIs (65%) and tRPC (80%) for efficient client-server communication."
+  },
+  {
+    "keywords": ["frontend", "ui/ux", "design"],
+    "answer": "Frontend development is my specialty with React.js (87%), Next.js (90%), TypeScript (70%), and Tailwind CSS (87%). I also have strong UI/UX design skills using Figma (90%) to create visually appealing and user-friendly interfaces."
+  },
+  {
+    "keywords": ["location", "where are you from", "dhaka", "bangladesh"],
+    "answer": "I'm based in Mohakhali, Dhaka, Bangladesh and have experience working both in-office and remotely."
+  },
+  {
+    "keywords": ["resume", "cv", "download resume"],
+    "answer": "You can view my full resume through the links provided in my portfolio or contact me directly for a copy."
+  },
+  {
+    "keywords": ["achievements", "accomplishments", "impact", "results"],
+    "answer": "Throughout my career, I've successfully delivered multiple web applications using modern tech stacks, collaborated with cross-functional teams to ship new features, and maintained high code quality standards. My projects like MOEGUIDE and Suirikyou demonstrate my ability to build complete, production-ready applications."
+  },
+  {
+    "keywords": ["why hire you", "why should we hire you", "what makes you unique"],
+    "answer": "I bring full-stack development expertise with specialized skills in Next.js, React, and TypeScript, combined with strong UI/UX design sensibilities using Figma. I'm proficient in both frontend and backend technologies and have experience working in both remote and in-office environments across different company sizes."
+  },
+  {
+    "keywords": ["challenges", "difficulties", "problems solved"],
+    "answer": "In my projects, I've tackled various technical challenges including implementing authentication systems with NextAuth, optimizing performance in Next.js applications, and integrating different APIs and CMS systems. Each project presented unique obstacles that helped me grow as an engineer."
+  },
+  {
+    "keywords": ["teamwork", "collaboration", "team player"],
+    "answer": "I have extensive experience collaborating with cross-functional teams, as evidenced by my roles at Ninja Digital Innovations and Brand Cloud. I actively participate in code reviews, provide constructive feedback, and work closely with team members to define, design, and ship new features."
+  },
+  {
+    "keywords": ["availability", "when can you start", "notice period"],
+    "answer": "I'm currently available for new opportunities and can discuss specific start dates during the interview process. I'm flexible and can accommodate reasonable notice periods as needed."
+  },
+  {
+    "keywords": ["relocation", "remote work", "work arrangement"],
+    "answer": "I'm based in Dhaka, Bangladesh and have proven experience working effectively in remote positions. I'm open to discussing different work arrangements including hybrid, remote, or in-office opportunities that match the role requirements."
+  },
+  {
+    "keywords": ["salary", "compensation", "pay expectations"],
+    "answer": "I'm looking for competitive compensation commensurate with my experience and the role requirements. I'd be happy to discuss specific salary expectations during later stages of the interview process."
+  },
+  {
+    "keywords": ["career goals", "career aspirations", "where do you see yourself", "future plans"],
+    "answer": "I aim to grow as a senior full-stack developer, taking on more architectural responsibilities and mentoring junior developers. I'm particularly interested in working on scalable SaaS products and expanding my expertise in cloud technologies and system design."
+  },
+  {
+    "keywords": ["strengths", "what are you good at", "key strengths"],
+    "answer": "My key strengths include rapid learning of new technologies, strong problem-solving skills, attention to UI/UX details, and the ability to work effectively in both team and independent settings. I'm particularly strong in React/Next.js ecosystems and full-stack development."
+  },
+  {
+    "keywords": ["weaknesses", "areas for improvement", "what needs improvement"],
+    "answer": "I'm continuously working on improving my knowledge of advanced system design patterns and deepening my understanding of DevOps practices. I also aim to enhance my leadership skills to better mentor junior team members in the future."
+  },
+  {
+    "keywords": ["programming languages", "languages proficient", "coding languages"],
+    "answer": "I'm highly proficient in JavaScript (87%) and TypeScript (70%) for frontend development, with strong skills in Python (70%) and Java (65%) for backend systems. I also have experience with SQL for database management."
+  },
+  {
+    "keywords": ["frameworks", "libraries", "tools"],
+    "answer": "My primary frameworks include Next.js (90%), React.js (87%), Node.js (72%), and Tailwind CSS (87%). I'm also skilled with tRPC (80%), Prisma, NextAuth, and have experience with testing tools like Cypress and Vitest."
+  },
+  {
+    "keywords": ["database experience", "databases", "sql", "nosql"],
+    "answer": "I have strong experience with PostgreSQL (77%) and MySQL (70%), including schema design, query optimization, and database management. I've worked with Prisma ORM for database operations in my projects."
+  },
+  {
+    "keywords": ["api experience", "rest", "graphql", "api development"],
+    "answer": "I have extensive experience building REST APIs (65%) and tRPC APIs (80%). I've implemented secure authentication systems and developed efficient API endpoints for various web applications."
+  },
+  {
+    "keywords": ["testing", "quality assurance", "test automation"],
+    "answer": "I have experience with test automation using Cypress for end-to-end testing and Vitest for unit testing. I believe in writing maintainable, tested code and participate in code reviews to ensure quality standards."
+  },
+  {
+    "keywords": ["version control", "git", "github", "gitlab"],
+    "answer": "I'm proficient with Git version control and have extensive experience using GitHub for collaborative development, code reviews, and project management throughout my career."
+  },
+  {
+    "keywords": ["agile", "methodology", "scrum", "work process"],
+    "answer": "I have experience working in agile environments, participating in sprint planning, daily standups, and retrospectives. I'm comfortable with iterative development and collaborative project management approaches."
+  },
+  {
+    "keywords": ["remote work experience", "working remotely", "remote collaboration"],
+    "answer": "I successfully worked as a Remote Software Engineer at Brand Cloud Inc. for nearly two years, developing strong communication skills and self-discipline required for effective remote collaboration across different time zones."
+  },
+  {
+    "keywords": ["biggest achievement", "proudest accomplishment", "best project"],
+    "answer": "I'm particularly proud of developing MOEGUIDE - a comprehensive Next.js application with full authentication, database integration, and responsive design. It demonstrates my ability to deliver complete, production-ready solutions from concept to deployment."
+  },
+  {
+    "keywords": ["problem solving", "how you solve problems", "approach to challenges"],
+    "answer": "I follow a structured approach: first understanding the root cause, researching solutions, breaking down complex problems into manageable parts, and implementing tested solutions. I'm not afraid to ask for help when needed and learn from each challenge."
+  },
+  {
+    "keywords": ["learning ability", "how do you learn", "stay updated"],
+    "answer": "I'm a continuous learner who stays updated through documentation, online courses, and building projects. I've completed courses from Bohubrihi and Coursera, and I regularly explore new technologies through personal projects."
+  },
+  {
+    "keywords": ["work environment", "preferred environment", "company culture"],
+    "answer": "I thrive in collaborative environments that value code quality, continuous learning, and open communication. I appreciate teams that encourage knowledge sharing and provide opportunities for professional growth."
+  },
+  {
+    "keywords": ["leadership experience", "leadership roles", "managing projects"],
+    "answer": "While in university, I held leadership positions as Director of Finance & Administration for the Film Club and Additional Director of IT. I've also taken ownership of features and projects in my professional roles, guiding them from conception to completion."
+  },
+  {
+    "keywords": ["time management", "organization", "meeting deadlines"],
+    "answer": "I'm skilled at prioritizing tasks, breaking down projects into manageable milestones, and communicating progress regularly. I've successfully managed multiple projects simultaneously while maintaining quality and meeting deadlines."
+  },
+  {
+    "keywords": ["communication skills", "english proficiency", "language skills"],
+    "answer": "I'm proficient in English (82%) with strong technical communication skills. I'm comfortable discussing complex technical concepts with both technical and non-technical stakeholders, and have experience documenting code and processes."
+  },
+  {
+    "keywords": ["open source", "community contribution", "github contributions"],
+    "answer": "While most of my work has been on private projects, I maintain personal projects on GitHub and am building my open-source presence. I'm eager to contribute more to the developer community as I progress in my career."
+  },
+  {
+    "keywords": ["technical decisions", "why technologies", "tech stack choices"],
+    "answer": "I choose technologies based on project requirements, team expertise, and long-term maintainability. For example, I prefer Next.js for its SSR capabilities and excellent developer experience, TypeScript for type safety, and Tailwind CSS for rapid UI development."
+  },
+  {
+    "keywords": ["who are you", "about you", "your name", "introduce", "who is Md. Rafidul Islam", "who is Rafid"],
+    "answer": "Hi, I'm Md. Rafidul Islam — a Software Engineer from Mohakhali, Dhaka, Bangladesh. I'm an experienced developer with a strong background in Next.js, React.js, and TypeScript, passionate about building scalable, high-performance web applications with a keen eye for UI/UX design."
+  }
+]

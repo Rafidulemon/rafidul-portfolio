@@ -14,17 +14,39 @@ const ChatbotModal = ({
   onClose: () => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string }[]>([]);
+  const [messages, setMessages] = useState<
+    { sender: "user" | "bot"; text: string }[]
+  >([]);
   const [inputValue, setInputValue] = useState("");
   const [hasStartedChatting, setHasStartedChatting] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const faq = [
-    { question: "What is AI?", answer: "AI stands for Artificial Intelligence, enabling machines to mimic human intelligence." },
-    { question: "How to create a website?", answer: "To create a website, you'll need a domain, hosting, and a development platform like Next.js or WordPress." },
-    { question: "How can I promote my company?", answer: "You can promote your company using social media marketing, SEO, and targeted ads." },
-    { question: "What are the best tools for productivity?", answer: "Popular tools include Notion, Slack, Trello, and Google Workspace." },
-    { question: "How to start a career in web development?", answer: "Start by learning HTML, CSS, and JavaScript, then move to frameworks like React or Next.js." },
+    {
+      question: "What is AI?",
+      answer:
+        "AI stands for Artificial Intelligence, enabling machines to mimic human intelligence.",
+    },
+    {
+      question: "How to create a website?",
+      answer:
+        "To create a website, you'll need a domain, hosting, and a development platform like Next.js or WordPress.",
+    },
+    {
+      question: "How can I promote my company?",
+      answer:
+        "You can promote your company using social media marketing, SEO, and targeted ads.",
+    },
+    {
+      question: "What are the best tools for productivity?",
+      answer:
+        "Popular tools include Notion, Slack, Trello, and Google Workspace.",
+    },
+    {
+      question: "How to start a career in web development?",
+      answer:
+        "Start by learning HTML, CSS, and JavaScript, then move to frameworks like React or Next.js.",
+    },
   ];
 
   useEffect(() => {
@@ -55,40 +77,46 @@ const ChatbotModal = ({
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (inputValue.trim()) {
-      const userMessage = { sender: "user" as "user", text: inputValue.trim() };
-      setMessages((prev) => [...prev, userMessage]);
-      setInputValue(""); // Clear input field
-      setHasStartedChatting(true); // Hide common questions
-  
-      // Show bot typing indicator
-      setMessages((prev) => [...prev, { sender: "bot", text: "Typing..." }]);
-  
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: userMessage.text }),
+    if (!inputValue.trim()) return;
+
+    const userMessage = { sender: "user" as "user", text: inputValue.trim() };
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
+    setHasStartedChatting(true);
+
+    // Add placeholder for bot typing
+    const botIndex = messages.length + 1; // index of bot message
+    setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage.text }),
+      });
+
+      const data = await response.json();
+      const botReply = data.reply || "Sorry, no response received.";
+
+      // Typing effect logic
+      let currentText = "";
+      for (let i = 0; i < botReply.length; i++) {
+        currentText += botReply[i];
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[botIndex].text = currentText;
+          return updated;
         });
-  
-        const data = await response.json();
-  
-        setMessages((prev) => [
-          ...prev.slice(0, -1), // Remove "Typing..."
-          { sender: "bot", text: data.reply || "Sorry, no response received." },
-        ]);
-      } catch (error) {
-        console.error("Error fetching AI response:", error);
-        setMessages((prev) => [
-          ...prev.slice(0, -1), // Remove "Typing..."
-          { sender: "bot", text: "Failed to get a response. Please try again." },
-        ]);
+        await new Promise((resolve) => setTimeout(resolve, 20)); // 20ms per character
       }
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { sender: "bot", text: "Failed to get a response. Please try again." },
+      ]);
     }
   };
-  
 
   const handleFaqClick = (answer: string) => {
     const botResponse = { sender: "bot" as "bot", text: answer };
@@ -116,7 +144,10 @@ const ChatbotModal = ({
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <Link href={"/"} className="flex flex-row gap-2 md:gap-4 items-center">
+            <Link
+              href={"/"}
+              className="flex flex-row gap-2 md:gap-4 items-center"
+            >
               <div className="w-12 h-12 md:w-[70px] md:h-[70px] dark:bg-black bg-white rounded-full shadow-md dark:shadow-primary shadow-gray-500">
                 <Image
                   src="/images/hero-image.png"

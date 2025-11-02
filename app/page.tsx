@@ -91,9 +91,9 @@ const HomePage = () => {
               </div>
             </div>
             <MotionDiv
-              src="/images/hero-image.png"
+              src="/images/new_dp.png"
               isTransparentBG
-              className="md:col-span-5 place-self-end hidden md:flex md:w-[250px] lg:w-[400px] xl:w-[550px]"
+              className="md:col-span-5 place-self-center mt-6 hidden md:flex md:w-[150px] lg:w-[220px] xl:w-[250px]"
               isRoundedImage
             />
           </div>
@@ -140,45 +140,6 @@ const HomePage = () => {
                 </div>
               </div>
             )}
-
-            {/* <div className="flex flex-col gap-6 items-center">
-              <div className="w-full flex flex-row gap-10 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                <div className="w-full">
-                  <SkillBar label="Javascript" level={80} />
-                  <SkillBar label="Java" level={50} />
-                  <SkillBar label="python" level={55} />
-                </div>
-                <div className="w-full">
-                  <SkillBar label="TypeScriopt" level={80} />
-                  <SkillBar label="Next.js" level={85} />
-                  <SkillBar label="React.js" level={80} />
-                </div>
-              </div>
-              <div className="w-full flex flex-row gap-10 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                <div className="w-full">
-                  <SkillBar label="Postgres" level={65} />
-                  <SkillBar label="MySQL" level={60} />
-                  <SkillBar label="Tailwind CSS" level={85} />
-                </div>
-                <div className="w-full">
-                  <SkillBar label="Node.js" level={75} />
-                  <SkillBar label="Prisma" level={95} />
-                  <SkillBar label="Git" level={85} />
-                </div>
-              </div>
-              <div className="w-full flex flex-row gap-10 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                <div className="w-full">
-                  <SkillBar label="tRPC" level={85} />
-                  <SkillBar label="REST Api" level={65} />
-                  <SkillBar label="Docker" level={50} />
-                </div>
-                <div className="w-full">
-                  <SkillBar label="Git" level={85} />
-                  <SkillBar label="Figma" level={85} />
-                  <SkillBar label="Adobe XD" level={60} />
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {/* Services */}
