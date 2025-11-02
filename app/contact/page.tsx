@@ -12,8 +12,19 @@ const contactPage = () => {
     <div className="w-full">
       <PageTitle name="CONTACT ME" />
       <Grid colCount={12} className="mt-10">
-        <MotionDiv src="/images/ai-image-2.png" className="col-span-4 hidden md:flex" isTransparentBG isRoundedImage/>
-        <MotionDiv src="/images/ai-image-2.png" className="col-span-12 md:hidden flex flex-row items-center justify-center" isTransparentBG isRoundedImage height_width={200}/>
+        <MotionDiv
+          src="/images/ai-image-2.png"
+          className="col-span-4 hidden md:flex"
+          isTransparentBG
+          isRoundedImage
+        />
+        <MotionDiv
+          src="/images/ai-image-2.png"
+          className="col-span-12 md:hidden flex flex-row items-center justify-center"
+          isTransparentBG
+          isRoundedImage
+          height_width={200}
+        />
         <Flex
           direction="col"
           className="w-full col-span-12 md:col-span-8"
@@ -38,11 +49,12 @@ const contactPage = () => {
               isBold
               className="w-full text-center text-[12px] md:text-[16px] text-primary dark:text-cyan-500"
             />
-            <Text
-              text="+8801990497796"
-              isBold
-              className="w-full text-center text-[12px] md:text-[16px] text-gray-700 dark:text-white "
-            />
+            <a
+              href="tel:+8801990497796"
+              className="w-full text-center text-[12px] md:text-[16px] text-gray-700 dark:text-white font-[500]"
+            >
+              +8801990497796
+            </a>
           </div>
           <div className="mb-10">
             <Text
@@ -50,17 +62,18 @@ const contactPage = () => {
               isBold
               className="w-full text-center text-[12px] md:text-[16px] text-primary dark:text-cyan-500"
             />
-            <Text
-              text="rafidulemon@gmail.com"
-              isBold
-              className="w-full text-center text-[12px] md:text-[16px] underline text-gray-700 dark:text-white"
-            />
+            <a
+              href="mailto:rafidulemon@gmail.com"
+              className="w-full text-center text-[12px] md:text-[16px] text-gray-700 dark:text-white font-[500]"
+            >
+              rafidulemon@gmail.com
+            </a>
           </div>
           <ContactForm />
         </Flex>
       </Grid>
     </div>
   );
-}
+};
 
 export default contactPage;
