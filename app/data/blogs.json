@@ -168,5 +168,15 @@
       "OpenAI Codex empowers developers with AI-assisted coding, smart autocomplete, and automated code reviews directly in VS Code and GitHub Actions.",
     "image": "/images/blogs/codex.jpg",
     "author": "Md. Rafidul Islam"
+  },
+  {
+    "id": "18",
+    "title": "Generative AI — A Complete, Friendly Guide for Everyone",
+    "date": "05 November, 2025",
+    "description": "GenerativeAI",
+    "description_summary":
+      "Learn what Generative AI is, how it works under the hood, where it’s useful, and how to build with it today.",
+    "image": "/images/blogs/generativeAi.jpg",
+    "author": "Md. Rafidul Islam"
   }
 ]

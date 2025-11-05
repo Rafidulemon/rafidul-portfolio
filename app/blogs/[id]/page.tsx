@@ -1,46 +1,10 @@
 "use client";
-import BangladeshTechBusinessDescription from "@/app/components/blogs/BangladeshTechBusinessDescription";
-import ChatGptPremiumBlogDescription from "@/app/components/blogs/ChatGptPremiumBlogDescription";
-import ClaudeAiBlogDescription from "@/app/components/blogs/ClaudeAiBlogDescription";
-import CryptoFutureDescription from "@/app/components/blogs/CryptoFutureDescription";
-import DeepSeekBlogDescription from "@/app/components/blogs/DeepSeekBlogDescription";
-import DigitalMarketingAIDescription from "@/app/components/blogs/DigitalMarketingAIDescription";
-import FutureAiBlogDescription from "@/app/components/blogs/FutureAiBlogDescription";
-import MetaverseBlogDescription from "@/app/components/blogs/MetaverseBlogDescription";
-import NextAppRouterThemeChangeDescription from "@/app/components/blogs/NextAppRouterThemeChangeDescription";
-import NextJsBlogDescription from "@/app/components/blogs/NextJsBlogDescription";
-import NextJsIntlDescription from "@/app/components/blogs/NextJsIntlDescription";
-import SoftwareEntrepreneurshipDescription from "@/app/components/blogs/SoftwareEntrepreneurshipDescription";
-import TrpcBlogDescription from "@/app/components/blogs/TrpcBlogDescription";
-import UIUXPrinciplesDescription from "@/app/components/blogs/UIUXPrinciplesDescription";
-import JS_DOM_Blog from "@/app/components/blogs/JSDom";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import MCP_Blog from "@/app/components/blogs/MCP_Blog";
-import OpenAiCodex from "@/app/components/blogs/OpenAiCodex";
 import SocialShare from "@/app/components/share/SocialShare";
 import blogsJson from "../../data/blogs.json";
-
-const componentsMap: Record<string, JSX.Element> = {
-  BangladeshTechBusinessDescription: <BangladeshTechBusinessDescription/>,
-  ChatGptPremiumBlogDescription: <ChatGptPremiumBlogDescription/>,
-  ClaudeAiBlogDescription: <ClaudeAiBlogDescription/>,
-  CryptoFutureDescription: <CryptoFutureDescription/>,
-  DeepSeekBlogDescription: <DeepSeekBlogDescription/>,
-  DigitalMarketingAIDescription: <DigitalMarketingAIDescription/>,
-  FutureAiBlogDescription: <FutureAiBlogDescription/>,
-  MetaverseBlogDescription: <MetaverseBlogDescription/>,
-  NextAppRouterThemeChangeDescription: <NextAppRouterThemeChangeDescription/>,
-  NextJsBlogDescription: <NextJsBlogDescription/>,
-  NextJsIntlDescription: <NextJsIntlDescription/>,
-  SoftwareEntrepreneurshipDescription: <SoftwareEntrepreneurshipDescription/>,
-  TrpcBlogDescription: <TrpcBlogDescription/>,
-  UIUXPrinciplesDescription: <UIUXPrinciplesDescription/>,
-  JS_DOM_Blog: <JS_DOM_Blog/>,
-  MCP_Blog: <MCP_Blog/>,
-  OpenAiCodex: <OpenAiCodex/>
-};
+import { componentsMap } from "@/app/utils/blogsComponentMap";
 
 
 export default function BlogPage({ params }: { params: { id: string } }) {

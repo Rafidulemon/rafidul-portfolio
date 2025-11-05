@@ -1,15 +1,7 @@
-"use client";
-import React, { useState } from "react";
-import { MdContentCopy } from "react-icons/md";
+import React from "react";
+import CodeBlock from "../CodeBlock";
 
 const OpenAiCodex = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
   const codexingithub = `
 name: Perform a code review when a pull request is created.
 on:
@@ -209,44 +201,22 @@ jobs:
         2️⃣ Install the OpenAI Node.js SDK
       </h2>
       <p>Run the following command in your project:</p>
-      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
-        <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
-          {`
+      <CodeBlock
+        code={`
 npm install openai
 `}
-        </pre>
-        <button
-          className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() =>
-            handleCopy(`
-npm install openai
-`)
-          }
-          aria-label="Copy command"
-        >
-          <MdContentCopy size={20} />
-        </button>
-      </div>
+        language="bash"
+        fileName="Terminal"
+      />
 
       <p>Then create a .env file to securely store your API key:</p>
-      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
-        <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
-          {`
+      <CodeBlock
+        code={`
 OPENAI_API_KEY=your_api_key_here
 `}
-        </pre>
-        <button
-          className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() =>
-            handleCopy(`
-OPENAI_API_KEY=your_api_key_here
-`)
-          }
-          aria-label="Copy command"
-        >
-          <MdContentCopy size={20} />
-        </button>
-      </div>
+        language="bash"
+        fileName="Terminal"
+      />
 
       <h2 className="text-l md:text-xl font-bold my-2">
         3️⃣ Use Codex in JavaScript
@@ -255,32 +225,8 @@ OPENAI_API_KEY=your_api_key_here
         Here’s a simple Node.js example that asks Codex to generate a function
         based on plain English instructions:
       </p>
-      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
-        <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
-          {`
-import OpenAI from "openai";
-import dotenv from "dotenv";
-dotenv.config();
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-async function generateCode(prompt) {
-  const response = await openai.responses.create({
-    model: "gpt-3.5-turbo-instruct",
-    input: "Ask a Codex model to generate code based on the following prompt: ",
-  });
-
-  console.log (response.output[0].content[0].text);
-}
-
-generateCode("Write a JavaScript function that sorts an array of numbers in ascending order");
-
-`}
-        </pre>
-        <button
-          className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() =>
-            handleCopy(`
+      <CodeBlock
+        code={`
 import OpenAI from "openai";
 import dotenv from "dotenv";
 dotenv.config();
@@ -298,37 +244,21 @@ async function generateCode(prompt) {
 
 generateCode("Write a JavaScript function that sorts an array of numbers in ascending order");
 
-`)
-          }
-          aria-label="Copy command"
-        >
-          <MdContentCopy size={20} />
-        </button>
-      </div>
+`}
+        language="bash"
+        fileName="Terminal"
+      />
 
       <p>✅ Output:</p>
-      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
-        <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
-          {`
+      <CodeBlock
+        code={`
 function sortArray(arr) {
   return arr.sort((a, b) => a - b);
 }
 `}
-        </pre>
-        <button
-          className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() =>
-            handleCopy(`
-function sortArray(arr) {
-  return arr.sort((a, b) => a - b);
-}
-`)
-          }
-          aria-label="Copy command"
-        >
-          <MdContentCopy size={20} />
-        </button>
-      </div>
+        language="bash"
+        fileName="Terminal"
+      />
 
       <h2 className="text-xl md:text-2xl font-bold mt-6 mb-2">
         🎥 Watch: How to Connect OpenAI Codex in VS Code
@@ -365,18 +295,11 @@ function sortArray(arr) {
       <h2 className="text-l font-bold mt-6">
         ⚡ Example: Create Your Own Pull Request Bot
       </h2>
-      <div className="relative bg-gray-800 text-white p-2 md:p-4 rounded-md my-2">
-        <pre className="whitespace-pre-wrap font-fira_code text-[12px] md:text-[14px] md:-mt-6">
-          {codexingithub}
-        </pre>
-        <button
-          className="absolute top-2 right-2 text-gray-300 hover:text-white"
-          onClick={() => handleCopy(codexingithub)}
-          aria-label="Copy command"
-        >
-          <MdContentCopy size={20} />
-        </button>
-      </div>
+      <CodeBlock
+        code={codexingithub}
+        language="bash"
+        fileName="Terminal"
+      />
       <h2 className="text-xl md:text-2xl font-bold mt-6">
         ⚙️ Inputs & Safety Strategy
       </h2>
