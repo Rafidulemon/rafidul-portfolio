@@ -2,7 +2,6 @@ import React from "react";
 import CodeBlock from "../CodeBlock";
 
 const GenerativeAI: React.FC = () => {
-
   // --- Reusable code blocks to keep JSX clean ---
   const installOpenAI = `npm install openai`;
   const envExample = `# .env.local
@@ -172,7 +171,9 @@ const result = await openai.chat.completions.create({
   return (
     <article className="flex flex-col gap-2 md:gap-4">
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">What Is Generative AI?</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          🧭 What Is Generative AI?
+        </h2>
         <p>
           <strong>Generative AI</strong> is a branch of artificial intelligence
           that <em>creates new content</em> — text, images, code, music, and
@@ -180,6 +181,27 @@ const result = await openai.chat.completions.create({
           models learn patterns from data and then produce original outputs that
           feel human-made.
         </p>
+        <div className="flex flex-col gap-1 md:gap2">
+          <p>
+            <strong>Generative AI</strong> = AI that creates new content, not
+            just analyzes existing data.
+          </p>
+          <p>
+            Traditional AI decides <i>what something is</i> → classification.
+          </p>
+          <p>
+            Generative AI decides <i>what to make next</i> → creation.
+          </p>
+        </div>
+        <div>
+          <p className="mb-1 md:mb-2">
+            <strong>Example:</strong>
+          </p>
+          <ul>
+            <p>Traditional AI → “This is a cat.”</p>
+            <p>Generative AI → “Draw a cat in space wearing a spacesuit.”</p>
+          </ul>
+        </div>
         <div className="bg-gray-50 border rounded-xl p-2 md:p-4 text-gray-800 whitespace-normal">
           <p>
             🔍 <strong>Think of it as a super-smart autocomplete:</strong> it
@@ -190,31 +212,125 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">How It Works (Plain-English Mechanics)</h2>
-        <ol className="list-decimal pl-6">
+        <h2 className="text-l md:text-xl font-[600]">
+          🧠 How It Works (Plain-English Mechanics)
+        </h2>
+        <ol className="list-decimal pl-6 flex flex-col gap-1 md:gap2">
           <li>
-            <strong>Training on large datasets:</strong> The model reads
-            billions of tokens (words/sentences), learning how language (or
-            images) are structured.
+            <div className="flex flex-col gap-1">
+              <span className="font-[600]">Tokens → Numbers</span>
+              <span>
+                Text is split into small units called tokens (words or
+                sub-words) and then converted into vectors (numbers).
+              </span>
+              <span>
+                Example: “AI is powerful” → 12 , 45 , 78 , 93 12,45,78,93.
+              </span>
+            </div>
           </li>
           <li>
-            <strong>Tokens & embeddings:</strong> Text is broken into tokens and
-            converted to vectors (numbers) that capture meaning.
+            <div className="flex flex-col gap-1">
+              <span className="font-[600]">Embeddings → Meaning</span>
+              <span>
+                Each vector captures meaning — so similar words live close
+                together in vector space.
+              </span>
+              <span>(“cat” ≈ “dog”, but far from “keyboard”.) </span>
+            </div>
           </li>
+
           <li>
-            <strong>Transformer attention:</strong> The model uses
-            self-attention to understand which parts of the input matter most
-            for predicting the next token.
+            <div className="flex flex-col gap-1">
+              <span className="font-[600]">
+                Transformer → Context Understanding
+              </span>
+              <span>
+                The Transformer architecture (used in GPT, Claude, Gemini) lets
+                the model see all previous tokens at once through
+                “self-attention.”
+              </span>
+              <span>
+                It decides which words matter most to predict the next one.
+              </span>
+              <span>
+                Example: In “The cat sat on the mat because it was tired,” the
+                model knows “it” refers to “cat.”
+              </span>
+            </div>
           </li>
+
           <li>
-            <strong>Autoregressive generation:</strong> It predicts one token at
-            a time, repeatedly, forming paragraphs, code, or instructions.
+            <div className="flex flex-col gap-1">
+              <span className="font-[600]">
+                Autoregressive Prediction → Generation
+              </span>
+              <span>
+                The model predicts one token at a time based on probability and
+                adds it to the sequence to form a sentence or paragraph.
+              </span>
+            </div>
           </li>
         </ol>
+        <p>
+          That’s why it’s called <strong>“next-token prediction”</strong> — the
+          simple rule that builds whole books, code, and conversations.
+        </p>
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Where We Use Generative AI</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          ⚙️ The Training Mindset
+        </h2>
+        <p>
+          Generative models are trained with self-supervised learning on massive
+          datasets (text, images, code). They learn patterns like:
+        </p>
+        <div className="bg-gray-900 p-1 md:p-2 text-gray-100 rounded-lg border border-gray-800 whitespace-normal">
+          <p>
+            “After ‘I love to drink’, words like ‘coffee’, ‘tea’, ‘water’ often
+            follow.”
+          </p>
+        </div>
+        <p>When you give a prompt, the model uses that probability knowledge to predict what comes next.</p>
+      </section>
+
+      <section className="flex flex-col gap-2 md:gap-4">
+        <h2 className="text-l md:text-xl font-[600]">
+          🧱 The Building Blocks of Generative AI
+        </h2>
+        <table>
+            <tr className="border border-[1px] border-gray-500 bg-gray-900 text-white">
+                <td className="border-r border-[1px] border-gray-500 px-2">Layer</td>
+                <td className="border-r border-[1px] border-gray-500 px-2">Role</td>
+                <td className="px-2">Example</td>
+            </tr>
+            <tr className="border border-[1px] border-gray-500">
+                <td className="border-r border-[1px] border-gray-500 px-2">Foundation Model</td>
+                <td className="border-r border-[1px] border-gray-500 px-2">Core reasoning engine</td>
+                <td className="px-2">GPT-4, Claude, Gemini</td>
+            </tr>
+            <tr className="border border-[1px] border-gray-500">
+                <td className="border-r border-[1px] border-gray-500 px-2">Interface Layer</td>
+                <td className="border-r border-[1px] border-gray-500 px-2">Prompt engineering, API</td>
+                <td className="px-2">ChatGPT UI, SDKs</td>
+            </tr>
+            <tr className="border border-[1px] border-gray-500">
+                <td className="border-r border-[1px] border-gray-500 px-2">Retrieval Layer (RAG)</td>
+                <td className="border-r border-[1px] border-gray-500 px-2">Add your data</td>
+                <td className="px-2">Company docs, DB</td>
+            </tr>
+            <tr className="border border-[1px] border-gray-500">
+                <td className="border-r border-[1px] border-gray-500 px-2">Application Layer</td>
+                <td className="border-r border-[1px] border-gray-500 px-2">Final product</td>
+                <td className="px-2">Chatbot, Copilot, Writer tool</td>
+            </tr>
+        </table>
+    </section>
+
+      <section className="flex flex-col gap-2 md:gap-4">
+        <h2 className="text-l md:text-xl font-[600]">
+          Where We Use Generative AI
+        </h2>
         <ul>
           <li>
             <strong>Writing & Education:</strong> blog posts, summaries,
@@ -247,7 +363,9 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Minimal Node Example (Text Generation)</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Minimal Node Example (Text Generation)
+        </h2>
         <p>This script prints a short Generative AI intro to your console:</p>
         <CodeBlock
           code={minimalNodeExample}
@@ -257,7 +375,9 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Next.js API Route + Client Fetch</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Next.js API Route + Client Fetch
+        </h2>
         <p>
           Create a clean server boundary for generation and call it from your
           UI.
@@ -275,13 +395,17 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Prompt Engineering — Patterns That Work</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Prompt Engineering — Patterns That Work
+        </h2>
         <p>Clear, structured prompts drastically improve output quality.</p>
         <CodeBlock code={promptPatterns} language="bash" fileName="Terminal" />
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">RAG (Retrieval-Augmented Generation) — Make Answers Factual</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          RAG (Retrieval-Augmented Generation) — Make Answers Factual
+        </h2>
         <p>
           RAG combines generation with search over your own documents. The model
           uses retrieved context to ground its response, reducing
@@ -291,7 +415,9 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Controlling Style & Creativity</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Controlling Style & Creativity
+        </h2>
         <p>
           Use sampling controls to tune outputs for precision vs. creativity.
         </p>
@@ -303,7 +429,9 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Limitations (and How to Mitigate)</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Limitations (and How to Mitigate)
+        </h2>
         <ul>
           <li>
             <strong>Hallucinations:</strong> Ground with RAG; add instructions
@@ -325,7 +453,9 @@ const result = await openai.chat.completions.create({
       </section>
 
       <section className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-l md:text-xl font-[600]">Safety & Quality Checklist</h2>
+        <h2 className="text-l md:text-xl font-[600]">
+          Safety & Quality Checklist
+        </h2>
         <CodeBlock code={safetyChecklist} language="bash" fileName="Terminal" />
       </section>
     </article>
