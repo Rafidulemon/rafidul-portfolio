@@ -178,5 +178,15 @@
       "Learn what Generative AI is, how it works under the hood, where it’s useful, and how to build with it today.",
     "image": "/images/blogs/generativeAi.jpg",
     "author": "Md. Rafidul Islam"
+  },
+  {
+    "id": "19",
+    "title": "Vibe Coding and the Future of Web Developers",
+    "date": "15 November, 2025",
+    "description": "VibeCoding",
+    "description_summary":
+      "How conversational, AI-assisted workflows are transforming the way we build for the web — and what it means for developers.",
+    "image": "/images/blogs/vibecoding.jpg",
+    "author": "Md. Rafidul Islam"
   }
 ]

@@ -16,6 +16,7 @@ import JS_DOM_Blog from "@/app/components/blogs/JSDom";
 import MCP_Blog from "../components/blogs/MCP_Blog";
 import OpenAiCodex from "../components/blogs/OpenAiCodex";
 import GenerativeAI from "../components/blogs/GenerativeAI";
+import VibeCoding from "../components/blogs/VibeCoding";
 
 export const componentsMap: Record<string, JSX.Element> = {
   BangladeshTechBusinessDescription: <BangladeshTechBusinessDescription />,
@@ -36,4 +37,5 @@ export const componentsMap: Record<string, JSX.Element> = {
   MCP_Blog: <MCP_Blog />,
   OpenAiCodex: <OpenAiCodex />,
   GenerativeAI: <GenerativeAI/>,
+  VibeCoding: <VibeCoding />,
 };
