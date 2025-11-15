@@ -1,34 +1,79 @@
-"use client";
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { notFound } from "next/navigation";
 import SocialShare from "@/app/components/share/SocialShare";
 import blogsJson from "../../data/blogs.json";
 import { componentsMap } from "@/app/utils/blogsComponentMap";
 
+type Blog = (typeof blogsJson)[number];
 
-export default function BlogPage({ params }: { params: { id: string } }) {
-  
-  const blogData = blogsJson;
-  const blog = blogData.find((b:any) => b.id === params.id);
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rafidul-portfolio.vercel.app";
 
-  if (!blog) notFound();
+const findBlogById = (id: string): Blog | undefined =>
+  (blogsJson as Blog[]).find((blog) => blog.id === id);
 
-  const [currentUrl, setCurrentUrl] = useState("");
-  const [copied, setCopied] = useState(false);
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const blog = findBlogById(params.id);
 
-  // Fix: Set the full URL client-side after the component mounts
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
+  if (!blog) {
+    return {
+      title: "Blog Not Found | Md. Rafidul Islam",
+      description: "The requested blog post could not be found.",
+    };
+  }
 
-  const handleCopy = () => {
-    if (currentUrl) {
-      navigator.clipboard.writeText(currentUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  const canonicalUrl = `${BASE_URL}/blogs/${params.id}`;
+  const imageUrl = blog.image.startsWith("http")
+    ? blog.image
+    : `${BASE_URL}${blog.image}`;
+  const description = blog.description_summary || blog.title;
+
+  return {
+    title: `${blog.title} | Md. Rafidul Islam`,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: canonicalUrl,
+      title: blog.title,
+      description,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description,
+      images: [imageUrl],
+    },
   };
+}
+
+export default function BlogPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const blog = findBlogById(params.id);
+
+  if (!blog) {
+    notFound();
+  }
+
+  const blogContent = componentsMap[blog.description];
 
   return (
     <div className="w-full py-6 md:px-10">
@@ -50,13 +95,16 @@ export default function BlogPage({ params }: { params: { id: string } }) {
           />
         </div>
         <div className="dark:text-gray-300 text-gray-800 mt-4 text-justify text-[14px] md:text-[16px]">
-          {componentsMap[blog.description]}
+          {blogContent ?? (
+            <p>
+              This article is being updated. Please check back shortly for the
+              full content.
+            </p>
+          )}
         </div>
-
-        <div className="mt-6 flex items-center text-[16] md:text-[20px]">
-          Share this blog:
+        <div className="mt-8">
+          <SocialShare title={blog.title} />
         </div>
-        <SocialShare title={blog.title} />
       </div>
     </div>
   );
