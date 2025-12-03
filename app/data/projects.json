@@ -113,5 +113,26 @@
     "project_details": "A platform for user and driver management including live location, calling the driver.",
     "live_link": "https://benrimono-api-next.vercel.app",
     "stack": ["Vitest"]
+  },
+  {
+    "id": 12,
+    "type": "ai",
+    "category": "personal",
+    "src": "/images/projects/carelytic.png",
+    "project_title": "Carelytic",
+    "project_details": "A platform for patient to analysis his medical report with the help of AI.",
+    "live_link": "https://carelytic-pucq.vercel.app/",
+    "github_link": "https://github.com/Rafidulemon/carelytic",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAi" ]
+  },
+  {
+    "id": 13,
+    "type": "ai",
+    "category": "personal",
+    "src": "/images/projects/cv.png",
+    "project_title": "CV Sorting AI",
+    "project_details": "A platform for sorting and ordering CV based on Job Description.",
+    "github_link": "https://github.com/Rafidulemon/cv-sorting-ai",
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAi" ]
   }
 ]
