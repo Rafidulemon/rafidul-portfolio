@@ -5,6 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoMdSend } from "react-icons/io";
+import {
+  BsMicFill,
+  BsMicMuteFill,
+  BsVolumeMuteFill,
+  BsVolumeUpFill,
+} from "react-icons/bs";
+
+type SpeechRecognitionWindow = Window &
+  typeof globalThis & {
+    webkitSpeechRecognition?: any;
+    SpeechRecognition?: any;
+  };
 
 const ChatbotModal = ({
   isOpen,
@@ -20,6 +32,61 @@ const ChatbotModal = ({
   const [inputValue, setInputValue] = useState("");
   const [hasStartedChatting, setHasStartedChatting] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [speechRecognitionSupported, setSpeechRecognitionSupported] =
+    useState(false);
+  const [speechSynthesisSupported, setSpeechSynthesisSupported] =
+    useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
+  const recognitionRef = useRef<any>(null);
+  const handleSendMessageRef = useRef<(overrideText?: string) => void>();
+  const sendMessageToEndpoint = async (endpoint: string, text: string) => {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text }),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Request to ${endpoint} failed with status ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+    return data.reply || "Sorry, no response received.";
+  };
+
+  const stopSpeaking = () => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+  };
+
+  const speakReply = (text: string) => {
+    if (
+      !text.trim() ||
+      !isVoiceEnabled ||
+      !speechSynthesisSupported ||
+      typeof window === "undefined" ||
+      !window.speechSynthesis
+    ) {
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    const availableVoices = window.speechSynthesis.getVoices();
+    const preferredVoice = availableVoices.find((voice) =>
+      voice.lang?.toLowerCase().startsWith("en")
+    );
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+    }
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+  };
 
   const faq = [
     {
@@ -76,10 +143,72 @@ const ChatbotModal = ({
     localStorage.setItem("chatMessages", JSON.stringify(messages));
   }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const speechWindow = window as SpeechRecognitionWindow;
+    const SpeechRecognitionClass =
+      speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
 
-    const userMessage = { sender: "user" as "user", text: inputValue.trim() };
+    if (SpeechRecognitionClass) {
+      const recognition = new SpeechRecognitionClass();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
+      recognition.onresult = (event: any) => {
+        const transcript =
+          event?.results?.[0]?.[0]?.transcript?.toString().trim() || "";
+        if (transcript) {
+          setInputValue(transcript);
+          handleSendMessageRef.current?.(transcript);
+        }
+      };
+      recognition.onerror = (event: any) => {
+        console.error("Speech recognition error:", event);
+        setIsListening(false);
+      };
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+      recognitionRef.current = recognition;
+    }
+
+    setSpeechRecognitionSupported(!!SpeechRecognitionClass);
+    setSpeechSynthesisSupported(
+      typeof speechWindow.speechSynthesis !== "undefined"
+    );
+
+    return () => {
+      recognitionRef.current?.stop?.();
+      speechWindow.speechSynthesis?.cancel();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) {
+      recognitionRef.current?.stop?.();
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      setIsListening(false);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isVoiceEnabled && typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }, [isVoiceEnabled]);
+
+  const handleSendMessage = async (overrideText?: string) => {
+    const textToSend = (overrideText ?? inputValue).trim();
+    if (!textToSend) return;
+
+    stopSpeaking();
+
+    const userMessage = { sender: "user" as "user", text: textToSend };
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setHasStartedChatting(true);
@@ -89,14 +218,16 @@ const ChatbotModal = ({
     setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage.text }),
-      });
-
-      const data = await response.json();
-      const botReply = data.reply || "Sorry, no response received.";
+      let botReply = "";
+      try {
+        botReply = await sendMessageToEndpoint("/api/openai", textToSend);
+      } catch (primaryError) {
+        console.error(
+          "OpenAI endpoint failed, falling back to /api/chat:",
+          primaryError
+        );
+        botReply = await sendMessageToEndpoint("/api/chat", textToSend);
+      }
 
       // Typing effect logic
       let currentText = "";
@@ -109,6 +240,7 @@ const ChatbotModal = ({
         });
         await new Promise((resolve) => setTimeout(resolve, 20)); // 20ms per character
       }
+      speakReply(botReply);
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prev) => [
@@ -116,6 +248,40 @@ const ChatbotModal = ({
         { sender: "bot", text: "Failed to get a response. Please try again." },
       ]);
     }
+  };
+
+  useEffect(() => {
+    handleSendMessageRef.current = handleSendMessage;
+  });
+
+  const handleMicrophoneToggle = () => {
+    if (!speechRecognitionSupported || !recognitionRef.current) return;
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      return;
+    }
+
+    try {
+      recognitionRef.current.start();
+      setIsListening(true);
+    } catch (error) {
+      console.error("Unable to start voice recognition:", error);
+      setIsListening(false);
+    }
+  };
+
+  const handleVoiceToggle = () => {
+    if (!speechSynthesisSupported) return;
+
+    setIsVoiceEnabled((prev) => {
+      const next = !prev;
+      if (!next && typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      return next;
+    });
   };
 
   const handleFaqClick = (answer: string) => {
@@ -241,12 +407,65 @@ const ChatbotModal = ({
                 if (e.key === "Enter") handleSendMessage();
               }}
             />
-            <button
-              className="my-2 w-fit text-primary hover:text-primary_dark"
-              onClick={handleSendMessage}
-            >
-              <IoMdSend size={24} />
-            </button>
+            <div className="flex items-center gap-1 md:gap-2 ml-2">
+              <button
+                type="button"
+                onClick={handleVoiceToggle}
+                disabled={!speechSynthesisSupported}
+                title={
+                  speechSynthesisSupported
+                    ? isVoiceEnabled
+                      ? "Mute spoken replies"
+                      : "Enable spoken replies"
+                    : "Voice playback not supported in this browser"
+                }
+                className={`p-2 rounded-full transition-colors ${
+                  isVoiceEnabled ? "text-primary" : "text-gray-500"
+                } ${
+                  speechSynthesisSupported
+                    ? "hover:text-primary_dark"
+                    : "opacity-40 cursor-not-allowed"
+                }`}
+              >
+                {isVoiceEnabled ? (
+                  <BsVolumeUpFill size={18} />
+                ) : (
+                  <BsVolumeMuteFill size={18} />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={handleMicrophoneToggle}
+                disabled={!speechRecognitionSupported}
+                title={
+                  speechRecognitionSupported
+                    ? isListening
+                      ? "Stop voice input"
+                      : "Speak to Rafid"
+                    : "Voice input not supported in this browser"
+                }
+                className={`p-2 rounded-full transition-colors ${
+                  isListening ? "bg-red-600 text-white" : "text-primary"
+                } ${
+                  speechRecognitionSupported
+                    ? "hover:text-primary_dark"
+                    : "opacity-40 cursor-not-allowed"
+                }`}
+              >
+                {isListening ? (
+                  <BsMicMuteFill size={18} />
+                ) : (
+                  <BsMicFill size={18} />
+                )}
+              </button>
+              <button
+                type="button"
+                className="my-2 w-fit text-primary hover:text-primary_dark"
+                onClick={() => handleSendMessage()}
+              >
+                <IoMdSend size={24} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
