@@ -26,20 +26,34 @@ const ChatbotModal = ({
   onClose: () => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [messages, setMessages] = useState<
-    { sender: "user" | "bot"; text: string }[]
-  >([]);
+  type ChatMessage = { sender: "user" | "bot"; text: string };
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [hasStartedChatting, setHasStartedChatting] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [speechRecognitionSupported, setSpeechRecognitionSupported] =
     useState(false);
   const [speechSynthesisSupported, setSpeechSynthesisSupported] =
     useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
+  const [isVoiceEnabled, setIsVoiceEnabled] = useState(false);
   const recognitionRef = useRef<any>(null);
   const handleSendMessageRef = useRef<(overrideText?: string) => void>();
+  const botMessageIndexRef = useRef<number | null>(null);
+  const shouldSpeakNextReplyRef = useRef(false);
+  const personaResponseText =
+    "I am Md Rafidul Islam, a full-stack developer sharing my work through this chat.";
+  const personaReplyTriggers = [
+    "who are you",
+    "your name",
+    "who's this",
+    "who is this",
+    "are you",
+    "what are you",
+    "introduce yourself",
+    "tell me about yourself",
+  ];
   const sendMessageToEndpoint = async (endpoint: string, text: string) => {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -62,10 +76,40 @@ const ChatbotModal = ({
     window.speechSynthesis.cancel();
   };
 
+  const getPersonaReply = (text: string) => {
+    const normalized = text.toLowerCase();
+    return personaReplyTriggers.some((phrase) => normalized.includes(phrase))
+      ? personaResponseText
+      : null;
+  };
+
+  const pickMaleVoice = (voices: SpeechSynthesisVoice[]) => {
+    const hints = [
+      "male",
+      "daniel",
+      "david",
+      "mark",
+      "mike",
+      "fred",
+      "alex",
+      "james",
+      "george",
+    ];
+    const isEnglish = (voice: SpeechSynthesisVoice) =>
+      voice.lang?.toLowerCase().startsWith("en");
+    const hasMaleHint = (voice: SpeechSynthesisVoice) =>
+      hints.some((hint) => voice.name?.toLowerCase().includes(hint));
+
+    return (
+      voices.find((voice) => isEnglish(voice) && hasMaleHint(voice)) ??
+      voices.find(hasMaleHint) ??
+      voices.find(isEnglish)
+    );
+  };
+
   const speakReply = (text: string) => {
     if (
       !text.trim() ||
-      !isVoiceEnabled ||
       !speechSynthesisSupported ||
       typeof window === "undefined" ||
       !window.speechSynthesis
@@ -75,14 +119,12 @@ const ChatbotModal = ({
 
     const utterance = new SpeechSynthesisUtterance(text);
     const availableVoices = window.speechSynthesis.getVoices();
-    const preferredVoice = availableVoices.find((voice) =>
-      voice.lang?.toLowerCase().startsWith("en")
-    );
+    const preferredVoice = pickMaleVoice(availableVoices);
     if (preferredVoice) {
       utterance.voice = preferredVoice;
     }
     utterance.rate = 1;
-    utterance.pitch = 1;
+    utterance.pitch = 0.9;
 
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
@@ -90,29 +132,29 @@ const ChatbotModal = ({
 
   const faq = [
     {
-      question: "What is AI?",
+      question: "What services do you offer?",
       answer:
-        "AI stands for Artificial Intelligence, enabling machines to mimic human intelligence.",
+        "I build full-stack products with Next.js, TypeScript, tRPC, Prisma, and Tailwind CSS—covering everything from UI/UX to production deployment.",
     },
     {
-      question: "How to create a website?",
+      question: "Can I hire you for contract work?",
       answer:
-        "To create a website, you'll need a domain, hosting, and a development platform like Next.js or WordPress.",
+        "Yes! I take on freelance and contract engagements. Share your timeline and scope via the contact page or here in chat.",
     },
     {
-      question: "How can I promote my company?",
+      question: "Which recent projects are you proud of?",
       answer:
-        "You can promote your company using social media marketing, SEO, and targeted ads.",
+        "I recently shipped MoeGuide, Suirikyou, and Raggie—SaaS products that mix AI assistants, subscription billing, and complex dashboards.",
     },
     {
-      question: "What are the best tools for productivity?",
+      question: "Do you have experience with AI integrations?",
       answer:
-        "Popular tools include Notion, Slack, Trello, and Google Workspace.",
+        "Absolutely. I have hands-on experience with OpenAI, LangChain, Pinecone, and custom RAG pipelines for production apps.",
     },
     {
-      question: "How to start a career in web development?",
+      question: "How quickly can you start?",
       answer:
-        "Start by learning HTML, CSS, and JavaScript, then move to frameworks like React or Next.js.",
+        "I can usually kick off within two weeks. Let me know the deliverables and we can align on a schedule.",
     },
   ];
 
@@ -158,6 +200,7 @@ const ChatbotModal = ({
         const transcript =
           event?.results?.[0]?.[0]?.transcript?.toString().trim() || "";
         if (transcript) {
+          shouldSpeakNextReplyRef.current = true;
           setInputValue(transcript);
           handleSendMessageRef.current?.(transcript);
         }
@@ -170,6 +213,7 @@ const ChatbotModal = ({
         setIsListening(false);
       };
       recognition.onstart = () => {
+        setIsVoiceEnabled((prev) => (prev ? prev : true));
         setIsListening(true);
       };
       recognitionRef.current = recognition;
@@ -187,7 +231,9 @@ const ChatbotModal = ({
   }, []);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      modalRef.current?.focus();
+    } else {
       recognitionRef.current?.stop?.();
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
@@ -195,6 +241,19 @@ const ChatbotModal = ({
       setIsListening(false);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (!isVoiceEnabled && typeof window !== "undefined" && window.speechSynthesis) {
@@ -208,14 +267,36 @@ const ChatbotModal = ({
 
     stopSpeaking();
 
-    const userMessage = { sender: "user" as "user", text: textToSend };
+    const shouldSpeakResponse =
+      isVoiceEnabled || shouldSpeakNextReplyRef.current;
+    shouldSpeakNextReplyRef.current = false;
+
+    const userMessage: ChatMessage = { sender: "user", text: textToSend };
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setHasStartedChatting(true);
 
+    const personaReply = getPersonaReply(textToSend);
+    if (personaReply) {
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: personaReply } as ChatMessage,
+      ]);
+      if (shouldSpeakResponse) {
+        speakReply(personaReply);
+      }
+      return;
+    }
+
     // Add placeholder for bot typing
-    const botIndex = messages.length + 1; // index of bot message
-    setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
+    setMessages((prev) => {
+      const updated: ChatMessage[] = [
+        ...prev,
+        { sender: "bot", text: "" } as ChatMessage,
+      ];
+      botMessageIndexRef.current = updated.length - 1;
+      return updated;
+    });
 
     try {
       let botReply = "";
@@ -229,24 +310,47 @@ const ChatbotModal = ({
         botReply = await sendMessageToEndpoint("/api/chat", textToSend);
       }
 
+      if (shouldSpeakResponse) {
+        speakReply(botReply);
+      }
+
       // Typing effect logic
       let currentText = "";
       for (let i = 0; i < botReply.length; i++) {
         currentText += botReply[i];
+        const targetIndex = botMessageIndexRef.current;
+        if (targetIndex === null) break;
         setMessages((prev) => {
+          if (!prev[targetIndex]) return prev;
           const updated = [...prev];
-          updated[botIndex].text = currentText;
+          updated[targetIndex] = {
+            ...updated[targetIndex],
+            text: currentText,
+          };
           return updated;
         });
         await new Promise((resolve) => setTimeout(resolve, 20)); // 20ms per character
       }
-      speakReply(botReply);
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      setMessages((prev) => [
-        ...prev.slice(0, -1),
-        { sender: "bot", text: "Failed to get a response. Please try again." },
-      ]);
+      const fallbackMessage = "Failed to get a response. Please try again.";
+      setMessages((prev) => {
+        const targetIndex = botMessageIndexRef.current;
+        if (targetIndex === null || !prev[targetIndex]) {
+          return [
+            ...prev,
+            { sender: "bot", text: fallbackMessage } as ChatMessage,
+          ];
+        }
+        const updated = [...prev];
+        updated[targetIndex] = {
+          sender: "bot",
+          text: fallbackMessage,
+        } as ChatMessage;
+        return updated;
+      });
+    } finally {
+      botMessageIndexRef.current = null;
     }
   };
 
@@ -264,6 +368,7 @@ const ChatbotModal = ({
     }
 
     try {
+      setIsVoiceEnabled(true);
       recognitionRef.current.start();
       setIsListening(true);
     } catch (error) {
@@ -285,13 +390,18 @@ const ChatbotModal = ({
   };
 
   const handleFaqClick = (answer: string) => {
-    const botResponse = { sender: "bot" as "bot", text: answer };
+    const botResponse: ChatMessage = { sender: "bot", text: answer };
     setMessages((prev) => [...prev, botResponse]);
     setHasStartedChatting(true); // Hide common questions
   };
 
   return (
     <div
+      ref={modalRef}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Portfolio chat assistant"
       className={`fixed top-0 right-0 h-full w-full md:w-[30%] dark:bg-[#111111] bg-white shadow-lg transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } transition-transform duration-1000 z-50`}
@@ -316,7 +426,7 @@ const ChatbotModal = ({
             >
               <div className="w-12 h-12 md:w-[70px] md:h-[70px] dark:bg-black bg-white rounded-full shadow-md dark:shadow-primary shadow-gray-500">
                 <Image
-                  src="/images/hero-image.png"
+                  src="/images/chat.png"
                   alt="Logo"
                   width={200}
                   height={200}
@@ -372,7 +482,7 @@ const ChatbotModal = ({
                 <div className="flex items-center mr-2">
                   <div className="w-8 h-8 flex items-center justify-center bg-black rounded-full">
                     <Image
-                      src="/images/hero-image.png"
+                      src="/images/chat.png"
                       alt="Logo"
                       width={30}
                       height={30}

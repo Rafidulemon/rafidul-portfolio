@@ -42,7 +42,7 @@ const EducationalDetails =() => {
 
       <div className="flex flex-col">
         <Text
-          text="Secondary Secondary Certificate"
+          text="Secondary School Certificate"
           isBold
           className="text-primary_dark dark:text-cyan-500 mb-4 text-[22px]"
         />

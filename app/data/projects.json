@@ -90,7 +90,7 @@
     "category": "professional",
     "src": "/images/projects/suiri.png",
     "project_title": "Suirikyou",
-    "project_details": "A plafrorm for online test and getting results, certificates, and scholarships.",
+    "project_details": "A platform for online assessments with instant results, certificates, and scholarship workflows.",
     "live_link": "https://suirikyou.vercel.app/",
     "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "Stripe", "Micro CMS"]
   },
@@ -102,7 +102,7 @@
     "project_title": "Raggie",
     "project_details": "An inhouse gpt platform for ai chatting",
     "live_link": "https://raggie-swart.vercel.app/",
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAi", "Pinecone", "tRPC", "Prisma", "Lanchain"]
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI", "Pinecone", "tRPC", "Prisma", "LangChain"]
   },
   {
     "id": 11,
@@ -110,9 +110,9 @@
     "category": "professional",
     "src": "/images/projects/benrimono.png",
     "project_title": "Benrimono",
-    "project_details": "A platform for user and driver management including live location, calling the driver.",
+    "project_details": "A platform for rider and driver management with live location tracking, in-app calling, and granular trip history.",
     "live_link": "https://benrimono-api-next.vercel.app",
-    "stack": ["Vitest"]
+    "stack": ["React Native", "TypeScript", "Expo", "Firebase", "Socket.io"]
   },
   {
     "id": 12,
@@ -123,7 +123,7 @@
     "project_details": "A platform for patient to analysis his medical report with the help of AI.",
     "live_link": "https://carelytic-pucq.vercel.app/",
     "github_link": "https://github.com/Rafidulemon/carelytic",
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAi" ]
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAI" ]
   },
   {
     "id": 13,
@@ -133,6 +133,6 @@
     "project_title": "CV Sorting AI",
     "project_details": "A platform for sorting and ordering CV based on Job Description.",
     "github_link": "https://github.com/Rafidulemon/cv-sorting-ai",
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAi" ]
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "tRPC", "Prisma", "OpenAI" ]
   }
 ]

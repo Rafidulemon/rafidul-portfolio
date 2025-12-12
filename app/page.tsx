@@ -17,6 +17,7 @@ import skillData from "./data/skills.json";
 import servicesData from "./data/services.json";
 import Image from "next/image";
 import { ServiceInfo } from "@/types/content";
+import { motion } from "framer-motion";
 
 const serviceIconMap: Record<ServiceInfo["iconKey"], JSX.Element> = {
   web: <MdOutlineCode className="text-2xl lg:text-5xl" />,
@@ -25,6 +26,21 @@ const serviceIconMap: Record<ServiceInfo["iconKey"], JSX.Element> = {
 };
 
 const services = servicesData as ServiceInfo[];
+
+const skillIconReveal = {
+  hidden: { opacity: 0, scale: 0.85, rotate: -4 },
+  visible: (custom: number) => ({
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      delay: custom * 0.05,
+      type: "spring",
+      stiffness: 260,
+      damping: 18,
+    },
+  }),
+};
 
 const HomePage = () => {
   const [showPersonalProjects, setShowPersonalProjects] = useState(true);
@@ -120,20 +136,40 @@ const HomePage = () => {
               <Line className="w-full border-cyan-500" />
             </div>
             <div className="flex flex-col items-center">
-            {skillData.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-10 lg:mb-14 xl:mb-20 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                {skillData.map((skill) => (
-                  <Image
-                    key={skill.id}
-                    src={skill.icon}
-                    alt={`${skill.skill_name} icon`}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 object-contain md:h-12 md:w-12 lg:h-[60px] lg:w-[60px] rounded-md"
-                  />
-                ))}
-              </div>
-            )}
+              {skillData.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-10 lg:mb-14 xl:mb-20 md:w-[350px] lg:w-[550px] xl:w-[700px]">
+                  {skillData.map((skill, index) => (
+                    <motion.div
+                      key={skill.id}
+                      custom={index}
+                      variants={skillIconReveal}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.3 }}
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{
+                        y: {
+                          duration: 2.2 + (index % 3) * 0.35,
+                          repeat: Infinity,
+                          repeatType: "mirror",
+                          ease: "easeInOut",
+                        },
+                      }}
+                      whileHover={{ scale: 1.15, rotate: 3 }}
+                      className="flex items-center justify-center rounded-2xl border border-white/20 bg-white/40 p-3 shadow-lg shadow-cyan-500/10 backdrop-blur dark:border-white/10 dark:bg-white/10"
+                    >
+                      <Image
+                        src={skill.icon}
+                        alt={`${skill.skill_name} icon`}
+                        width={48}
+                        height={48}
+                        className="h-10 w-10 object-contain md:h-12 md:w-12 lg:h-[60px] lg:w-[60px]"
+                      />
+                      <span className="sr-only">{skill.skill_name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {skillData.length > 0 && (

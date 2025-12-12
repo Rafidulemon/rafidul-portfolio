@@ -53,12 +53,11 @@ function Button(props: Props) {
         setIsClicked(true);
         debouncedOnClick(e);
       }}
-      className={`${className} ${isWidthFull ? "w-full" : "w-fit"}`}
-      onFocus={() => {}}
+      className={`${isWidthFull ? "w-full" : "w-fit"} ${className ?? ""}`}
     >
       {theme === "secondary" && (
         <div
-          className={`${className} "inline-block py-[2px] md:py-1 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-primary dark:text-white mt-3"`}
+          className="inline-block py-[2px] md:py-1 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-primary dark:text-white mt-3"
         >
           <span className="block bg-white dark:bg-black dark:hover:bg-black rounded-xl md:rounded-full mx-[2px] md:mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
             {children}
@@ -68,7 +67,7 @@ function Button(props: Props) {
 
       {theme === "primary" && (
         <div
-          className={`${className} px-6 inline-block py-2 md:py-3 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white`}
+          className="px-6 inline-block py-2 md:py-3 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white"
         >
           <span className="flex flex-col justify-center">{children}</span>
         </div>

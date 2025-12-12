@@ -29,19 +29,24 @@ const MotionDiv = (props: TitleProps) => {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className={`${className}`}
+      className={className}
     >
       <div
-        className={`rounded-full ${isCircularBorder ? "border border-[6px] border-cyan-600" : ""} 
-        ${isTransparentBG ? "" : `bg-[${background}]`}
-        w-[${height_width}px] h-[${height_width}px] relative`}
+        className={`relative flex items-center justify-center rounded-full ${
+          isCircularBorder ? "border border-[6px] border-cyan-600" : ""
+        }`}
+        style={{
+          width: height_width,
+          height: height_width,
+          background: isTransparentBG ? "transparent" : background,
+        }}
       >
         <Image
           src={src}
           alt="hero image"
           width={height_width}
           height={height_width}
-          className={`${className} ${isRoundedImage ? "rounded-full" : ""}`}
+          className={isRoundedImage ? "rounded-full" : ""}
         />
       </div>
     </motion.div>

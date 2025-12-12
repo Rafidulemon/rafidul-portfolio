@@ -6,7 +6,11 @@ import { ThemeProvider } from "next-themes";
 import ChatIcon from "./components/display/ChatIcon";
 import Script from "next/script";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rafidul-portfolio.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Md. Rafidul Islam – Software Engineer Portfolio",
   description:
     "The official portfolio of Md. Rafidul Islam, a Software Engineer specializing in Next.js, React, and modern web development.",
@@ -23,7 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Md. Rafidul Islam" }],
   openGraph: {
     type: "website",
-    url: "https://rafidul-portfolio.vercel.app",
+    url: siteUrl,
     title: "Md. Rafidul Islam – Software Engineer Portfolio",
     description:
       "Explore the projects and skills of Md. Rafidul Islam, a Next.js and React developer from Bangladesh.",
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rafidul-portfolio.vercel.app",
+    canonical: siteUrl,
   },
 };
 
@@ -73,17 +77,26 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[#f6fefe] dark:bg-black">
+      <body className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-[#eaf9ff] via-[#fefefe] to-[#d4f3ff] text-black dark:from-[#050505] dark:via-[#0b1222] dark:to-[#010308] dark:text-white">
         <ThemeProvider defaultTheme="dark" attribute="class">
-          <div>
-            <div className="fixed top-0 left-0 right-0 z-10">
-              <Header />
+          <div className="relative min-h-screen">
+            {/* Ambient background shapes */}
+            <div className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute -top-32 right-[-5%] h-72 w-72 rounded-full bg-cyan-400/30 blur-[140px] dark:bg-cyan-500/40" />
+              <div className="absolute top-1/3 -left-24 h-64 w-64 rounded-full bg-pink-200/40 blur-[120px] dark:bg-purple-700/30" />
+              <div className="absolute bottom-0 right-10 h-80 w-80 rounded-full bg-amber-100/40 blur-[150px] dark:bg-emerald-600/20" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_45%)] dark:bg-[radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),_transparent_50%)]" />
             </div>
-            <div className="px-6 md:px-10 mt-20 md:mt-24 pb-6 min-h-screen">
-              {children}
+            <div>
+              <div className="fixed top-0 left-0 right-0 z-10">
+                <Header />
+              </div>
+              <div className="px-6 md:px-10 mt-20 md:mt-40 pb-6 min-h-screen">
+                {children}
+              </div>
+              <ChatIcon />
+              <Footer />
             </div>
-            <ChatIcon />
-            <Footer />
           </div>
         </ThemeProvider>
       </body>

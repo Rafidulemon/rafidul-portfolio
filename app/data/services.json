@@ -2,13 +2,13 @@
   {
     "id": 1,
     "iconKey": "web",
-    "service_title": "Web Developement",
+    "service_title": "Web Development",
     "service_details": "I specialize in building modern, scalable, and high-performance web applications using cutting-edge technologies. My expertise includes frameworks and tools such as Next.js, React.js, TypeScript, Tailwind CSS, tRPC, Prisma, RESTful APIs, JWT, and Zod. I focus on creating responsive, user-friendly interfaces and efficient backend architectures. By combining best practices in performance optimization, accessibility, and security, I deliver web solutions tailored to meet your business goals while ensuring a seamless user experience."
   },
   {
     "id": 2,
     "iconKey": "mobile",
-    "service_title": "Mobile App Developement",
+    "service_title": "Mobile App Development",
     "service_details": "I design and develop high-performance mobile applications for Android and iOS platforms, leveraging Native Android and React Native. My expertise allows me to create both platform-specific and cross-platform apps that deliver seamless user experiences. From integrating backend services using REST APIs and GraphQL to ensuring high scalability and efficiency, I craft mobile solutions that meet app store requirements while aligning with your business objectives."
   },
   {

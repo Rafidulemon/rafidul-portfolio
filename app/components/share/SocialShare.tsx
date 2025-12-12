@@ -16,6 +16,11 @@ const SocialShare = ({ title }: { title: string }) => {
   const [currentUrl, setCurrentUrl] = useState("");
   const [copied, setCopied] = useState(false);
 
+  const handleShareClick = (platform: string) => {
+    if (!currentUrl) return;
+    console.log(`[Share:${platform}] ${currentUrl}`);
+  };
+
   // Set full URL client-side
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -38,16 +43,32 @@ const SocialShare = ({ title }: { title: string }) => {
       <span className="mr-2 font-medium text-gray-700 dark:text-gray-300">
         Share this blog:
       </span>
-      <FacebookShareButton url={currentUrl} title={title}>
+      <FacebookShareButton
+        url={currentUrl}
+        title={title}
+        onClick={() => handleShareClick("facebook")}
+      >
         <FacebookIcon size={32} round />
       </FacebookShareButton>
-      <TwitterShareButton url={currentUrl} title={title}>
+      <TwitterShareButton
+        url={currentUrl}
+        title={title}
+        onClick={() => handleShareClick("twitter")}
+      >
         <TwitterIcon size={32} round />
       </TwitterShareButton>
-      <LinkedinShareButton url={currentUrl} title={title}>
+      <LinkedinShareButton
+        url={currentUrl}
+        title={title}
+        onClick={() => handleShareClick("linkedin")}
+      >
         <LinkedinIcon size={32} round />
       </LinkedinShareButton>
-      <WhatsappShareButton url={currentUrl} title={title}>
+      <WhatsappShareButton
+        url={currentUrl}
+        title={title}
+        onClick={() => handleShareClick("whatsapp")}
+      >
         <WhatsappIcon size={32} round />
       </WhatsappShareButton>
       <button

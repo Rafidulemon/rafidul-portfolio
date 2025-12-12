@@ -49,15 +49,15 @@
   },
   {
     "keywords": ["linkedin", "linkedin profile", "linkedin link"],
-    "answer": "My LinkedIn profile is available at: [Your LinkedIn URL]"
+    "answer": "My LinkedIn profile is available at: https://www.linkedin.com/in/md-rafidul-islam-8b013118b/"
   },
   {
     "keywords": ["github", "github profile", "github link", "code", "repository"],
-    "answer": "My GitHub profile is available at: [Your GitHub URL]"
+    "answer": "My GitHub profile is available at: https://github.com/Rafidulemon"
   },
   {
     "keywords": ["facebook", "facebook profile", "fb"],
-    "answer": "My Facebook profile is available at: [Your Facebook URL]"
+    "answer": "My Facebook profile is available at: https://www.facebook.com/rafidul.emon.50"
   },
   {
     "keywords": ["hello", "hi", "hey", "greetings"],
