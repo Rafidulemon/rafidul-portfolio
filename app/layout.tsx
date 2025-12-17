@@ -5,6 +5,7 @@ import Footer from "./components/navigations/Footer";
 import { ThemeProvider } from "next-themes";
 import ChatIcon from "./components/display/ChatIcon";
 import Script from "next/script";
+import TechBackground from "./components/display/TechBackground";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://rafidul-portfolio.vercel.app";
@@ -81,7 +82,8 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="dark" attribute="class">
           <div className="relative min-h-screen">
             {/* Ambient background shapes */}
-            <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+              <TechBackground />
               <div className="absolute -top-32 right-[-5%] h-72 w-72 rounded-full bg-cyan-400/30 blur-[140px] dark:bg-cyan-500/40" />
               <div className="absolute top-1/3 -left-24 h-64 w-64 rounded-full bg-pink-200/40 blur-[120px] dark:bg-purple-700/30" />
               <div className="absolute bottom-0 right-10 h-80 w-80 rounded-full bg-amber-100/40 blur-[150px] dark:bg-emerald-600/20" />
@@ -91,7 +93,7 @@ export default function RootLayout({
               <div className="fixed top-0 left-0 right-0 z-10">
                 <Header />
               </div>
-              <div className="px-6 md:px-10 pt-20 md:pt-40 pb-6 min-h-screen">
+              <div className="px-6 md:px-10 pt-20 md:pt-32 pb-6 min-h-screen">
                 {children}
               </div>
               <ChatIcon />

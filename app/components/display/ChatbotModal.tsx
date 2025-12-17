@@ -44,15 +44,15 @@ const ChatbotModal = ({
   const shouldSpeakNextReplyRef = useRef(false);
   const personaResponseText =
     "I am Md Rafidul Islam, a full-stack developer sharing my work through this chat.";
-  const personaReplyTriggers = [
-    "who are you",
-    "your name",
-    "who's this",
-    "who is this",
-    "are you",
-    "what are you",
-    "introduce yourself",
-    "tell me about yourself",
+  const personaReplyPatterns = [
+    /\bwho\s+are\s+you\b/i,
+    /\bwho\s+is\s+this\b/i,
+    /\bwho'?s\s+this\b/i,
+    /\bwhat\s+is\s+your\s+name\b/i,
+    /\bwhat'?s\s+your\s+name\b/i,
+    /\bintroduce\s+yourself\b/i,
+    /\btell\s+me\s+about\s+yourself\b/i,
+    /\bwho\s+am\s+i\s+talking\s+to\b/i,
   ];
   const sendMessageToEndpoint = async (endpoint: string, text: string) => {
     const response = await fetch(endpoint, {
@@ -76,12 +76,10 @@ const ChatbotModal = ({
     window.speechSynthesis.cancel();
   };
 
-  const getPersonaReply = (text: string) => {
-    const normalized = text.toLowerCase();
-    return personaReplyTriggers.some((phrase) => normalized.includes(phrase))
+  const getPersonaReply = (text: string) =>
+    personaReplyPatterns.some((pattern) => pattern.test(text))
       ? personaResponseText
       : null;
-  };
 
   const pickMaleVoice = (voices: SpeechSynthesisVoice[]) => {
     const hints = [

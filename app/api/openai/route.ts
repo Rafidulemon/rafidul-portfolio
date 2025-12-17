@@ -5,6 +5,29 @@ import projects from "../../data/projects.json";
 import blogs from "../../data/blogs.json";
 import skills from "../../data/skills.json";
 import services from "../../data/services.json";
+import contactInfo from "../../data/contact.json";
+
+type ContactSocial = {
+  platform: string;
+  handle?: string;
+  url: string;
+};
+
+type ContactInfo = {
+  full_name?: string;
+  title?: string;
+  location?: string;
+  time_zone?: string;
+  email?: string;
+  phone_primary?: string;
+  phone_secondary?: string;
+  availability?: string;
+  preferred_contact_methods?: string[];
+  response_time?: string;
+  office_hours?: string;
+  portfolio_url?: string;
+  socials?: ContactSocial[];
+};
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
@@ -44,6 +67,56 @@ export async function POST(req: Request) {
         `- ${service.service_title}: ${service.service_details}`
     )
     .join("\n");
+  const contactDetails = contactInfo as ContactInfo;
+
+  const socialLinks =
+    contactDetails.socials && contactDetails.socials.length > 0
+      ? contactDetails.socials
+          .map((social) => {
+            const handlePart = social.handle ? ` (${social.handle})` : "";
+            return `  - ${social.platform}${handlePart}: ${social.url}`;
+          })
+          .join("\n")
+      : "  - No social profiles provided.";
+
+  const preferredContacts =
+    contactDetails.preferred_contact_methods?.join(", ") ?? "email";
+
+  const contactContextLines = [
+    `- Name: ${contactDetails.full_name ?? "Md. Rafidul Islam"}`,
+    `- Role: ${contactDetails.title ?? "Software Engineer"}`,
+    `- Location: ${contactDetails.location ?? "Dhaka, Bangladesh"}`,
+    `- Time Zone: ${
+      contactDetails.time_zone ?? "GMT+6 (Bangladesh Standard Time)"
+    }`,
+    `- Email: ${contactDetails.email ?? "rafidulemon@gmail.com"}`,
+    `- Primary Phone: ${
+      contactDetails.phone_primary ?? "+8801990497796"
+    }`,
+    contactDetails.phone_secondary
+      ? `- Secondary Phone: ${contactDetails.phone_secondary}`
+      : "",
+    `- Availability: ${
+      contactDetails.availability ?? "Open to new opportunities."
+    }`,
+    `- Preferred Contact Methods: ${preferredContacts}`,
+    `- Typical Response Time: ${
+      contactDetails.response_time ?? "Replies within 24 hours."
+    }`,
+    `- Office Hours: ${
+      contactDetails.office_hours ?? "Weekdays 09:00–18:00 BST."
+    }`,
+    `- Portfolio: ${
+      contactDetails.portfolio_url ??
+      "https://rafidul-portfolio.vercel.app"
+    }`,
+    "- Social Profiles:",
+    socialLinks,
+  ];
+
+  const contactContext = contactContextLines
+    .filter((line): line is string => Boolean(line))
+    .join("\n");
 
   const knowledgeBase = `
 PROJECTS
@@ -57,6 +130,9 @@ ${skillContext}
 
 SERVICES
 ${serviceContext}
+
+CONTACT
+${contactContext}
 `;
 
   const systemPrompt = `

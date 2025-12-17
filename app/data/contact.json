@@ -1,0 +1,32 @@
+{
+  "full_name": "Md. Rafidul Islam",
+  "title": "Software Engineer & Product-Focused Full-Stack Developer",
+  "location": "Mohammodpur, Dhaka, Bangladesh (originally from Debidwar, Cumilla)",
+  "time_zone": "GMT+6 (Bangladesh Standard Time)",
+  "email": "rafidulemon@gmail.com",
+  "phone_primary": "+8801990497796",
+  "phone_secondary": "+8801850700054",
+  "portfolio_url": "https://rafidul-portfolio.vercel.app",
+  "availability": "Open to full-time roles, high-impact freelance projects, and remote collaborations.",
+  "preferred_contact_methods": ["email", "phone", "portfolio contact form"],
+  "response_time": "Typically replies within 24 hours on business days and faster for priority project inquiries.",
+  "office_hours": "Weekdays 09:00–18:00 BST with flexibility for international teams.",
+  "socials": [
+    {
+      "platform": "LinkedIn",
+      "handle": "md-rafidul-islam-8b013118b",
+      "url": "https://www.linkedin.com/in/md-rafidul-islam-8b013118b/"
+    },
+    {
+      "platform": "GitHub",
+      "handle": "Rafidulemon",
+      "url": "https://github.com/Rafidulemon"
+    },
+    {
+      "platform": "Facebook",
+      "handle": "rafidul.emon.50",
+      "url": "https://www.facebook.com/rafidul.emon.50"
+    }
+  ],
+  "notes": "Use email for formal proposals, phone or chat for urgent collaborations, and the portfolio contact form for scoped project briefs."
+}
