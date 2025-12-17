@@ -91,7 +91,7 @@ export default function RootLayout({
               <div className="fixed top-0 left-0 right-0 z-10">
                 <Header />
               </div>
-              <div className="px-6 md:px-10 mt-20 md:mt-40 pb-6 min-h-screen">
+              <div className="px-6 md:px-10 pt-20 md:pt-40 pb-6 min-h-screen">
                 {children}
               </div>
               <ChatIcon />

@@ -37,7 +37,8 @@ const MotionDiv = (props: TitleProps) => {
         }`}
         style={{
           width: height_width,
-          height: height_width,
+          maxWidth: "100%",
+          aspectRatio: "1 / 1",
           background: isTransparentBG ? "transparent" : background,
         }}
       >
@@ -46,7 +47,9 @@ const MotionDiv = (props: TitleProps) => {
           alt="hero image"
           width={height_width}
           height={height_width}
-          className={isRoundedImage ? "rounded-full" : ""}
+          className={`${
+            isRoundedImage ? "h-full w-full object-cover  rounded-full" : ""
+          }`}
         />
       </div>
     </motion.div>

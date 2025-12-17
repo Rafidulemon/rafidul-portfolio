@@ -57,9 +57,15 @@ function Button(props: Props) {
     >
       {theme === "secondary" && (
         <div
-          className="inline-block py-[2px] md:py-1 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-primary dark:text-white mt-3"
+          className={`rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-800 text-primary dark:text-white ${
+            isWidthFull ? "flex w-full" : "inline-flex"
+          } items-center justify-center px-[2px] py-[2px] md:px-1 md:py-1`}
         >
-          <span className="block bg-white dark:bg-black dark:hover:bg-black rounded-xl md:rounded-full mx-[2px] md:mx-1 px-5 py-1 md:py-2 flex flex-col justify-center">
+          <span
+            className={`bg-white dark:bg-black dark:hover:bg-black rounded-xl md:rounded-full px-5 py-1 md:py-2 flex flex-col justify-center text-center ${
+              isWidthFull ? "w-full" : ""
+            }`}
+          >
             {children}
           </span>
         </div>
@@ -67,9 +73,13 @@ function Button(props: Props) {
 
       {theme === "primary" && (
         <div
-          className="px-6 inline-block py-2 md:py-3 rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white"
+          className={`rounded-xl md:rounded-full bg-gradient-to-br from-cyan-500 to-teal-700 hover:bg-slate-200 text-white ${
+            isWidthFull ? "flex w-full" : "inline-flex"
+          } items-center justify-center px-6 py-2 md:py-3`}
         >
-          <span className="flex flex-col justify-center">{children}</span>
+          <span className="flex flex-col items-center justify-center text-center">
+            {children}
+          </span>
         </div>
       )}
     </button>

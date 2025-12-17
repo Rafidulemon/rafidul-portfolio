@@ -120,7 +120,7 @@ const HomePage = () => {
               src="/images/new_dp.png"
               isTransparentBG
               className="md:col-span-5 place-self-center mt-6 hidden md:flex md:w-[150px] lg:w-[220px] xl:w-[250px]"
-              isRoundedImage
+              
             />
           </div>
 
