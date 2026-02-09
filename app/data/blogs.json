@@ -188,5 +188,15 @@
       "How conversational, AI-assisted workflows are transforming the way we build for the web — and what it means for developers.",
     "image": "/images/blogs/vibecoding.jpg",
     "author": "Md. Rafidul Islam"
+  },
+  {
+    "id": "20",
+    "title": "OpenClaw: The AI That Actually Does Things",
+    "date": "09 February, 2026",
+    "description": "OpenClawBlog",
+    "description_summary":
+      "From Clawdbot → MoltBot → OpenClaw — A new era of autonomous personal AI assistants",
+    "image": "/images/blogs/openClaw.png",
+    "author": "Md. Rafidul Islam"
   }
 ]
