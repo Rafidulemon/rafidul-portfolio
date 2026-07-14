@@ -16,6 +16,25 @@ const ProfessionalDetails = () => {
           className="text-[16px] md:text-[18px] lg:text-[22px] xl:text-[24px] text-primary_dark dark:text-cyan-500"
         />
         <div className="flex flex-col gap-2 md:gap-3 lg:gap-4">
+          <Link href={"https://www.echologyx.com/"}>
+            <Text
+              text="Echologyx Ltd."
+              className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-primary dark:text-cyan-200"
+              isBold
+            />
+          </Link>
+          <Text
+            text="From July 2026 to Present"
+            className="text-gray-700 dark:text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]"
+          />
+        </div>
+
+        <Text
+          text="Software Engineer"
+          isBold
+          className="text-[16px] md:text-[18px] lg:text-[22px] xl:text-[24px] text-primary_dark dark:text-cyan-500"
+        />
+        <div className="flex flex-col gap-2 md:gap-3 lg:gap-4">
           <Link href={"https://www.ninja-digital-innovations.com/"}>
             <Text
               text="Ninja Digital Innovations"
@@ -24,7 +43,7 @@ const ProfessionalDetails = () => {
             />
           </Link>
           <Text
-            text="From July 2025 to Present"
+            text="From July 2025 to June 2026"
             className="text-gray-700 dark:text-white text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]"
           />
         </div>
