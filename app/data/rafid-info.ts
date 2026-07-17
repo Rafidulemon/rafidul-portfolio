@@ -4,6 +4,13 @@ He has a strong technical foundation in JavaScript, TypeScript, React.js, Next.j
 With years of experience working in both startup and enterprise environments, he excels at building scalable, high-performance, and aesthetically refined digital experiences.
 
 💼 Professional Experience:
+- **Software Engineer L2 at Echologyx Limited** (Jul 2025 – Present)
+  - Develop and maintain A/B testing solutions for global e-commerce and enterprise clients, optimizing user experiences and conversion rates through data-driven experimentation.
+  - Design and implement client-side JavaScript experiments, UI/UX enhancements, and personalization features across various web platforms.
+  - Collaborate with product managers, designers, and QA teams to analyze experiment performance and deliver scalable optimization solutions.
+  - Work with modern front-end technologies including JavaScript (ES6+), HTML5, CSS3, and browser APIs while ensuring cross-browser compatibility and high-performance execution.
+  - Troubleshoot, debug, and optimize experimentation scripts, ensuring minimal performance impact and seamless integration with existing websites.
+  
 - **Software Engineer (Remote) at Brand Cloud Inc.** (Aug 2023 – Jun 2025)
   - Developed and maintained advanced SaaS platforms integrating AI-driven chat systems and multi-tenant architecture.
   - Worked extensively with Next.js (App Router), tRPC, Prisma, and NextAuth for secure, scalable, and maintainable applications.

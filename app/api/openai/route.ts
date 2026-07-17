@@ -30,7 +30,12 @@ type ContactInfo = {
 };
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
+  apiKey: process.env.OPENROUTER_API_KEY!,
+  baseURL: "https://openrouter.ai/api/v1",
+  defaultHeaders: {
+    "HTTP-Referer": process.env.NEXT_PUBLIC_APP_URL,
+    "X-Title": "Rafid Portfolio",
+  },
 });
 
 export async function POST(req: Request) {
@@ -154,7 +159,7 @@ If someone asks general tech or AI questions, answer in Rafid's voice and mindse
 `;
 
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: "google/gemma-4-26b-a4b-it:free",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: message },
