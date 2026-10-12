@@ -1,340 +1,81 @@
-"use client";
-import React, { useState } from "react";
-import { Line } from "../components/display/Line";
-import { Text } from "../components/typography/Text";
-import { Grid } from "../components/layout/Grid";
-import PageTitle from "../components/typography/PageTitle";
-import Button from "../components/display/Button";
-import MotionDiv from "../components/animations/MotionDiv";
-import { FaMapLocationDot, FaPhoneVolume } from "react-icons/fa6";
-import { MdOutlineEmail } from "react-icons/md";
-import SkillBar from "../components/animations/SkillBar";
-import ProjectsCard from "../components/cards/ProjectsCard";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaGithub,
-  FaTwitter,
-  FaLinkedin,
-} from "react-icons/fa";
-import Details from "../components/about-details/Details";
+import type { Metadata } from "next";
 import Link from "next/link";
-import projectData from "../data/projects.json";
+import MotionDiv from "../components/animations/MotionDiv";
+import SkillBar from "../components/animations/SkillBar";
+import SocialIcons from "../components/display/SocialIcons";
+import ProjectsSection from "../components/projects/ProjectsSection";
+import AboutDetails, { ContactChips } from "../components/about-details/AboutDetails";
+import { getContent } from "../lib/content/store";
 
-const AboutPage = () => {
-  const [showPersonalProjects, setShowPersonalProjects] = useState(true);
-  
-  const personalProjects = projectData.filter((project: { category: string; }) => project.category === "personal");
-  const professionalProjects = projectData.filter((project: { category: string; }) => project.category === "professional");
+export const metadata: Metadata = {
+  title: "About | Md. Rafidul Islam",
+  description:
+    "About Md. Rafidul Islam: software engineer building web, mobile and AI products. Experience, education and skills.",
+};
 
-  const currentProjects = showPersonalProjects ? personalProjects : professionalProjects;
+const AboutPage = async () => {
+  const [about, contact, projects] = await Promise.all([
+    getContent("about"),
+    getContent("contact"),
+    getContent("projects"),
+  ]);
+
   return (
     <div className="w-full">
-      <PageTitle name="ABOUT ME" />
-      <div className="md:hidden">
-        <div className="flex flex-row justify-center mt-8">
-          <div>
-            <div className="flex flex-row items-center justify-center">
-              <MotionDiv
-                src="/images/ai-image-1.png"
-                isCircularBorder
-                isTransparentBG
-                isRoundedImage
-                className="w-[150px]"
-              />
-            </div>
-            <div className="flex w-full flex-row items-center justify-center mt-4 gap-x-4 mb-4">
-              <a href="https://www.facebook.com/rafidul.emon.50" target="_blank">
-                <FaFacebook
-                  color="#1877F2"
-                  size={20}
-                />
-              </a>
-              <a href="https://www.instagram.com/rafidulemon" target="_blank">
-                <FaInstagram
-                  color="#E1306C"
-                  size={20}
-                />
-              </a>
-              <a href="https://github.com/Rafidulemon" target="_blank" className="dark:text-white text-gray-600">
-                <FaGithub
-                  size={20}
-                />
-              </a>
-              <a href="https://www.linkedin.com/in/md-rafidul-islam-8b013118b/" target="_blank">
-                <FaLinkedin
-                  color="#0077B5"
-                  size={20}
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col justify-start text-center mt-4">
-          <Text
-            text="Md. Rafidul Islam"
-            isBold
-            className="text-primary_dark text-[16px] dark:text-cyan-300 mb-4"
-          />
-          <p className="text-gray-700 dark:text-[#ADB7BE] text-[14px] mb-4 text-justify">
-            Crafted by a skilled Software Engineer, specializing in Mobile App
-            Development and Web Development, the digital experiences by this
-            innovative mind blend technology and creativity seamlessly.
-            Dedicated to delivering exceptional solutions, this talent strives
-            to make a meaningful impact through their work.
-          </p>
-          <div className="flex flex-col items-start gap-1">
-            <div>
-              <FaMapLocationDot
-                size={16}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="Patiya, Chittagong, Bangladesh"
-                className="text-gray-700 inline-block align-middle dark:text-white text-[12px]"
-              />
-            </div>
-            <div>
-              <FaPhoneVolume
-                size={14}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="+8801990497796"
-                className="text-gray-700 inline-block align-middle dark:text-white text-[14px]"
-              />
-            </div>
-            <Link href={`mailto:rafidulemon@gmail.com`} className="mb-2">
-              <MdOutlineEmail
-                size={18}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="rafidulemon@gmail.com"
-                className="text-gray-700 inline-block align-middle dark:text-white text-[14px]"
-              />
+      <section className="mx-auto mt-6 grid w-full max-w-6xl items-center gap-10 md:mt-12 md:grid-cols-5">
+        <div className="md:col-span-3">
+          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium uppercase tracking-widest text-cyan-700 dark:text-cyan-300">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-500" />
+            About me
+          </span>
+          <h1 className="mt-4 font-poppins text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
+            {about.name}
+          </h1>
+          <p className="mt-1 text-lg text-cyan-700 dark:text-cyan-300">{about.personal.occupation}</p>
+          <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">{about.summary}</p>
+          <ContactChips about={about} contact={contact} />
+          <div className="mt-6 flex flex-wrap items-center gap-5">
+            <Link
+              href="/contact"
+              className="rounded-full bg-gradient-to-r from-cyan-600 to-teal-500 px-6 py-2.5 font-medium text-white shadow-lg shadow-cyan-500/30 transition hover:shadow-xl"
+            >
+              Get in touch
             </Link>
-            <Link href={"/contact"} className="w-full my-2">
-              <Button
-                theme="primary"
-                className="w-full"
-              >
-                <Text text="Get in Touch" className="text-[14px] text-white"/>
-              </Button>
-            </Link>
+            <SocialIcons socials={contact.socials} size={24} />
           </div>
         </div>
-        <div className="flex flex-col alighItems-end justify-start my-4 text-center">
-          <Text
-            text="My Professional Skills"
-            isBold
-            className="text-primary_dark text-[16px] dark:text-cyan-300 mb-4"
+        <div className="flex justify-center md:col-span-2">
+          <MotionDiv
+            src="/images/ai-image-1.png"
+            isCircularBorder
+            isTransparentBG
+            isRoundedImage
+            className="w-[180px] md:w-[220px] lg:w-[260px]"
           />
-          <p className="text-gray-700 dark:text-[#ADB7BE] text-[14px] mb-4 text-justify">
-            With expertise spanning web development encompassing JavaScript,
-            TypeScript, React.js, Next.js, and database management tools like
-            MySQL, MongoDB, and Prisma, alongside mobile app development
-            proficiency in Java and Android, I bring a comprehensive skill set
-            to the table. Complemented by UI/UX design capabilities utilizing
-            Figma and Adobe XD, I am equipped to deliver impactful solutions
-            across diverse platforms.
-          </p>
-          <div className="text-start">
-            <SkillBar label="Web Development" level={80} />
-            <SkillBar label="Mobile App Development" level={70} />
-            <SkillBar label="UI/UX Design" level={60} />
-          </div>
         </div>
-      </div>
-      <Grid colCount={3} className="w-full mt-[60px] hidden md:grid">
-        <div className="flex flex-col justify-start">
-          <Text
-            text="Md. Rafidul Islam"
-            isBold
-            className="text-primary_dark md:text-[20px] lg:text-[22px] xl:text-[24px] dark:text-cyan-300 mb-4"
-          />
-          <p className="text-gray-700 dark:text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
-            Crafted by a skilled Software Engineer, specializing in Mobile App
-            Development and Web Development, the digital experiences by this
-            innovative mind blend technology and creativity seamlessly.
-            Dedicated to delivering exceptional solutions, this talent strives
-            to make a meaningful impact through their work.
-          </p>
-          <div className="flex flex-col items-start gap-4">
-            <div>
-              <FaMapLocationDot
-                size={18}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="Patiya, Chittagong, Bangladesh"
-                className="text-gray-700 inline-block align-middle dark:text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
-              />
-            </div>
-            <div>
-              <FaPhoneVolume
-                size={18}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="+8801990497796"
-                className="text-gray-700 inline-block align-middle dark:text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
-              />
-            </div>
-            <Link href={`mailto:rafidulemon@gmail.com`}>
-              <MdOutlineEmail
-                size={24}
-                color="#00BCD4"
-                className="mr-4 inline-block align-middle"
-              />
-              <Text
-                text="rafidulemon@gmail.com"
-                className="text-gray-700 inline-block align-middle dark:text-white md:text-[14px] lg:text-[16px] xl:text-[18px]"
-              />
-            </Link>
-            <Link href={"/contact"} className="mt-4">
-              <Button
-                theme="primary"
-                className="md:w-[150px] lg:w-[200px] xl:w-[250px]"
-              >
-                <Text text="Get in Touch" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <div className="flex flex-row justify-center md:mt-20 lg:mt-18 xl:mt-16">
-          <div>
-            <div className="flex flex-row items-center justify-center">
-              <MotionDiv
-                src="/images/ai-image-1.png"
-                isCircularBorder
-                isTransparentBG
-                isRoundedImage
-                className="md:w-[150px] lg:w-[200px] xl:w-[250px]"
-              />
-            </div>
-            <div className="flex w-full flex-row items-center justify-center md:mt-4 md:gap-x-4 lg:mt-8 lg:gap-x-8 xl:mt-8 xl:gap-x-8 mb-10">
-              <a href="https://www.facebook.com/rafidul.emon.50" target="_blank">
-                <FaFacebook
-                  color="#1877F2"
-                  className="md:text-[24px] md:text-[28px] md:text-[30px]"
-                />
-              </a>
-              <a href="https://www.instagram.com/rafidulemon" target="_blank">
-                <FaInstagram
-                  color="#E1306C"
-                  className="md:text-[24px] md:text-[28px] md:text-[30px]"
-                />
-              </a>
-              <a href="https://github.com/Rafidulemon" target="_blank" className="dark:text-white text-gray-600">
-                <FaGithub
-                  className="md:text-[24px] md:text-[28px] md:text-[30px]"
-                />
-              </a>
-              <a href="https://www.linkedin.com/in/md-rafidul-islam-8b013118b/" target="_blank">
-                <FaLinkedin
-                  color="#0077B5"
-                  className="md:text-[24px] md:text-[28px] md:text-[30px]"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col alighItems-end justify-start">
-          <Text
-            text="My Professional Skills"
-            isBold
-            className="text-primary_dark md:text-[20px] lg:text-[22px] xl:text-[24px] dark:text-cyan-300 mb-4"
-          />
-          <p className="text-gray-700 dark:text-[#ADB7BE] md:text-[16px] lg:text-[18px] xl:text-[20px] mb-10 text-justify">
-            With expertise spanning web development encompassing JavaScript,
-            TypeScript, React.js, Next.js, and database management tools like
-            MySQL, MongoDB, and Prisma, alongside mobile app development
-            proficiency in Java and Android, I bring a comprehensive skill set
-            to the table. Complemented by UI/UX design capabilities utilizing
-            Figma and Adobe XD, I am equipped to deliver impactful solutions
-            across diverse platforms.
-          </p>
-          <div>
-            <SkillBar label="Web Development" level={80} />
-            <SkillBar label="Mobile App Development" level={70} />
-            <SkillBar label="UI/UX Design" level={60} />
-          </div>
-        </div>
-      </Grid>
-      <div className="w-full mt-6">
-        <div className="w-full flex flex-col items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
-          <Line className="w-full border-cyan-500" />
-          <Text
-            text="My Projects"
-            isNosifer
-            className="text-primary_dark dark:text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
-          />
-          <Line className="w-full border-cyan-500" />
-        </div>
+      </section>
 
-        {/* Tabs */}
-        <div className="w-full flex flex-row items-center justify-center gap-4 md:gap-10 my-6">
-          <button
-            className={`${
-              showPersonalProjects
-                ? "bg-primary text-white py-1 px-4 rounded-xl"
-                : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
-            } text-[16px] md:text-[24px] focus:outline-none`}
-            onClick={() => setShowPersonalProjects(true)}
-          >
-            Personal Projects
-          </button>
-
-          <button
-            className={`${
-              !showPersonalProjects
-                ? "bg-primary text-white py-1 px-4 rounded-xl"
-                : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
-            } text-[16px] md:text-[24px] focus:outline-none`}
-            onClick={() => setShowPersonalProjects(false)}
-          >
-            Professional Projects
-          </button>
+      <section className="mx-auto mt-16 grid w-full max-w-6xl gap-8 md:grid-cols-2">
+        <div>
+          <h2 className="font-poppins text-2xl font-bold text-gray-900 dark:text-white">
+            My professional skills
+          </h2>
+          <p className="mt-3 leading-relaxed text-gray-700 dark:text-gray-300">{about.skills_summary}</p>
         </div>
-
-        {/* Project Cards */}
-        <div className="w-full flex flex-col gap-10">
-          <div className="flex flex-wrap items-center justify-center gap-10">
-            {currentProjects.map((project, index) => (
-              <ProjectsCard
-                key={index}
-                src={project.src}
-                project_title={(project as any).title ?? (project as any).project_title}
-                project_details={(project as any).details ?? (project as any).project_details}
-                github_link={(project as any).github ?? (project as any).github_link}
-                live_link={(project as any).link ?? (project as any).live_link}
-                stack={project.stack}
-              />
-            ))}
-          </div>
-
-          <Link
-            href={"/projects"}
-            className="flex flex-row items-center justify-center"
-          >
-            <Text
-              text="See More..."
-              className="text-primary dark:text-cyan-200 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]"
-            />
-          </Link>
+        <div className="flex flex-col justify-center">
+          {about.skill_bars.map((bar) => (
+            <SkillBar key={bar.label} label={bar.label} level={bar.level} />
+          ))}
         </div>
-      </div>
-      <div className="w-full my-10">
-        <Details />
-      </div>
+      </section>
+
+      <ProjectsSection projects={projects} compact />
+
+      <section className="my-16 w-full">
+        <AboutDetails about={about} contact={contact} />
+      </section>
     </div>
   );
-}
+};
 
 export default AboutPage;

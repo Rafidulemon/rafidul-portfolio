@@ -1,49 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import TyAnimation from "./components/animations/TyAnimation";
+import TyAnimation from "../animations/TyAnimation";
 import Link from "next/link";
-import Button from "./components/display/Button";
-import { Text } from "./components/typography/Text";
-import MotionDiv from "./components/animations/MotionDiv";
-import { Line } from "./components/display/Line";
-import ServicessCard from "./components/cards/ServiceCard";
-import { MdOutlineCode, MdAppShortcut } from "react-icons/md";
-import { SiMaterialdesignicons } from "react-icons/si";
-import ProjectsCard from "./components/cards/ProjectsCard";
-import SkillBar from "./components/animations/SkillBar";
-import FlashScreen from "./components/FlashScreen";
-import projectsData from "./data/projects.json";
-import skillData from "./data/skills.json";
-import servicesData from "./data/services.json";
-import Image from "next/image";
-import { ServiceInfo } from "@/types/content";
-import { motion } from "framer-motion";
+import Button from "../display/Button";
+import { Text } from "../typography/Text";
+import MotionDiv from "../animations/MotionDiv";
+import FlashScreen from "../FlashScreen";
+import HeroAskAI from "../ai/HeroAskAI";
+import SkillsSection from "../skills/SkillsSection";
+import ServicesSection from "../services/ServicesSection";
+import ProjectsSection from "../projects/ProjectsSection";
+import type { AboutInfo, ProjectInfo, ServiceInfo, SkillInfo } from "@/types/content";
 
-const serviceIconMap: Record<ServiceInfo["iconKey"], JSX.Element> = {
-  web: <MdOutlineCode className="text-2xl lg:text-5xl" />,
-  mobile: <MdAppShortcut className="text-2xl lg:text-5xl" />,
-  design: <SiMaterialdesignicons className="text-2xl lg:text-5xl" />,
+type HomeProps = {
+  about: AboutInfo;
+  skills: SkillInfo[];
+  services: ServiceInfo[];
+  projects: ProjectInfo[];
 };
 
-const services = servicesData as ServiceInfo[];
-
-const skillIconReveal = {
-  hidden: { opacity: 0, scale: 0.85, rotate: -4 },
-  visible: (custom: number) => ({
-    opacity: 1,
-    scale: 1,
-    rotate: 0,
-    transition: {
-      delay: custom * 0.05,
-      type: "spring",
-      stiffness: 260,
-      damping: 18,
-    },
-  }),
-};
-
-const HomePage = () => {
-  const [showPersonalProjects, setShowPersonalProjects] = useState(true);
+const HomePage = ({ about, skills, services, projects }: HomeProps) => {
   const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
@@ -59,12 +35,6 @@ const HomePage = () => {
       }, 3000);
     }
   }, []);
-
-  const currentProjects = projectsData.filter((project: { category: string }) =>
-    showPersonalProjects
-      ? project.category === "personal"
-      : project.category === "professional"
-  );
 
   return (
     <section>
@@ -91,11 +61,7 @@ const HomePage = () => {
                 </div>
               </h1>
               <p className="dark:text-[#ADB7BE] text-gray-700 text-[14px] md:text-[24px] mb-4 md:mb-6 lg:mb-10 xl:mb-14 sm:leading-[20px] md:leading-normal text-justify">
-                Crafted by a skilled Software Engineer, specializing in Mobile
-                App Development and Web Development, the digital experiences by
-                this innovative mind blend technology and creativity seamlessly.
-                Dedicated to delivering exceptional solutions, this talent
-                strives to make a meaningful impact through their work.
+                {about.summary}
               </p>
               <div className="flex gap-4 justify-center md:justify-start">
                 <Link href="/contact">
@@ -115,6 +81,7 @@ const HomePage = () => {
                   </Button>
                 </a>
               </div>
+              <HeroAskAI />
             </div>
             <MotionDiv
               src="/images/new_dp.png"
@@ -125,165 +92,13 @@ const HomePage = () => {
           </div>
 
           {/* Skills */}
-          <div className="w-full sm:my-6 md:my-10 lg:my-14 xl:my-20">
-            <div className="w-full flex flex-col mb-4 md:mb-6 lg:mb-8 xl:mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
-              <Line className="w-full border-cyan-500" />
-              <Text
-                text="My Skills"
-                isNosifer
-                className="dark:text-white text-primary_dark text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
-              />
-              <Line className="w-full border-cyan-500" />
-            </div>
-            <div className="flex flex-col items-center">
-              {skillData.length > 0 && (
-                <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-10 lg:mb-14 xl:mb-20 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                  {skillData.map((skill, index) => (
-                    <motion.div
-                      key={skill.id}
-                      custom={index}
-                      variants={skillIconReveal}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, amount: 0.3 }}
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{
-                        y: {
-                          duration: 2.2 + (index % 3) * 0.35,
-                          repeat: Infinity,
-                          repeatType: "mirror",
-                          ease: "easeInOut",
-                        },
-                      }}
-                      whileHover={{ scale: 1.15, rotate: 3 }}
-                      className="flex items-center justify-center rounded-2xl border border-white/20 bg-white/40 p-3 shadow-lg shadow-cyan-500/10 backdrop-blur dark:border-white/10 dark:bg-white/10"
-                    >
-                      <Image
-                        src={skill.icon}
-                        alt={`${skill.skill_name} icon`}
-                        width={48}
-                        height={48}
-                        className="h-10 w-10 object-contain md:h-12 md:w-12 lg:h-[60px] lg:w-[60px]"
-                      />
-                      <span className="sr-only">{skill.skill_name}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {skillData.length > 0 && (
-              <div className="flex flex-col gap-6 items-center">
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4 md:w-[350px] lg:w-[550px] xl:w-[700px]">
-                  {skillData.map((skill) => (
-                    <div key={skill.id} className="w-full">
-                      <SkillBar
-                        label={skill.skill_name}
-                        level={skill.percentage}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          <SkillsSection skills={skills} />
 
           {/* Services */}
-          <div className="w-full flex flex-col items-center sm:mb-6 md:mb-10 lg:mb-14 xl:mb-20">
-            <div className="w-full flex flex-col mb-10 items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
-              <Line className="w-full border-cyan-500" />
-              <Text
-                text="My Services"
-                isNosifer
-                className="text-primary_dark dark:text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
-              />
-              <Line className="w-full border-cyan-500" />
-            </div>
-            <div className="w-full flex flex-col md:flex-row justify-center gap-6">
-              {services.map((service) => (
-                <ServicessCard
-                  key={service.id}
-                  icon={serviceIconMap[service.iconKey]}
-                  service_title={service.service_title}
-                  service_details={service.service_details}
-                />
-              ))}
-            </div>
-            <Link
-              href={"/services"}
-              className="flex md:flex-row items-center justify-center mt-10"
-            >
-              <Text
-                text="See More..."
-                className="text-primary dark:text-cyan-200 xl:text-[12px] xl:text-[16px] xl:text-[20px] xl:text-[24px]"
-              />
-            </Link>
-          </div>
+          <ServicesSection services={services} featuredOnly />
 
           {/* Projects */}
-          <div className="w-full">
-            <div className="w-full flex flex-col items-center justify-center px-[80px] md:px-[250px] lg:px-[500px] xl:px-[650px]">
-              <Line className="w-full border-cyan-500" />
-              <Text
-                text="My Projects"
-                isNosifer
-                className="text-primary_dark dark:text-white text-[20px] md:text-[30px] lg:text-[40px] xl:text-[48px]"
-              />
-              <Line className="w-full border-cyan-500" />
-            </div>
-
-            {/* Tabs */}
-            <div className="w-full flex flex-row items-center justify-center gap-4 md:gap-10 my-6">
-              <button
-                className={`${
-                  showPersonalProjects
-                    ? "bg-primary text-white py-1 px-4 rounded-xl"
-                    : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
-                } text-[16px] md:text-[24px] focus:outline-none`}
-                onClick={() => setShowPersonalProjects(true)}
-              >
-                Personal Projects
-              </button>
-
-              <button
-                className={`${
-                  !showPersonalProjects
-                    ? "bg-primary text-white py-1 px-4 rounded-xl"
-                    : "border border-primary text-primary dark:text-white rounded-xl py-1 px-4"
-                } text-[16px] md:text-[24px] focus:outline-none`}
-                onClick={() => setShowPersonalProjects(false)}
-              >
-                Professional Projects
-              </button>
-            </div>
-
-            {/* Project Cards */}
-            <div className="w-full flex flex-col gap-10">
-              <div className="flex flex-wrap items-center justify-center gap-10">
-                {currentProjects.map((project) => (
-                  <ProjectsCard
-                    key={project.id}
-                    src={project.src}
-                    project_title={project.project_title}
-                    project_details={project.project_details}
-                    github_link={project.github_link || ""}
-                    live_link={project.live_link || ""}
-                    stack={project.stack || []}
-                  />
-                ))}
-              </div>
-
-              <Link
-                href={"/projects"}
-                className="flex flex-row items-center justify-center"
-              >
-                <Text
-                  text="See More..."
-                  className="text-primary dark:text-cyan-200 text-[16px] lg:text-[20px] xl:text-[24px]"
-                />
-              </Link>
-            </div>
-          </div>
+          <ProjectsSection projects={projects} compact />
         </div>
       )}
     </section>

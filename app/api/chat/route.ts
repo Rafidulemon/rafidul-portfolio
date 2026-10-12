@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
-import faqs from "../../data/faqs.json";
-import projects from "../../data/projects.json";
-import blogs from "../../data/blogs.json";
-import skills from "../../data/skills.json";
-import services from "../../data/services.json";
+import { getContent } from "../../lib/content/store";
+import { getPublicBlogs } from "../../lib/blog/store";
 
 export async function POST(req: Request) {
   const { message } = await req.json();
+  // Offline keyword fallback: same live content as the AI, just matched by keywords.
+  const [info, projects, skills, services, blogs] = await Promise.all([
+    getContent("info"),
+    getContent("projects"),
+    getContent("skills"),
+    getContent("services"),
+    getPublicBlogs(),
+  ]);
+  const faqs = info.faqs;
   const userMessage: string = message.toLowerCase();
   const tokenize = (text: string) =>
     text
@@ -82,7 +88,7 @@ export async function POST(req: Request) {
   );
   const blogMatches = matchByTokens(
     blogs,
-    (blog) => [blog.title, blog.description_summary, blog.description]
+    (blog) => [blog.title, blog.description_summary]
   );
   const skillMatches = matchByTokens(
     skills,

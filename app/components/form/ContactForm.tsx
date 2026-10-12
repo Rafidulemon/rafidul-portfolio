@@ -46,8 +46,20 @@ const ContactForm: React.FC = () => {
         throw new Error("Failed to send message");
       }
 
+      const result = await response.json().catch(() => ({}));
+      const acknowledgements: Record<string, string> = {
+        hiring:
+          "Thanks for reaching out about a role. I've flagged your message as a hiring inquiry and will reply within 24 hours on business days.",
+        freelance:
+          "Thanks for the project inquiry. I've flagged it as a freelance request and will get back to you soon to discuss scope and timeline.",
+        collaboration:
+          "Thanks for proposing a collaboration. I'll review it and reply shortly.",
+        question:
+          "Thanks for your question. I'll get back to you as soon as I can.",
+      };
       setPopupMessage(
-        "Your message has been sent successfully. We will get back to you as soon as possible."
+        acknowledgements[result?.intent as string] ??
+          "Your message has been sent successfully. I will get back to you as soon as possible."
       );
       setPopupTitle("Message Sent");
       setOpen(true);

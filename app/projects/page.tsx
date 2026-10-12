@@ -1,24 +1,16 @@
-import React from "react";
-import PageTitle from "../components/typography/PageTitle";
-import Button from "../components/display/Button";
-import { Text } from "../components/typography/Text";
-import Projects from "../components/projects/Projects";
-import Link from "next/link";
+import type { Metadata } from "next";
+import ProjectsSection from "../components/projects/ProjectsSection";
+import { getContent } from "../lib/content/store";
 
-function projectPage() {
-  return (
-    <div>
-      <PageTitle name="PROJECTS" />
-      <Projects />
-      <div className="w-full flex flex-row justify-center">
-        <Link href={"/contact"} className="w-fit my-10">
-          <Button theme="primary" className="w-[200px]">
-            <Text text="Contact me" />
-          </Button>
-        </Link>
-      </div>
-    </div>
-  );
-}
+export const metadata: Metadata = {
+  title: "Projects | Md. Rafidul Islam",
+  description:
+    "Production SaaS platforms, AI products, web and mobile apps built by Md. Rafidul Islam with Next.js, TypeScript, tRPC, Prisma and OpenAI.",
+};
 
-export default projectPage;
+const ProjectsPage = async () => {
+  const projects = await getContent("projects");
+  return <ProjectsSection projects={projects} titleAs="h1" showCta />;
+};
+
+export default ProjectsPage;

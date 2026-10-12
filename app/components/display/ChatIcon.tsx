@@ -2,15 +2,32 @@
 
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ChatbotModal from "./ChatbotModal";
+
+/** Open the chat from anywhere: window.dispatchEvent(new CustomEvent("open-chat", { detail: { prompt } })) */
+export const openChat = (prompt?: string) =>
+  window.dispatchEvent(new CustomEvent("open-chat", { detail: { prompt } }));
 
 export default function ChatIcon() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pendingPrompt, setPendingPrompt] = useState<string | null>(null);
 
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const prompt = (event as CustomEvent<{ prompt?: string }>).detail?.prompt;
+      setPendingPrompt(prompt?.trim() ? prompt : null);
+      setIsModalOpen(true);
+    };
+    window.addEventListener("open-chat", handler);
+    return () => window.removeEventListener("open-chat", handler);
+  }, []);
+
+  const clearPrompt = useCallback(() => setPendingPrompt(null), []);
 
   const pulseVariants: Variants = {
     initial: { scale: 1, y: 0 },
@@ -47,7 +64,12 @@ export default function ChatIcon() {
           Meet my AI
         </span>
       </motion.button>
-      <ChatbotModal isOpen={isModalOpen} onClose={toggleModal} />
+      <ChatbotModal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        initialPrompt={pendingPrompt}
+        onPromptConsumed={clearPrompt}
+      />
     </>
   );
 }

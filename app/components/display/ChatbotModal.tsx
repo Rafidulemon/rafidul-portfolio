@@ -1,6 +1,6 @@
 "use client";
 
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,8 @@ import {
   BsVolumeMuteFill,
   BsVolumeUpFill,
 } from "react-icons/bs";
+import Markdown from "../chat/Markdown";
+import ChatCards, { parseReply } from "../chat/ChatCards";
 
 type SpeechRecognitionWindow = Window &
   typeof globalThis & {
@@ -18,20 +20,59 @@ type SpeechRecognitionWindow = Window &
     SpeechRecognition?: any;
   };
 
+type ChatMessage = { sender: "user" | "bot"; text: string };
+
+const STORAGE_KEY = "chatMessages";
+const MAX_INPUT_CHARS = 500;
+
+const faq = [
+  {
+    question: "What services do you offer?",
+    answer:
+      "I build full-stack products with Next.js, TypeScript, tRPC, Prisma, and Tailwind CSS—covering everything from UI/UX to production deployment.",
+  },
+  {
+    question: "Can I hire you for contract work?",
+    answer:
+      "Yes! I take on freelance and contract engagements. Share your timeline and scope via the contact page or here in chat.\n\n[[contact]]",
+  },
+  {
+    question: "Which recent projects are you proud of?",
+    answer:
+      "I recently shipped MoeGuide, Suirikyou, and Raggie—SaaS products that mix AI assistants, subscription billing, and complex dashboards.",
+  },
+  {
+    question: "Do you have experience with AI integrations?",
+    answer:
+      "Absolutely. I have hands-on experience with OpenAI, LangChain, Pinecone, and custom RAG pipelines for production apps.",
+  },
+  {
+    question: "How quickly can you start?",
+    answer:
+      "I can usually kick off within two weeks. Let me know the deliverables and we can align on a schedule.",
+  },
+];
+
 const ChatbotModal = ({
   isOpen,
   onClose,
+  initialPrompt,
+  onPromptConsumed,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  initialPrompt?: string | null;
+  onPromptConsumed?: () => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  type ChatMessage = { sender: "user" | "bot"; text: string };
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [hasStartedChatting, setHasStartedChatting] = useState(false);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [storageLoaded, setStorageLoaded] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<ChatMessage[]>([]);
+  const abortRef = useRef<AbortController | null>(null);
   const [speechRecognitionSupported, setSpeechRecognitionSupported] =
     useState(false);
   const [speechSynthesisSupported, setSpeechSynthesisSupported] =
@@ -40,46 +81,14 @@ const ChatbotModal = ({
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(false);
   const recognitionRef = useRef<any>(null);
   const handleSendMessageRef = useRef<(overrideText?: string) => void>();
-  const botMessageIndexRef = useRef<number | null>(null);
   const shouldSpeakNextReplyRef = useRef(false);
-  const personaResponseText =
-    "I am Md Rafidul Islam, a full-stack developer sharing my work through this chat.";
-  const personaReplyPatterns = [
-    /\bwho\s+are\s+you\b/i,
-    /\bwho\s+is\s+this\b/i,
-    /\bwho'?s\s+this\b/i,
-    /\bwhat\s+is\s+your\s+name\b/i,
-    /\bwhat'?s\s+your\s+name\b/i,
-    /\bintroduce\s+yourself\b/i,
-    /\btell\s+me\s+about\s+yourself\b/i,
-    /\bwho\s+am\s+i\s+talking\s+to\b/i,
-  ];
-  const sendMessageToEndpoint = async (endpoint: string, text: string) => {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text }),
-    });
 
-    if (!response.ok) {
-      throw new Error(
-        `Request to ${endpoint} failed with status ${response.status}`
-      );
-    }
-
-    const data = await response.json();
-    return data.reply || "Sorry, no response received.";
-  };
+  messagesRef.current = messages;
 
   const stopSpeaking = () => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
   };
-
-  const getPersonaReply = (text: string) =>
-    personaReplyPatterns.some((pattern) => pattern.test(text))
-      ? personaResponseText
-      : null;
 
   const pickMaleVoice = (voices: SpeechSynthesisVoice[]) => {
     const hints = [
@@ -105,7 +114,10 @@ const ChatbotModal = ({
     );
   };
 
-  const speakReply = (text: string) => {
+  const speakReply = (rawText: string) => {
+    const text = parseReply(rawText)
+      .text.replace(/[*`#]/g, "")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
     if (
       !text.trim() ||
       !speechSynthesisSupported ||
@@ -116,8 +128,7 @@ const ChatbotModal = ({
     }
 
     const utterance = new SpeechSynthesisUtterance(text);
-    const availableVoices = window.speechSynthesis.getVoices();
-    const preferredVoice = pickMaleVoice(availableVoices);
+    const preferredVoice = pickMaleVoice(window.speechSynthesis.getVoices());
     if (preferredVoice) {
       utterance.voice = preferredVoice;
     }
@@ -128,60 +139,41 @@ const ChatbotModal = ({
     window.speechSynthesis.speak(utterance);
   };
 
-  const faq = [
-    {
-      question: "What services do you offer?",
-      answer:
-        "I build full-stack products with Next.js, TypeScript, tRPC, Prisma, and Tailwind CSS—covering everything from UI/UX to production deployment.",
-    },
-    {
-      question: "Can I hire you for contract work?",
-      answer:
-        "Yes! I take on freelance and contract engagements. Share your timeline and scope via the contact page or here in chat.",
-    },
-    {
-      question: "Which recent projects are you proud of?",
-      answer:
-        "I recently shipped MoeGuide, Suirikyou, and Raggie—SaaS products that mix AI assistants, subscription billing, and complex dashboards.",
-    },
-    {
-      question: "Do you have experience with AI integrations?",
-      answer:
-        "Absolutely. I have hands-on experience with OpenAI, LangChain, Pinecone, and custom RAG pipelines for production apps.",
-    },
-    {
-      question: "How quickly can you start?",
-      answer:
-        "I can usually kick off within two weeks. Let me know the deliverables and we can align on a schedule.",
-    },
-  ];
+  // Restore saved chat once. (Previously the save effect ran first and wiped it.)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) setMessages(parsed);
+      }
+    } catch {
+      // ignore corrupted storage
+    }
+    setStorageLoaded(true);
+  }, []);
 
   useEffect(() => {
-    // Load saved messages from localStorage when the modal opens
-    const savedMessages = localStorage.getItem("chatMessages");
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    }
-
     if (isOpen) {
-      setTimeout(() => setIsVisible(true), 10);
-    } else {
-      setIsVisible(false);
+      const t = setTimeout(() => setIsVisible(true), 10);
+      return () => clearTimeout(t);
     }
+    setIsVisible(false);
   }, [isOpen]);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat container whenever the messages change
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTo({
-        top: chatContainerRef.current.scrollHeight,
-        behavior: "smooth",
-      });
+    chatContainerRef.current?.scrollTo({
+      top: chatContainerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+    if (storageLoaded && !isStreaming) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-40)));
+      } catch {
+        // storage full or blocked
+      }
     }
-
-    // Save messages to localStorage whenever they change
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
-  }, [messages]);
+  }, [messages, storageLoaded, isStreaming]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -225,6 +217,7 @@ const ChatbotModal = ({
     return () => {
       recognitionRef.current?.stop?.();
       speechWindow.speechSynthesis?.cancel();
+      abortRef.current?.abort();
     };
   }, []);
 
@@ -259,9 +252,17 @@ const ChatbotModal = ({
     }
   }, [isVoiceEnabled]);
 
+  const setBotText = (index: number, text: string) =>
+    setMessages((prev) => {
+      if (!prev[index]) return prev;
+      const updated = [...prev];
+      updated[index] = { sender: "bot", text };
+      return updated;
+    });
+
   const handleSendMessage = async (overrideText?: string) => {
-    const textToSend = (overrideText ?? inputValue).trim();
-    if (!textToSend) return;
+    const textToSend = (overrideText ?? inputValue).trim().slice(0, MAX_INPUT_CHARS);
+    if (!textToSend || isStreaming) return;
 
     stopSpeaking();
 
@@ -269,92 +270,121 @@ const ChatbotModal = ({
       isVoiceEnabled || shouldSpeakNextReplyRef.current;
     shouldSpeakNextReplyRef.current = false;
 
-    const userMessage: ChatMessage = { sender: "user", text: textToSend };
-    setMessages((prev) => [...prev, userMessage]);
+    const base = messagesRef.current;
+    const botIndex = base.length + 1;
+    // Send the last few turns so follow-ups like "tell me more" work.
+    const history = [...base, { sender: "user", text: textToSend } as ChatMessage]
+      .filter((m) => m.text.trim())
+      .slice(-9)
+      .map((m) => ({
+        role: m.sender === "user" ? "user" : "assistant",
+        content: parseReply(m.text).text || m.text,
+      }));
+
+    setMessages([
+      ...base,
+      { sender: "user", text: textToSend },
+      { sender: "bot", text: "" },
+    ]);
     setInputValue("");
-    setHasStartedChatting(true);
+    setIsStreaming(true);
 
-    const personaReply = getPersonaReply(textToSend);
-    if (personaReply) {
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: personaReply } as ChatMessage,
-      ]);
-      if (shouldSpeakResponse) {
-        speakReply(personaReply);
-      }
-      return;
-    }
-
-    // Add placeholder for bot typing
-    setMessages((prev) => {
-      const updated: ChatMessage[] = [
-        ...prev,
-        { sender: "bot", text: "" } as ChatMessage,
-      ];
-      botMessageIndexRef.current = updated.length - 1;
-      return updated;
-    });
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     try {
-      let botReply = "";
-      try {
-        botReply = await sendMessageToEndpoint("/api/openai", textToSend);
-      } catch (primaryError) {
-        console.error(
-          "OpenAI endpoint failed, falling back to /api/chat:",
-          primaryError
-        );
-        botReply = await sendMessageToEndpoint("/api/chat", textToSend);
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+        signal: controller.signal,
+      });
+
+      if (response.status === 429) {
+        const data = await response.json().catch(() => ({}));
+        setBotText(botIndex, data.error || "You're sending messages too fast. Please wait a moment.");
+        return;
       }
 
-      if (shouldSpeakResponse) {
-        speakReply(botReply);
-      }
+      let finalText = "";
 
-      // Typing effect logic
-      let currentText = "";
-      for (let i = 0; i < botReply.length; i++) {
-        currentText += botReply[i];
-        const targetIndex = botMessageIndexRef.current;
-        if (targetIndex === null) break;
-        setMessages((prev) => {
-          if (!prev[targetIndex]) return prev;
-          const updated = [...prev];
-          updated[targetIndex] = {
-            ...updated[targetIndex],
-            text: currentText,
-          };
-          return updated;
+      if (response.ok && response.body) {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        for (;;) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            try {
+              const evt = JSON.parse(line);
+              if (typeof evt.d === "string") {
+                finalText += evt.d;
+                setBotText(botIndex, finalText);
+              }
+            } catch {
+              // ignore a malformed line
+            }
+          }
+        }
+      } else {
+        // AI unavailable: fall back to the keyword matcher so the chat still answers.
+        const fallback = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: textToSend }),
+          signal: controller.signal,
         });
-        await new Promise((resolve) => setTimeout(resolve, 20)); // 20ms per character
+        const data = fallback.ok ? await fallback.json() : null;
+        finalText = data?.reply || "Sorry, I couldn't get a response. Please try again.";
+        setBotText(botIndex, finalText);
+      }
+
+      if (!finalText.trim()) {
+        setBotText(botIndex, "Sorry, I couldn't get a response. Please try again.");
+      } else if (shouldSpeakResponse) {
+        speakReply(finalText);
       }
     } catch (error) {
+      if ((error as Error)?.name === "AbortError") return;
       console.error("Error fetching AI response:", error);
-      const fallbackMessage = "Failed to get a response. Please try again.";
-      setMessages((prev) => {
-        const targetIndex = botMessageIndexRef.current;
-        if (targetIndex === null || !prev[targetIndex]) {
-          return [
-            ...prev,
-            { sender: "bot", text: fallbackMessage } as ChatMessage,
-          ];
-        }
-        const updated = [...prev];
-        updated[targetIndex] = {
-          sender: "bot",
-          text: fallbackMessage,
-        } as ChatMessage;
-        return updated;
-      });
+      setBotText(botIndex, "Failed to get a response. Please try again.");
     } finally {
-      botMessageIndexRef.current = null;
+      setIsStreaming(false);
+      abortRef.current = null;
     }
   };
 
   useEffect(() => {
     handleSendMessageRef.current = handleSendMessage;
   });
+
+  // Prompts sent from elsewhere on the site ("Ask AI about this project", hero chips).
+  useEffect(() => {
+    if (!isOpen || !initialPrompt) return;
+    const t = setTimeout(() => {
+      handleSendMessageRef.current?.(initialPrompt);
+      onPromptConsumed?.();
+    }, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, initialPrompt]);
+
+  const handleClear = () => {
+    abortRef.current?.abort();
+    stopSpeaking();
+    setMessages([]);
+    setIsStreaming(false);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // ignore
+    }
+  };
 
   const handleMicrophoneToggle = () => {
     if (!speechRecognitionSupported || !recognitionRef.current) return;
@@ -387,11 +417,15 @@ const ChatbotModal = ({
     });
   };
 
-  const handleFaqClick = (answer: string) => {
-    const botResponse: ChatMessage = { sender: "bot", text: answer };
-    setMessages((prev) => [...prev, botResponse]);
-    setHasStartedChatting(true); // Hide common questions
+  const handleFaqClick = (question: string, answer: string) => {
+    setMessages((prev) => [
+      ...prev,
+      { sender: "user", text: question },
+      { sender: "bot", text: answer },
+    ]);
   };
+
+  const hasStartedChatting = messages.length > 0;
 
   return (
     <div
@@ -409,12 +443,25 @@ const ChatbotModal = ({
           isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 text-gray-800 dark:text-white hover:text-gray-200"
-        >
-          <FaTimes size={24} />
-        </button>
+        <div className="absolute top-3 right-3 flex items-center gap-4">
+          {hasStartedChatting && (
+            <button
+              onClick={handleClear}
+              aria-label="Clear chat"
+              title="Clear chat"
+              className="text-gray-600 hover:text-red-500 dark:text-gray-300"
+            >
+              <FaRegTrashAlt size={18} />
+            </button>
+          )}
+          <button
+            onClick={onClose}
+            aria-label="Close chat"
+            className="text-gray-800 dark:text-white hover:text-gray-500"
+          >
+            <FaTimes size={24} />
+          </button>
+        </div>
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -437,7 +484,7 @@ const ChatbotModal = ({
                 Ask Me
               </h3>
               <p className="text-sm text-gray-800 dark:text-gray-200">
-                How can I assist you today?
+                Rafid&apos;s AI assistant
               </p>
             </div>
           </div>
@@ -446,9 +493,8 @@ const ChatbotModal = ({
         {/* Chat Area */}
         <div
           ref={chatContainerRef}
-          className={`flex flex-col overflow-y-auto my-6 h-[80%] space-y scrollbar-hidden`}
+          className="flex flex-col overflow-y-auto my-6 h-[74%] scrollbar-hidden"
         >
-          {/* Show Common Questions if chat hasn't started */}
           {!hasStartedChatting && (
             <div className="space-y-4 mb-4">
               <div className="text-sm text-gray-800 dark:text-gray-200">
@@ -456,59 +502,77 @@ const ChatbotModal = ({
               </div>
               <div className="space-y-2">
                 {faq.map((item, index) => (
-                  <div
+                  <button
+                    type="button"
                     key={index}
-                    className="cursor-pointer w-full bg-gradient-to-l dark:from-gray-900 dark:to-black from-cyan-900 to-primary_dark px-4 py-1 md:py-2 rounded-lg text-white shadow-md"
-                    onClick={() => handleFaqClick(item.answer)}
+                    className="block text-left cursor-pointer w-full bg-gradient-to-l dark:from-gray-900 dark:to-black from-cyan-900 to-primary_dark px-4 py-1 md:py-2 rounded-lg text-white shadow-md"
+                    onClick={() => handleFaqClick(item.question, item.answer)}
                   >
                     {item.question}
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Display Chat Messages */}
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${
-                message.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              {message.sender === "bot" && (
-                <div className="flex items-center mr-2">
-                  <div className="w-8 h-8 flex items-center justify-center bg-black rounded-full">
-                    <Image
-                      src="/images/chat.png"
-                      alt="Logo"
-                      width={30}
-                      height={30}
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </div>
-                </div>
-              )}
+          {messages.map((message, index) => {
+            const isBot = message.sender === "bot";
+            const parsed = isBot ? parseReply(message.text) : null;
+            const isLastBot = isBot && index === messages.length - 1;
+            return (
               <div
-                className={`${
-                  message.sender === "user"
-                    ? "bg-primary_dark text-white"
-                    : "dark:bg-gray-800 dark:text-white bg-gray-100 text-black"
-                } p-3 my-1 md:my-2 rounded-lg max-w-[75%] break-words whitespace-pre-wrap`}
+                key={index}
+                className={`flex ${isBot ? "justify-start" : "justify-end"}`}
               >
-                {message.text}
+                {isBot && (
+                  <div className="flex items-start mr-2 mt-2">
+                    <div className="w-8 h-8 flex items-center justify-center bg-black rounded-full">
+                      <Image
+                        src="/images/chat.png"
+                        alt="Assistant"
+                        width={30}
+                        height={30}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div
+                  className={`${
+                    isBot
+                      ? "dark:bg-gray-800 dark:text-white bg-gray-100 text-black"
+                      : "bg-primary_dark text-white whitespace-pre-wrap"
+                  } p-3 my-1 md:my-2 rounded-lg max-w-[80%] break-words text-sm md:text-base`}
+                >
+                  {isBot && parsed ? (
+                    <>
+                      {parsed.text ? (
+                        <Markdown text={parsed.text} />
+                      ) : isLastBot && isStreaming ? (
+                        <span className="animate-pulse" aria-label="Typing">
+                          ● ● ●
+                        </span>
+                      ) : null}
+                      <ChatCards cards={parsed.cards} />
+                    </>
+                  ) : (
+                    message.text
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Message Input */}
-        <div className="absolute bottom-4 left-0 right-0 px-4 md:px-6">
+        <div className="absolute bottom-3 left-0 right-0 px-4 md:px-6">
           <div className="flex items-center w-full px-2 md:px-3 rounded-md md:rounded-lg text-black dark:text-white bg-white dark:bg-black border border-primary">
             <input
               type="text"
               className="w-full focus:outline-none bg-white dark:bg-black"
               placeholder="Type your message..."
+              aria-label="Message"
+              maxLength={MAX_INPUT_CHARS}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {
@@ -520,6 +584,7 @@ const ChatbotModal = ({
                 type="button"
                 onClick={handleVoiceToggle}
                 disabled={!speechSynthesisSupported}
+                aria-label={isVoiceEnabled ? "Mute spoken replies" : "Enable spoken replies"}
                 title={
                   speechSynthesisSupported
                     ? isVoiceEnabled
@@ -545,6 +610,7 @@ const ChatbotModal = ({
                 type="button"
                 onClick={handleMicrophoneToggle}
                 disabled={!speechRecognitionSupported}
+                aria-label={isListening ? "Stop voice input" : "Start voice input"}
                 title={
                   speechRecognitionSupported
                     ? isListening
@@ -568,13 +634,19 @@ const ChatbotModal = ({
               </button>
               <button
                 type="button"
-                className="my-2 w-fit text-primary hover:text-primary_dark"
+                aria-label="Send message"
+                disabled={isStreaming}
+                className="my-2 w-fit text-primary hover:text-primary_dark disabled:opacity-40"
                 onClick={() => handleSendMessage()}
               >
                 <IoMdSend size={24} />
               </button>
             </div>
           </div>
+          <p className="mt-1 text-center text-[11px] text-gray-500 dark:text-gray-400">
+            AI assistant answering from my portfolio. It can make mistakes, so
+            please verify important details.
+          </p>
         </div>
       </div>
     </div>

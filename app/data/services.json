@@ -2,19 +2,127 @@
   {
     "id": 1,
     "iconKey": "web",
+    "featured": true,
     "service_title": "Web Development",
+    "tagline": "Fast, accessible, SEO-ready websites and web apps built with Next.js.",
+    "highlights": [
+      "App Router, SSR/SSG and pixel-perfect responsive UI",
+      "Type-safe end to end with TypeScript, Zod and tRPC",
+      "Deployed on Vercel with performance and security best practices"
+    ],
+    "tech": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     "service_details": "I specialize in building modern, scalable, and high-performance web applications using cutting-edge technologies. My expertise includes frameworks and tools such as Next.js, React.js, TypeScript, Tailwind CSS, tRPC, Prisma, RESTful APIs, JWT, and Zod. I focus on creating responsive, user-friendly interfaces and efficient backend architectures. By combining best practices in performance optimization, accessibility, and security, I deliver web solutions tailored to meet your business goals while ensuring a seamless user experience."
+  },
+  {
+    "id": 4,
+    "iconKey": "ai",
+    "featured": true,
+    "service_title": "AI Integration & Chatbots",
+    "tagline": "Chat assistants, RAG search and AI features wired into real products.",
+    "highlights": [
+      "RAG chat over your own documents and data",
+      "Streaming chat UIs with voice input and rich answers",
+      "AI document analysis and ranking workflows"
+    ],
+    "tech": ["OpenAI", "LangChain", "Pinecone", "RAG"],
+    "service_details": "I add practical AI to products people already use. That includes retrieval-augmented chat assistants grounded in your own content, streaming chat interfaces with voice input, and workflows such as CV ranking against a job description or medical-report analysis. I have shipped AI chat systems in production SaaS platforms using OpenAI, LangChain and Pinecone, and I care about the unglamorous parts too: rate limiting, prompt-injection safeguards, fallbacks between model providers, and keeping latency low."
+  },
+  {
+    "id": 5,
+    "iconKey": "saas",
+    "featured": true,
+    "service_title": "SaaS & Full-Stack Products",
+    "tagline": "Multi-tenant platforms with auth, billing and dashboards, from MVP to production.",
+    "highlights": [
+      "Secure auth and role-based access (NextAuth, JWT)",
+      "Subscription billing and admin dashboards",
+      "Multi-tenant architecture with Slack, LINE and Chatwork integrations"
+    ],
+    "tech": ["Next.js", "tRPC", "Prisma", "NextAuth"],
+    "service_details": "I build complete products rather than isolated pages: authentication, roles and permissions, multi-tenant data models, subscription billing, dashboards and third-party integrations. My production experience covers SaaS platforms such as MoeGuide, Suirikyou and Raggie, built with the Next.js App Router, tRPC, Prisma and NextAuth. I design the schema, the API and the UI together so the product stays maintainable as it grows."
   },
   {
     "id": 2,
     "iconKey": "mobile",
+    "featured": true,
     "service_title": "Mobile App Development",
+    "tagline": "Android and cross-platform apps with real-time features.",
+    "highlights": [
+      "Native Android (Java) and React Native with Expo",
+      "Live location and real-time sync with Firebase and Socket.io",
+      "REST and GraphQL backend integration"
+    ],
+    "tech": ["React Native", "Expo", "Android", "Firebase"],
     "service_details": "I design and develop high-performance mobile applications for Android and iOS platforms, leveraging Native Android and React Native. My expertise allows me to create both platform-specific and cross-platform apps that deliver seamless user experiences. From integrating backend services using REST APIs and GraphQL to ensuring high scalability and efficiency, I craft mobile solutions that meet app store requirements while aligning with your business objectives."
+  },
+  {
+    "id": 6,
+    "iconKey": "api",
+    "featured": true,
+    "service_title": "API & Backend Development",
+    "tagline": "Type-safe, well-documented backends and integrations your frontend can trust.",
+    "highlights": [
+      "tRPC and REST APIs with Zod validation",
+      "PostgreSQL and MySQL schema design with Prisma migrations",
+      "Third-party integrations and clear API documentation"
+    ],
+    "tech": ["Node.js", "tRPC", "Prisma", "PostgreSQL"],
+    "service_details": "I design and build backends that are easy to consume and easy to change: typed API layers with tRPC or REST, validated inputs with Zod, relational schemas in PostgreSQL or MySQL managed through Prisma, authentication, and integrations with services like Slack, LINE, Chatwork and payment providers. I document endpoints so other developers can work with them without guessing."
   },
   {
     "id": 3,
     "iconKey": "design",
+    "featured": true,
     "service_title": "UI/UX Design",
+    "tagline": "Clean, usable interfaces designed in Figma and shipped in code.",
+    "highlights": [
+      "Wireframes to interactive prototypes",
+      "Consistent design systems and components",
+      "Accessible, on-brand designs handed off ready to build"
+    ],
+    "tech": ["Figma", "Adobe XD", "Tailwind CSS"],
     "service_details": "I craft intuitive and visually stunning UI/UX designs that elevate the user experience. With tools like Figma and Adobe XD, I create wireframes, prototypes, and interactive designs that bring ideas to life. My focus is on creating designs that are both aesthetically pleasing and functional, ensuring usability, accessibility, and engagement while aligning with your brand’s identity."
+  },
+  {
+    "id": 7,
+    "iconKey": "ab",
+    "featured": false,
+    "service_title": "A/B Testing & Conversion Optimization",
+    "tagline": "Data-driven experiments that lift conversion on e-commerce and enterprise sites.",
+    "highlights": [
+      "Client-side JavaScript experiments and personalization",
+      "Cross-browser scripts with minimal performance impact",
+      "Experiment analysis with product, design and QA teams"
+    ],
+    "tech": ["JavaScript (ES6+)", "HTML5", "CSS3", "Browser APIs"],
+    "service_details": "In my current role I build A/B testing solutions for global e-commerce and enterprise clients. I implement client-side experiments, UI/UX enhancements and personalization on live sites, make sure they work across browsers without slowing pages down, and work with product managers, designers and QA to read the results and ship what actually improves conversion."
+  },
+  {
+    "id": 8,
+    "iconKey": "performance",
+    "featured": false,
+    "service_title": "Performance & SEO Optimization",
+    "tagline": "Faster, more accessible sites that rank and convert better.",
+    "highlights": [
+      "Core Web Vitals audits and fixes",
+      "Metadata, structured data, sitemaps and social previews",
+      "Accessibility and responsive polish"
+    ],
+    "tech": ["Next.js", "Lighthouse", "SEO", "Accessibility"],
+    "service_details": "I audit and improve existing sites: loading speed and Core Web Vitals, image and bundle optimization, rendering strategy in Next.js, technical SEO (metadata, canonical URLs, structured data, sitemaps, Open Graph) and accessibility. You get concrete fixes shipped to your codebase, not just a report."
+  },
+  {
+    "id": 9,
+    "iconKey": "consulting",
+    "featured": false,
+    "service_title": "Technical Consulting & Planning",
+    "tagline": "Turn a rough idea into a clear, buildable plan.",
+    "highlights": [
+      "Requirements analysis turned into an actionable dev plan",
+      "Architecture and tech-stack recommendations",
+      "Code review and smooth hand-off to your team"
+    ],
+    "tech": ["Architecture", "Requirements", "Code review", "Roadmaps"],
+    "service_details": "Before writing code it helps to agree on what to build. With a background that includes business analysis, I translate business requirements into scoped, prioritized development plans, recommend an architecture and stack that fit your budget and team, and review code or hand projects off cleanly so your team can carry them forward."
   }
 ]

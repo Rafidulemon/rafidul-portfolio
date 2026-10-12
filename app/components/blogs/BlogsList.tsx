@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
-import BlogCard from "../components/cards/BlogCard";
-import Button from "../components/display/Button";
-import PageTitle from "../components/typography/PageTitle";
-import blogsJson from "../data/blogs.json";
+import BlogCard from "../cards/BlogCard";
+import Button from "../display/Button";
+import PageTitle from "../typography/PageTitle";
+import type { PublicBlog } from "@/app/lib/blog/store";
 
-const BlogsPage = () => {
+const BlogsList = ({ blogs }: { blogs: PublicBlog[] }) => {
   const [visibleBlogs, setVisibleBlogs] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
-  const blogData = blogsJson;
+  const blogData = blogs;
 
   const loadMoreBlogs = () => {
     setVisibleBlogs((prev) => prev + 5);
@@ -26,7 +26,7 @@ const BlogsPage = () => {
         .includes(searchTerm);
       return titleMatch || descriptionMatch;
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
+    .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime()); // newest first
 
   return (
     <div className="w-full">
@@ -50,6 +50,7 @@ const BlogsPage = () => {
             description_summary={blog.description_summary}
             date={blog.date}
             image={blog.image}
+            tags={blog.tags}
           />
         ))}
       </div>
@@ -64,4 +65,4 @@ const BlogsPage = () => {
   );
 };
 
-export default BlogsPage;
+export default BlogsList;

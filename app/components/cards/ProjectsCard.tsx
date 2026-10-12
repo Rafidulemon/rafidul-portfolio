@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Text } from "../typography/Text";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { openChat } from "../display/ChatIcon";
 
 interface ProjectsCardProps {
   src: string;
@@ -72,6 +75,17 @@ function ProjectsCard(props: ProjectsCardProps) {
               <FaExternalLinkAlt />
             </a>
           </div>
+          <div className="mt-3 flex justify-center">
+          <button
+            type="button"
+            onClick={() =>
+              openChat(`Tell me about the "${project_title}" project: what it does, the stack, and what I should know.`)
+            }
+            className="rounded-lg border border-primary px-2 py-1 text-[12px] text-primary_dark hover:bg-cyan-500/10 dark:text-cyan-200"
+          >
+            ✨ Ask AI about this
+          </button>
+          </div>
         </div>
       </div>
 
@@ -111,6 +125,15 @@ function ProjectsCard(props: ProjectsCardProps) {
             <FaExternalLinkAlt />
           </a>
         </div>
+          <button
+            type="button"
+            onClick={() =>
+              openChat(`Tell me about the "${project_title}" project: what it does, the stack, and what I should know.`)
+            }
+            className="rounded-lg border border-primary px-2 py-1 text-[12px] text-primary_dark hover:bg-cyan-500/10 dark:text-cyan-200"
+          >
+            ✨ Ask AI about this
+          </button>
       </div>
     </div>
   );

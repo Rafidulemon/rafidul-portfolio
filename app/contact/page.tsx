@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { Flex } from "../components/layout/Flex";
 import { Text } from "../components/typography/Text";
@@ -6,8 +5,11 @@ import ContactForm from "../components/form/ContactForm";
 import { Grid } from "../components/layout/Grid";
 import PageTitle from "../components/typography/PageTitle";
 import MotionDiv from "../components/animations/MotionDiv";
+import { getContent } from "../lib/content/store";
 
-const contactPage = () => {
+const contactPage = async () => {
+  const contact = await getContent("contact");
+  const tel = contact.phone_primary.replace(/\s+/g, "");
   return (
     <div className="w-full">
       <PageTitle name="CONTACT ME" />
@@ -50,10 +52,10 @@ const contactPage = () => {
               className="w-full text-center text-[12px] md:text-[16px] text-primary dark:text-cyan-500"
             />
             <a
-              href="tel:+8801990497796"
+              href={`tel:${tel}`}
               className="w-full text-center text-[12px] md:text-[16px] text-gray-700 dark:text-white font-[500]"
             >
-              +8801990497796
+              {contact.phone_primary}
             </a>
           </div>
           <div className="mb-10">
@@ -63,10 +65,10 @@ const contactPage = () => {
               className="w-full text-center text-[12px] md:text-[16px] text-primary dark:text-cyan-500"
             />
             <a
-              href="mailto:rafidulemon@gmail.com"
+              href={`mailto:${contact.email}`}
               className="w-full text-center text-[12px] md:text-[16px] text-gray-700 dark:text-white font-[500]"
             >
-              rafidulemon@gmail.com
+              {contact.email}
             </a>
           </div>
           <ContactForm />

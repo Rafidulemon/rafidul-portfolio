@@ -7,7 +7,8 @@
         "category": "programming_language",
         "details": "Experienced in ES6+, asynchronous programming, and DOM manipulation.",
         "years_of_experience": 4,
-        "percentage": 90
+        "percentage": 90,
+        "group": "languages"
     },
     {
         "id": 2,
@@ -17,7 +18,8 @@
         "category": "programming_language",
         "details": "Proficient in static typing, interfaces, and type inference.",
         "years_of_experience": 2,
-        "percentage": 75
+        "percentage": 75,
+        "group": "languages"
     },
     {
         "id": 3,
@@ -27,7 +29,8 @@
         "category": "framework",
         "details": "Skilled in building SPAs, hooks, and state management with Redux.",
         "years_of_experience": 4,
-        "percentage": 80
+        "percentage": 80,
+        "group": "frontend"
     },
     {
         "id": 4,
@@ -37,7 +40,8 @@
         "category": "runtime_environment",
         "details": "Experienced in building RESTful APIs, middleware, and server-side rendering.",
         "years_of_experience": 4,
-        "percentage": 85
+        "percentage": 85,
+        "group": "backend"
     },
     {
         "id": 5,
@@ -47,7 +51,8 @@
         "category": "database",
         "details": "Proficient in schema design, aggregation framework, and indexing.",
         "years_of_experience": 3,
-        "percentage": 70
+        "percentage": 70,
+        "group": "backend"
     },
     {
         "id": 6,
@@ -57,7 +62,8 @@
         "category": "framework",
         "details": "Skilled in server-side rendering, static site generation, and API routes.",
         "years_of_experience": 3,
-        "percentage": 90
+        "percentage": 90,
+        "group": "frontend"
     },
     {
         "id": 7,
@@ -67,7 +73,8 @@
         "category": "css_framework",
         "details": "Proficient in utility-first CSS, responsive design, and theming.",
         "years_of_experience": 2,
-        "percentage": 95
+        "percentage": 95,
+        "group": "frontend"
     },
     {
         "id": 8,
@@ -77,7 +84,8 @@
         "category": "version_control",
         "details": "Experienced in branching, merging, and collaborative workflows.",
         "years_of_experience": 4,
-        "percentage": 90
+        "percentage": 90,
+        "group": "tools"
     },
     {
         "id": 9,
@@ -87,7 +95,8 @@
         "category": "containerization",
         "details": "Familiar with containerizing applications and using Docker Compose.",
         "years_of_experience": 1,
-        "percentage": 50
+        "percentage": 50,
+        "group": "tools"
     },
     {
         "id": 10,
@@ -97,7 +106,8 @@
         "category": "framework",
         "details": "Skilled in building RESTful APIs, middleware, and routing.",
         "years_of_experience": 4,
-        "percentage": 75
+        "percentage": 75,
+        "group": "backend"
     },
     {
         "id": 11,
@@ -107,7 +117,8 @@
         "category": "validation_library",
         "details": "Proficient in schema validation and type inference for TypeScript.",
         "years_of_experience": 2,
-        "percentage": 85
+        "percentage": 85,
+        "group": "backend"
     },
     {
         "id": 12,
@@ -117,7 +128,8 @@
         "category": "programming_language",
         "details": "Familiar with OOP concepts, data structures, and JavaFX for GUI development.",
         "years_of_experience": 2,
-        "percentage": 65
+        "percentage": 65,
+        "group": "languages"
     },
     {
         "id": 13,
@@ -127,7 +139,8 @@
         "category": "programming_language",
         "details": "Experienced in scripting, data analysis, and web development with Django.",
         "years_of_experience": 3,
-        "percentage": 75
+        "percentage": 75,
+        "group": "languages"
     },
     {
         "id": 14,
@@ -137,7 +150,8 @@
         "category": "database",
         "details": "Proficient in relational database design, SQL queries, and performance optimization.",
         "years_of_experience": 2,
-        "percentage": 80
+        "percentage": 80,
+        "group": "backend"
     },
     {
         "id": 15,
@@ -147,7 +161,8 @@
         "category": "database",
         "details": "Proficient in relational database design, SQL queries, and stored procedures.",
         "years_of_experience": 2,
-        "percentage": 70
+        "percentage": 70,
+        "group": "backend"
     },
     {
         "id": 16,
@@ -157,7 +172,8 @@
         "category": "orm",
         "details": "Proficient in database modeling, migrations, and type-safe database access.",
         "years_of_experience": 2,
-        "percentage": 85
+        "percentage": 85,
+        "group": "backend"
     },
     {
         "id": 17,
@@ -167,7 +183,8 @@
         "category": "rpc_framework",
         "details": "Proficient in building type-safe APIs with end-to-end type safety.",
         "years_of_experience": 2,
-        "percentage": 80
+        "percentage": 80,
+        "group": "backend"
     },
     {
         "id": 18,
@@ -177,7 +194,8 @@
         "category": "state_management",
         "details": "Skilled in state management, middleware, and asynchronous actions.",
         "years_of_experience": 3,
-        "percentage": 75
+        "percentage": 75,
+        "group": "frontend"
     },
     {
         "id": 19,
@@ -187,6 +205,7 @@
         "category": "design_tool",
         "details": "Proficient in UI/UX design, prototyping, and collaboration.",
         "years_of_experience": 2,
-        "percentage": 80
+        "percentage": 80,
+        "group": "tools"
     }
 ]

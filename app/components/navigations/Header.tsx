@@ -7,13 +7,15 @@ import { Text } from "../typography/Text";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { MdDarkMode, MdLightMode, MdSearch } from "react-icons/md";
+import { openSearch } from "../ai/SearchPalette";
 
 const NAV_ITEMS = [
   { path: "/", name: "Home" },
   { path: "/about", name: "About" },
   { path: "/projects", name: "Projects" },
   { path: "/blogs", name: "Blogs" },
+  { path: "/match", name: "AI Match" },
   { path: "/contact", name: "Contact" },
 ];
 
@@ -108,6 +110,24 @@ const Header = () => {
                   </Link>
                 </li>
               ))}
+
+              <li className="py-2 md:py-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNavbar(false);
+                    openSearch();
+                  }}
+                  aria-label="Search (Ctrl+K)"
+                  className="flex items-center gap-2 rounded-lg border border-cyan-500/40 px-3 py-1.5 text-sm dark:text-white text-black transition hover:bg-cyan-500/10 hover:border-cyan-500"
+                >
+                  <MdSearch className="text-lg" />
+                  <span className="text-sm text-gray-600 dark:text-gray-300">Search</span>
+                  <kbd className="hidden md:inline rounded border border-black/10 bg-black/5 px-1.5 text-[10px] text-gray-600 dark:border-white/20 dark:bg-white/10 dark:text-gray-300">
+                    Ctrl K
+                  </kbd>
+                </button>
+              </li>
 
               <li className="hidden md:flex flex-row items-center justify-center">
                 <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
