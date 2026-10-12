@@ -52,22 +52,42 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, title, message } = await request.json();
+    const body = await request.json();
+    // Honeypot: real visitors never see or fill this field, bots usually do.
+    // Pretend it worked so the bot doesn't learn anything.
+    if (body.website) {
+      return NextResponse.json({ message: "Email sent successfully", intent: "other" });
+    }
+    // Strip line breaks from anything that ends up in an email header (header injection).
+    const clean = (v: unknown) => String(v ?? "").replace(/[\r\n]+/g, " ").trim();
+    const name = clean(body.name);
+    const email = clean(body.email);
+    const title = clean(body.title);
+    const message = String(body.message ?? "").trim();
     if (!name || !email || !title || !message) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
       );
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) {
+      return NextResponse.json({ message: "Invalid email address" }, { status: 400 });
+    }
     if (String(message).length > 5000 || String(name).length > 100 || String(title).length > 100) {
       return NextResponse.json({ message: "Message is too long" }, { status: 400 });
     }
 
-    const smtpUser = process.env.EMAIL_SERVER_USER;
-    const smtpPass = process.env.EMAIL_SERVER_PASS;
+    // Accepts the documented names and the NEXT_PUBLIC_* names this project's .env uses.
+    // (Only read on the server here. Prefer the non-public names: NEXT_PUBLIC_ values
+    // can be inlined into browser bundles if any client code ever references them.)
+    const smtpUser = process.env.EMAIL_SERVER_USER ?? process.env.NEXT_PUBLIC_EMAIL_USER;
+    const smtpPass = process.env.EMAIL_SERVER_PASS ?? process.env.NEXT_PUBLIC_EMAIL_PASS;
     const senderAddress = process.env.EMAIL_FROM ?? smtpUser;
     const receiverAddress =
-      process.env.EMAIL_RECEIVER ?? process.env.EMAIL_FROM ?? smtpUser;
+      process.env.EMAIL_RECEIVER ??
+      process.env.NEXT_PUBLIC_RECEIVER_EMAIL ??
+      process.env.EMAIL_FROM ??
+      smtpUser;
 
     if (!smtpUser || !smtpPass || !senderAddress || !receiverAddress) {
       return NextResponse.json(

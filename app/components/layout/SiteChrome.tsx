@@ -6,17 +6,15 @@ import Footer from "../navigations/Footer";
 import ChatIcon from "../display/ChatIcon";
 import TechBackground from "../display/TechBackground";
 import SearchPalette from "../ai/SearchPalette";
-import type { SocialLink } from "@/types/content";
+import type { ContactInfo } from "@/types/content";
 
 /** Public-site frame. The admin area renders bare, with its own layout. */
 export default function SiteChrome({
   children,
-  socials,
-  ownerName,
+  contact,
 }: {
   children: React.ReactNode;
-  socials: SocialLink[];
-  ownerName: string;
+  contact: ContactInfo;
 }) {
   const path = usePathname();
   if (path.startsWith("/admin")) return <>{children}</>;
@@ -32,13 +30,19 @@ export default function SiteChrome({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_45%)] dark:bg-[radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),_transparent_50%)]" />
       </div>
       <div>
-        <div className="fixed top-0 left-0 right-0 z-10">
-          <Header />
-        </div>
-        <div className="px-6 md:px-10 pt-20 md:pt-32 pb-6 min-h-screen">{children}</div>
+        <a
+          href="#main-content"
+          className="sr-only z-[70] rounded-lg bg-cyan-600 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <Header contact={contact} />
+        <main id="main-content" className="px-6 md:px-10 pt-24 md:pt-28 pb-6 min-h-screen">
+          {children}
+        </main>
         <ChatIcon />
         <SearchPalette />
-        <Footer socials={socials} ownerName={ownerName} />
+        <Footer contact={contact} />
       </div>
     </div>
   );

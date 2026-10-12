@@ -79,7 +79,7 @@ export default async function RootLayout({
       </head>
       <body className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-[#eaf9ff] via-[#fefefe] to-[#d4f3ff] text-black dark:from-[#050505] dark:via-[#0b1222] dark:to-[#010308] dark:text-white">
         <ThemeProvider defaultTheme="dark" attribute="class">
-          <SiteChrome socials={contact.socials} ownerName={contact.full_name}>
+          <SiteChrome contact={contact}>
             {children}
           </SiteChrome>
         </ThemeProvider>
