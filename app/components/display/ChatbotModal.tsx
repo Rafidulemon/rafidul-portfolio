@@ -2,7 +2,9 @@
 
 import { FaTimes, FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { MdArrowOutward, MdAutoAwesome } from "react-icons/md";
+import SmartImage from "@/app/components/display/SmartImage";
 import Link from "next/link";
 import { IoMdSend } from "react-icons/io";
 import {
@@ -64,7 +66,7 @@ const ChatbotModal = ({
   initialPrompt?: string | null;
   onPromptConsumed?: () => void;
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const reduce = useReducedMotion();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
@@ -152,14 +154,6 @@ const ChatbotModal = ({
     }
     setStorageLoaded(true);
   }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      const t = setTimeout(() => setIsVisible(true), 10);
-      return () => clearTimeout(t);
-    }
-    setIsVisible(false);
-  }, [isOpen]);
 
   useEffect(() => {
     chatContainerRef.current?.scrollTo({
@@ -426,230 +420,232 @@ const ChatbotModal = ({
   };
 
   const hasStartedChatting = messages.length > 0;
+  const canSend = !isStreaming && inputValue.trim().length > 0;
+
+  const iconBtn =
+    "flex h-9 w-9 items-center justify-center rounded-full text-gray-600 transition hover:bg-black/5 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-cyan-300";
 
   return (
-    <div
-      ref={modalRef}
-      tabIndex={-1}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Portfolio chat assistant"
-      className={`fixed top-0 right-0 h-full w-full md:w-[30%] dark:bg-[#111111] bg-white shadow-lg transform ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      } transition-transform duration-1000 z-50`}
-    >
-      <div
-        className={`relative h-full p-6 transform transition-opacity duration-300 ${
-          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
-      >
-        <div className="absolute top-3 right-3 flex items-center gap-4">
-          {hasStartedChatting && (
-            <button
-              onClick={handleClear}
-              aria-label="Clear chat"
-              title="Clear chat"
-              className="text-gray-600 hover:text-red-500 dark:text-gray-300"
-            >
-              <FaRegTrashAlt size={18} />
-            </button>
-          )}
-          <button
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop: dims the page on phones, click-away on desktop */}
+          <motion.div
+            key="chat-backdrop"
+            aria-hidden
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={onClose}
-            aria-label="Close chat"
-            className="text-gray-800 dark:text-white hover:text-gray-500"
+            className="fixed inset-0 z-[49] bg-black/40 backdrop-blur-[2px] min-[768px]:bg-transparent min-[768px]:backdrop-blur-0"
+          />
+          <motion.div
+            key="chat-panel"
+            ref={modalRef}
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Portfolio chat assistant"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+            style={{ transformOrigin: "bottom right" }}
+            className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white/95 outline-none backdrop-blur-xl dark:bg-[#0a1020]/95 min-[768px]:inset-auto min-[768px]:bottom-6 min-[768px]:right-6 min-[768px]:h-[min(680px,calc(100vh-3rem))] min-[768px]:w-[420px] min-[768px]:rounded-3xl min-[768px]:border min-[768px]:border-black/10 min-[768px]:shadow-2xl min-[768px]:shadow-cyan-900/30 dark:min-[768px]:border-white/10"
           >
-            <FaTimes size={24} />
-          </button>
-        </div>
-
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center">
-            <Link
-              href={"/"}
-              className="flex flex-row gap-2 md:gap-4 items-center"
-            >
-              <div className="w-12 h-12 md:w-[70px] md:h-[70px] dark:bg-black bg-white rounded-full shadow-md dark:shadow-primary shadow-gray-500">
-                <Image
-                  src="/images/chat.png"
-                  alt="Logo"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover rounded-full"
-                />
+            {/* Header */}
+            <div className="relative flex items-center gap-3 border-b border-black/5 px-4 py-3 dark:border-white/10">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-teal-500/10 to-emerald-500/15"
+              />
+              <Link href="/" onClick={onClose} aria-label="Home" className="relative shrink-0">
+                <span className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-cyan-400 to-emerald-400" />
+                <span className="relative block h-11 w-11 overflow-hidden rounded-full border-2 border-white bg-slate-900 dark:border-[#0a1020]">
+                  <SmartImage src="portfolio/images/chat.png" alt="" width={88} height={88} className="h-full w-full object-cover" />
+                </span>
+                <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-500 dark:border-[#0a1020]" />
+              </Link>
+              <div className="relative min-w-0 flex-1">
+                <h3 className="flex items-center gap-1.5 font-poppins text-base font-semibold leading-tight text-gray-900 dark:text-white">
+                  Rafid&apos;s AI <MdAutoAwesome className="text-cyan-500" />
+                </h3>
+                <p className="truncate text-xs text-gray-600 dark:text-gray-400">
+                  {isStreaming ? "Thinking…" : "Online · answers from my portfolio"}
+                </p>
               </div>
-            </Link>
-            <div className="ml-4">
-              <h3 className="font-semibold text-xl text-primary_dark dark:text-white">
-                Ask Me
-              </h3>
-              <p className="text-sm text-gray-800 dark:text-gray-200">
-                Rafid&apos;s AI assistant
+              <div className="relative flex items-center gap-1">
+                {hasStartedChatting && (
+                  <button onClick={handleClear} aria-label="Clear chat" title="Clear chat" className={iconBtn}>
+                    <FaRegTrashAlt size={15} />
+                  </button>
+                )}
+                <button onClick={onClose} aria-label="Close chat" title="Close (Esc)" className={iconBtn}>
+                  <FaTimes size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Chat area */}
+            <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 scrollbar-hidden">
+              {!hasStartedChatting && (
+                <motion.div
+                  initial="hidden"
+                  animate="show"
+                  variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } } }}
+                  className="space-y-4"
+                >
+                  <motion.div
+                    variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                    className="rounded-2xl rounded-tl-md border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-emerald-500/10 p-4"
+                  >
+                    <p className="font-poppins text-lg font-semibold text-gray-900 dark:text-white">Hi, I&apos;m Rafid&apos;s AI 👋</p>
+                    <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                      Ask me about his projects, skills, experience or how to work together.
+                    </p>
+                  </motion.div>
+                  <p className="px-1 text-[11px] font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                    Try asking
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {faq.map((item) => (
+                      <motion.button
+                        type="button"
+                        key={item.question}
+                        variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                        whileHover={{ x: 3 }}
+                        onClick={() => handleFaqClick(item.question, item.answer)}
+                        className="group flex items-center justify-between gap-3 rounded-xl border border-black/10 bg-white/70 px-4 py-2.5 text-left text-sm text-gray-800 transition hover:border-cyan-500/60 hover:bg-cyan-500/5 dark:border-white/10 dark:bg-white/[0.04] dark:text-gray-200"
+                      >
+                        {item.question}
+                        <MdArrowOutward className="shrink-0 text-cyan-500 opacity-0 transition group-hover:opacity-100" />
+                      </motion.button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {messages.map((message, index) => {
+                const isBot = message.sender === "bot";
+                const parsed = isBot ? parseReply(message.text) : null;
+                const isLastBot = isBot && index === messages.length - 1;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={reduce ? false : { opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className={`flex items-end gap-2 ${isBot ? "justify-start" : "justify-end"}`}
+                  >
+                    {isBot && (
+                      <span className="mb-1 h-7 w-7 shrink-0 overflow-hidden rounded-full bg-slate-900 ring-2 ring-cyan-500/40">
+                        <SmartImage src="portfolio/images/chat.png" alt="" width={56} height={56} className="h-full w-full object-cover" />
+                      </span>
+                    )}
+                    <div
+                      className={`max-w-[85%] break-words px-3.5 py-2.5 text-sm leading-relaxed ${
+                        isBot
+                          ? "rounded-2xl rounded-bl-md border border-black/5 bg-gray-100 text-gray-900 dark:border-white/10 dark:bg-white/[0.07] dark:text-gray-100"
+                          : "whitespace-pre-wrap rounded-2xl rounded-br-md bg-gradient-to-br from-cyan-600 to-teal-500 text-white shadow-md shadow-cyan-500/20"
+                      }`}
+                    >
+                      {isBot && parsed ? (
+                        <>
+                          {parsed.text ? (
+                            <Markdown text={parsed.text} />
+                          ) : isLastBot && isStreaming ? (
+                            <span className="flex items-center gap-1 py-1" role="status" aria-label="Typing">
+                              {[0, 1, 2].map((i) => (
+                                <motion.span
+                                  key={i}
+                                  className="h-2 w-2 rounded-full bg-cyan-500"
+                                  animate={reduce ? undefined : { y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
+                                  transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.15 }}
+                                />
+                              ))}
+                            </span>
+                          ) : null}
+                          <ChatCards cards={parsed.cards} />
+                        </>
+                      ) : (
+                        message.text
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Composer */}
+            <div className="border-t border-black/5 px-4 pb-3 pt-3 dark:border-white/10">
+              <div className="flex items-center gap-1 rounded-full border border-black/10 bg-white py-1 pl-4 pr-1.5 shadow-sm transition focus-within:border-cyan-500 focus-within:ring-4 focus-within:ring-cyan-500/15 dark:border-white/15 dark:bg-black/40">
+                <input
+                  type="text"
+                  className="min-w-0 flex-1 bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-500 dark:text-white"
+                  placeholder="Ask me anything…"
+                  aria-label="Message"
+                  maxLength={MAX_INPUT_CHARS}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSendMessage();
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={handleVoiceToggle}
+                  disabled={!speechSynthesisSupported}
+                  aria-label={isVoiceEnabled ? "Mute spoken replies" : "Enable spoken replies"}
+                  title={
+                    speechSynthesisSupported
+                      ? isVoiceEnabled
+                        ? "Mute spoken replies"
+                        : "Enable spoken replies"
+                      : "Voice playback not supported in this browser"
+                  }
+                  className={`flex h-9 w-9 items-center justify-center rounded-full transition ${
+                    isVoiceEnabled ? "text-cyan-600 dark:text-cyan-300" : "text-gray-500"
+                  } ${speechSynthesisSupported ? "hover:bg-black/5 dark:hover:bg-white/10" : "cursor-not-allowed opacity-40"}`}
+                >
+                  {isVoiceEnabled ? <BsVolumeUpFill size={17} /> : <BsVolumeMuteFill size={17} />}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleMicrophoneToggle}
+                  disabled={!speechRecognitionSupported}
+                  aria-label={isListening ? "Stop voice input" : "Start voice input"}
+                  title={
+                    speechRecognitionSupported
+                      ? isListening
+                        ? "Stop voice input"
+                        : "Speak to Rafid"
+                      : "Voice input not supported in this browser"
+                  }
+                  className={`flex h-9 w-9 items-center justify-center rounded-full transition ${
+                    isListening ? "animate-pulse bg-red-600 text-white" : "text-cyan-600 dark:text-cyan-300"
+                  } ${speechRecognitionSupported ? "hover:bg-black/5 dark:hover:bg-white/10" : "cursor-not-allowed opacity-40"}`}
+                >
+                  {isListening ? <BsMicMuteFill size={17} /> : <BsMicFill size={17} />}
+                </button>
+                <button
+                  type="button"
+                  aria-label="Send message"
+                  disabled={!canSend}
+                  onClick={() => handleSendMessage()}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-600 to-teal-500 text-white shadow-md shadow-cyan-500/30 transition enabled:hover:scale-105 disabled:opacity-40"
+                >
+                  <IoMdSend size={19} />
+                </button>
+              </div>
+              <p className="mt-2 text-center text-[11px] text-gray-500 dark:text-gray-400">
+                AI answers from my portfolio and can make mistakes. Verify important details.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* Chat Area */}
-        <div
-          ref={chatContainerRef}
-          className="flex flex-col overflow-y-auto my-6 h-[74%] scrollbar-hidden"
-        >
-          {!hasStartedChatting && (
-            <div className="space-y-4 mb-4">
-              <div className="text-sm text-gray-800 dark:text-gray-200">
-                Common questions are:
-              </div>
-              <div className="space-y-2">
-                {faq.map((item, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    className="block text-left cursor-pointer w-full bg-gradient-to-l dark:from-gray-900 dark:to-black from-cyan-900 to-primary_dark px-4 py-1 md:py-2 rounded-lg text-white shadow-md"
-                    onClick={() => handleFaqClick(item.question, item.answer)}
-                  >
-                    {item.question}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {messages.map((message, index) => {
-            const isBot = message.sender === "bot";
-            const parsed = isBot ? parseReply(message.text) : null;
-            const isLastBot = isBot && index === messages.length - 1;
-            return (
-              <div
-                key={index}
-                className={`flex ${isBot ? "justify-start" : "justify-end"}`}
-              >
-                {isBot && (
-                  <div className="flex items-start mr-2 mt-2">
-                    <div className="w-8 h-8 flex items-center justify-center bg-black rounded-full">
-                      <Image
-                        src="/images/chat.png"
-                        alt="Assistant"
-                        width={30}
-                        height={30}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`${
-                    isBot
-                      ? "dark:bg-gray-800 dark:text-white bg-gray-100 text-black"
-                      : "bg-primary_dark text-white whitespace-pre-wrap"
-                  } p-3 my-1 md:my-2 rounded-lg max-w-[80%] break-words text-sm md:text-base`}
-                >
-                  {isBot && parsed ? (
-                    <>
-                      {parsed.text ? (
-                        <Markdown text={parsed.text} />
-                      ) : isLastBot && isStreaming ? (
-                        <span className="animate-pulse" aria-label="Typing">
-                          ● ● ●
-                        </span>
-                      ) : null}
-                      <ChatCards cards={parsed.cards} />
-                    </>
-                  ) : (
-                    message.text
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Message Input */}
-        <div className="absolute bottom-3 left-0 right-0 px-4 md:px-6">
-          <div className="flex items-center w-full px-2 md:px-3 rounded-md md:rounded-lg text-black dark:text-white bg-white dark:bg-black border border-primary">
-            <input
-              type="text"
-              className="w-full focus:outline-none bg-white dark:bg-black"
-              placeholder="Type your message..."
-              aria-label="Message"
-              maxLength={MAX_INPUT_CHARS}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSendMessage();
-              }}
-            />
-            <div className="flex items-center gap-1 md:gap-2 ml-2">
-              <button
-                type="button"
-                onClick={handleVoiceToggle}
-                disabled={!speechSynthesisSupported}
-                aria-label={isVoiceEnabled ? "Mute spoken replies" : "Enable spoken replies"}
-                title={
-                  speechSynthesisSupported
-                    ? isVoiceEnabled
-                      ? "Mute spoken replies"
-                      : "Enable spoken replies"
-                    : "Voice playback not supported in this browser"
-                }
-                className={`p-2 rounded-full transition-colors ${
-                  isVoiceEnabled ? "text-primary" : "text-gray-500"
-                } ${
-                  speechSynthesisSupported
-                    ? "hover:text-primary_dark"
-                    : "opacity-40 cursor-not-allowed"
-                }`}
-              >
-                {isVoiceEnabled ? (
-                  <BsVolumeUpFill size={18} />
-                ) : (
-                  <BsVolumeMuteFill size={18} />
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={handleMicrophoneToggle}
-                disabled={!speechRecognitionSupported}
-                aria-label={isListening ? "Stop voice input" : "Start voice input"}
-                title={
-                  speechRecognitionSupported
-                    ? isListening
-                      ? "Stop voice input"
-                      : "Speak to Rafid"
-                    : "Voice input not supported in this browser"
-                }
-                className={`p-2 rounded-full transition-colors ${
-                  isListening ? "bg-red-600 text-white" : "text-primary"
-                } ${
-                  speechRecognitionSupported
-                    ? "hover:text-primary_dark"
-                    : "opacity-40 cursor-not-allowed"
-                }`}
-              >
-                {isListening ? (
-                  <BsMicMuteFill size={18} />
-                ) : (
-                  <BsMicFill size={18} />
-                )}
-              </button>
-              <button
-                type="button"
-                aria-label="Send message"
-                disabled={isStreaming}
-                className="my-2 w-fit text-primary hover:text-primary_dark disabled:opacity-40"
-                onClick={() => handleSendMessage()}
-              >
-                <IoMdSend size={24} />
-              </button>
-            </div>
-          </div>
-          <p className="mt-1 text-center text-[11px] text-gray-500 dark:text-gray-400">
-            AI assistant answering from my portfolio. It can make mistakes, so
-            please verify important details.
-          </p>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

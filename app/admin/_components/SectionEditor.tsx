@@ -3,6 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { PageLoader } from "@/app/components/display/Spinner";
+import { mediaUrl } from "@/app/lib/media";
 import { SECTIONS } from "./specs";
 import { FieldGrid, FieldRenderer, isCompact, type Errors } from "./fields";
 import { Button, Card, api, cx, inputCls, useToasts, useUnsavedWarning } from "./ui";
@@ -107,7 +109,7 @@ export default function SectionEditor({ sectionKey }: { sectionKey: string }) {
   }, [items, filter, spec]);
 
   if (!spec) return null;
-  if (loading) return <p className="text-sm text-slate-500">Loading…</p>;
+  if (loading) return <PageLoader label="Loading…" />;
   if (loadError) {
     return (
       <Card>
@@ -177,7 +179,7 @@ export default function SectionEditor({ sectionKey }: { sectionKey: string }) {
               Revert to original
             </Button>
           )}
-          <Button variant="primary" disabled={!dirty || saving} onClick={save}>
+          <Button variant="primary" loading={saving} disabled={!dirty} onClick={save}>
             {saving ? "Saving…" : "Save changes"}
           </Button>
         </div>
@@ -219,7 +221,7 @@ export default function SectionEditor({ sectionKey }: { sectionKey: string }) {
                     >
                       {image !== undefined && (
                         <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
-                          {image ? <img src={image} alt="" className="h-full w-full object-cover" /> : null}
+                          {image ? <img src={mediaUrl(image)} alt="" className="h-full w-full object-cover" /> : null}
                         </span>
                       )}
                       <span className="min-w-0">

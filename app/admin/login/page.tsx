@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Spinner from "@/app/components/display/Spinner";
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
@@ -83,9 +84,9 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-cyan-600 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500 disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-600 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500 disabled:opacity-60"
           >
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? (<><Spinner size="xs" mono label="Signing in" /> Signing in…</>) : "Sign in"}
           </button>
         </form>
         <p className="mt-6 text-center text-xs text-slate-500">Sessions last 12 hours.</p>

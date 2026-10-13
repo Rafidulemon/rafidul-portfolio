@@ -7,7 +7,14 @@ import { useTheme } from "next-themes";
 import { cx } from "./ui";
 
 const NAV: { group: string; items: { href: string; label: string; icon: string }[] }[] = [
-  { group: "Overview", items: [{ href: "/admin", label: "Dashboard", icon: "▦" }] },
+  {
+    group: "Overview",
+    items: [
+      { href: "/admin", label: "Dashboard", icon: "▦" },
+      { href: "/admin/messages", label: "Messages", icon: "✉" },
+      { href: "/admin/visitors", label: "Visitors", icon: "◔" },
+    ],
+  },
   {
     group: "Content",
     items: [
@@ -21,7 +28,7 @@ const NAV: { group: string; items: { href: string; label: string; icon: string }
     group: "Profile",
     items: [
       { href: "/admin/about", label: "About", icon: "☺" },
-      { href: "/admin/contact", label: "Contact details", icon: "✉" },
+      { href: "/admin/contact", label: "Contact details", icon: "☎" },
       { href: "/admin/info", label: "My information (AI)", icon: "✦" },
     ],
   },
@@ -35,6 +42,22 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Unread-message badge; refreshed on every navigation inside the panel.
+  const [unread, setUnread] = useState(0);
+  useEffect(() => {
+    let live = true;
+    fetch("/api/admin/messages")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => live && d?.counts && setUnread(d.counts.new ?? 0))
+      .catch(() => {});
+    const onUnread = (e: Event) => setUnread((e as CustomEvent<number>).detail ?? 0);
+    window.addEventListener("messages-unread", onUnread);
+    return () => {
+      live = false;
+      window.removeEventListener("messages-unread", onUnread);
+    };
+  }, [path]);
+
   const logout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
     window.location.href = "/admin/login";
@@ -44,7 +67,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   const nav = (
     <nav className="flex h-full flex-col" aria-label="Admin">
-      <div className="flex items-center gap-3 px-5 py-5">
+      <div className="flex items-center gap-3 px-5 py-4">
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-500 font-bold text-white">
           R
         </span>
@@ -53,11 +76,11 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <div className="text-xs text-slate-500">Content manager</div>
         </div>
       </div>
-      <div className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
+      <div className="scrollbar-hidden flex-1 space-y-3 overflow-y-auto px-3 pb-2">
         {NAV.map((g) => (
           <div key={g.group}>
-            <div className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">{g.group}</div>
-            <ul className="space-y-0.5">
+            <div className="px-2 pb-0.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">{g.group}</div>
+            <ul className="space-y-px">
               {g.items.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -65,7 +88,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     onClick={() => setOpen(false)}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cx(
-                      "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition",
+                      "flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm transition",
                       isActive(item.href)
                         ? "bg-cyan-600 font-medium text-white"
                         : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
@@ -75,6 +98,11 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                       {item.icon}
                     </span>
                     {item.label}
+                    {item.href === "/admin/messages" && unread > 0 && (
+                      <span className="ml-auto rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-white" aria-label={`${unread} unread`}>
+                        {unread}
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}
@@ -82,26 +110,26 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           </div>
         ))}
       </div>
-      <div className="space-y-1 border-t border-slate-200 p-3 dark:border-slate-800">
+      <div className="space-y-0.5 border-t border-slate-200 px-3 py-2 dark:border-slate-800">
         <a
           href="/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          className="flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
           <span className="w-4 text-center">↗</span> View site
         </a>
         <button
           type="button"
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
           <span className="w-4 text-center">◐</span> {mounted ? (resolvedTheme === "dark" ? "Light theme" : "Dark theme") : "Switch theme"}
         </button>
         <button
           type="button"
           onClick={logout}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 dark:text-red-400"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-red-600 hover:bg-red-500/10 dark:text-red-400"
         >
           <span className="w-4 text-center">⎋</span> Sign out
         </button>

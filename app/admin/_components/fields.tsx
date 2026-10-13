@@ -3,23 +3,25 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useRef, useState } from "react";
+import Spinner from "@/app/components/display/Spinner";
 import { Button, Label, TagsInput, Toggle, api, cx, inputCls } from "./ui";
 import type { Field } from "./specs";
+import { mediaUrl } from "@/app/lib/media";
 
 export type Errors = Record<string, string>;
 
-type MediaItem = { id: string; name: string; url: string; size: number };
+type MediaItem = { id: string; name: string; key: string; url: string; size: number };
 
-/** Uploads one image to the admin media library and returns its public URL. */
+/** Uploads one image to R2 and returns its object key (what gets stored in the database). */
 export async function uploadImage(file: File): Promise<string> {
   const fd = new FormData();
   fd.append("file", file);
-  const res = await api<{ url: string }>("/api/admin/media", { method: "POST", body: fd });
+  const res = await api<{ key: string }>("/api/admin/media", { method: "POST", body: fd });
   if (!res.ok) throw new Error(res.data.error || "Upload failed");
-  return res.data.url;
+  return res.data.key;
 }
 
-export function MediaLibrary({ onPick, onClose }: { onPick: (url: string) => void; onClose: () => void }) {
+export function MediaLibrary({ onPick, onClose }: { onPick: (key: string) => void; onClose: () => void }) {
   const [items, setItems] = useState<MediaItem[] | null>(null);
 
   const load = async () => {
@@ -54,14 +56,14 @@ export function MediaLibrary({ onPick, onClose }: { onPick: (url: string) => voi
             Close
           </Button>
         </div>
-        {items === null && <p className="text-sm text-slate-500">Loading…</p>}
+        {items === null && <div className="flex justify-center py-6"><Spinner size="md" label="Loading images…" showLabel /></div>}
         {items?.length === 0 && (
           <p className="text-sm text-slate-500">No uploaded images yet. Use “Upload” on an image field.</p>
         )}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {items?.map((m) => (
             <div key={m.id} className="group relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
-              <button type="button" onClick={() => onPick(m.url)} className="block w-full">
+              <button type="button" onClick={() => onPick(m.key)} className="block w-full">
                 <img src={m.url} alt={m.name} className="aspect-square w-full object-cover" />
               </button>
               <div className="flex items-center justify-between gap-1 p-1.5 text-[11px] text-slate-600 dark:text-slate-300">
@@ -111,7 +113,7 @@ export function ImageField({
       <div className="flex items-start gap-3">
         <div className="flex h-16 w-24 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
           {value ? (
-            <img src={value} alt="" className="h-full w-full object-contain" />
+            <img src={mediaUrl(value)} alt="" className="h-full w-full object-contain" />
           ) : (
             <span className="text-[10px] text-slate-400">No image</span>
           )}
@@ -121,11 +123,11 @@ export function ImageField({
             id={id}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            placeholder="/images/… or https://…"
+            placeholder="Upload an image, or paste a key / https:// URL"
             className={inputCls}
           />
           <div className="flex flex-wrap gap-2">
-            <Button size="sm" disabled={busy} onClick={() => fileRef.current?.click()}>
+            <Button size="sm" loading={busy} onClick={() => fileRef.current?.click()}>
               {busy ? "Uploading…" : "Upload"}
             </Button>
             <Button size="sm" onClick={() => setLibrary(true)}>

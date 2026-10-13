@@ -2,6 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "../CodeBlock";
+import { mediaUrl } from "@/app/lib/media";
 
 // Raw HTML in the Markdown is NOT rendered (react-markdown's default), and unsafe link
 // protocols such as javascript: are stripped by its default URL transform.
@@ -52,7 +53,7 @@ export default function MarkdownContent({ children }: { children: string }) {
         img: ({ src, alt }) => (
           // eslint-disable-next-line @next/next/no-img-element -- arbitrary author-provided URLs
           <img
-            src={typeof src === "string" ? src : undefined}
+            src={typeof src === "string" ? mediaUrl(src) : undefined}
             alt={alt ?? ""}
             loading="lazy"
             className="my-5 h-auto max-w-full rounded-xl"

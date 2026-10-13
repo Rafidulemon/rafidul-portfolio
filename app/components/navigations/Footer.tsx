@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { MdArrowOutward, MdArrowUpward, MdAutoAwesome, MdDownload, MdOutlineEmail, MdPlace } from "react-icons/md";
 import SocialIcons from "../display/SocialIcons";
 import { openChat } from "../display/ChatIcon";
-import { givenName, shortRole } from "@/app/lib/name";
+import { shortRole } from "@/app/lib/name";
 import type { ContactInfo } from "@/types/content";
 
 const EXPLORE = [
@@ -112,12 +112,12 @@ function Footer({ contact }: { contact: ContactInfo }) {
               <span className="relative h-11 w-11">
                 <span aria-hidden className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-cyan-400 to-emerald-400 opacity-80" />
                 <span className="relative block h-full w-full overflow-hidden rounded-full border-2 border-white bg-slate-900 dark:border-slate-900">
-                  <Image src="/images/hero-image.png" alt="" width={88} height={88} className="h-full w-full object-cover" />
+                  <SmartImage src="portfolio/images/hero-image.png" alt="" width={88} height={88} className="h-full w-full object-cover" />
                 </span>
               </span>
               <span>
                 <span className="block font-poppins text-lg font-semibold text-gray-900 dark:text-white">
-                  {givenName(contact.full_name)}
+                  Rafid
                   <span className="text-cyan-500">.</span>
                 </span>
                 <span className="block text-xs text-gray-500 dark:text-gray-400">{shortRole(contact.title)}</span>

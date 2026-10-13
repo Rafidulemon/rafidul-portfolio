@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Spinner from "../display/Spinner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,7 +12,12 @@ import { openChat } from "../display/ChatIcon";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Please tell me your name").max(100, "That name is too long"),
-  email: z.string().trim().email("That doesn't look like a valid email").max(200),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required so I can reply to you")
+    .email("That doesn't look like a valid email address")
+    .max(200, "That email is too long"),
   title: z.string().trim().min(1, "Add a short subject").max(100, "Keep the subject under 100 characters"),
   message: z.string().trim().min(10, "Tell me a little more (at least 10 characters)").max(5000, "Please keep it under 5000 characters"),
   website: z.string().optional(), // honeypot
@@ -68,6 +74,7 @@ export default function ContactForm() {
     handleSubmit,
     watch,
     setValue,
+    setError,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema), defaultValues: { website: "" } });
@@ -100,6 +107,10 @@ export default function ContactForm() {
       });
       const result = await res.json().catch(() => ({}));
       if (!res.ok) {
+        if (result.field === "email") {
+          setError("email", { type: "server", message: result.message });
+          return;
+        }
         setServerError(
           res.status === 429
             ? "You've sent a few messages already. Please try again in a little while."
@@ -251,7 +262,7 @@ export default function ContactForm() {
               >
                 {isSubmitting ? (
                   <>
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" /> Sending…
+                    <Spinner size="xs" mono label="Sending" /> Sending…
                   </>
                 ) : (
                   <>

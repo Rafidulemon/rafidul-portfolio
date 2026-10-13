@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/app/lib/admin/guard";
 import { ensureSchema, sql } from "@/app/lib/db";
+import { putObject, KEY_PREFIX, isStorageConfigured } from "@/app/lib/storage";
+import { mediaUrl } from "@/app/lib/media";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,14 +24,15 @@ export async function GET(req: Request) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
   await ensureSchema();
-  const rows = await sql`select id, name, mime, size, created_at from media order by created_at desc limit 60`;
+  const rows = await sql`select id, name, mime, size, key, created_at from media order by created_at desc limit 60`;
   return NextResponse.json({
     items: rows.map((r) => ({
       id: r.id as string,
       name: r.name as string,
       mime: r.mime as string,
       size: r.size as number,
-      url: `/api/media/${r.id}`,
+      key: (r.key as string | null) ?? `/api/media/${r.id}`,
+      url: r.key ? mediaUrl(r.key as string) : `/api/media/${r.id}`,
       created_at: new Date(r.created_at).toISOString(),
     })),
   });
@@ -58,10 +61,21 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Only PNG, JPEG, GIF, WebP or AVIF images are allowed" }, { status: 415 });
   }
 
-  const hex = "\\x" + Buffer.from(bytes).toString("hex");
+  if (!isStorageConfigured()) {
+    return NextResponse.json({ error: "Image storage (R2) is not configured on the server" }, { status: 503 });
+  }
+  const ext = { "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp", "image/avif": "avif" }[mime];
+  const key = `${KEY_PREFIX}uploads/${crypto.randomUUID()}.${ext}`;
   const name = file.name.replace(/[^\w.\- ]+/g, "").slice(0, 120) || "image";
+  try {
+    await putObject(key, bytes, mime);
+  } catch (error) {
+    console.error("[media] R2 upload failed:", error);
+    return NextResponse.json({ error: "Could not upload to storage. Please try again." }, { status: 502 });
+  }
   await ensureSchema();
-  const rows = await sql`insert into media (mime, size, name, data) values (${mime}, ${bytes.length}, ${name}, ${hex}::bytea) returning id`;
+  const rows = await sql`insert into media (mime, size, name, key) values (${mime}, ${bytes.length}, ${name}, ${key}) returning id`;
   const id = rows[0].id as string;
-  return NextResponse.json({ ok: true, id, url: `/api/media/${id}`, name, mime, size: bytes.length }, { status: 201 });
+  // `key` is what gets stored in content/blog records; `url` is only for previews.
+  return NextResponse.json({ ok: true, id, key, url: mediaUrl(key), name, mime, size: bytes.length }, { status: 201 });
 }

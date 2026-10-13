@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 
 type TitleProps = {
   src?: string;
@@ -42,7 +42,7 @@ const MotionDiv = (props: TitleProps) => {
           background: isTransparentBG ? "transparent" : background,
         }}
       >
-        <Image
+        <SmartImage
           src={src}
           alt="hero image"
           width={height_width}

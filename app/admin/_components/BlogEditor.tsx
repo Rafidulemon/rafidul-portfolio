@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { PageLoader } from "@/app/components/display/Spinner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MarkdownContent from "@/app/components/blogs/MarkdownContent";
 import { ImageField, MediaLibrary, uploadImage } from "./fields";
+import { mediaUrl } from "@/app/lib/media";
 import { Button, Card, Label, TagsInput, api, cx, inputCls, useToasts, useUnsavedWarning } from "./ui";
 
 type Form = {
@@ -181,7 +183,7 @@ export default function BlogEditor({ postId }: { postId?: number }) {
     } else push("error", res.data.error || "Could not delete");
   };
 
-  if (loading) return <p className="text-sm text-slate-500">Loading…</p>;
+  if (loading) return <PageLoader label="Loading post…" />;
   if (loadError) {
     return (
       <Card>
@@ -229,19 +231,19 @@ export default function BlogEditor({ postId }: { postId?: number }) {
           )}
           {isPublished ? (
             <>
-              <Button disabled={saving} onClick={() => save("draft")}>
+              <Button loading={saving} onClick={() => save("draft")}>
                 Unpublish
               </Button>
-              <Button variant="primary" disabled={saving || !dirty} onClick={() => save("published")}>
+              <Button variant="primary" loading={saving} disabled={!dirty} onClick={() => save("published")}>
                 {saving ? "Saving…" : "Update"}
               </Button>
             </>
           ) : (
             <>
-              <Button disabled={saving} onClick={() => save("draft")}>
+              <Button loading={saving} onClick={() => save("draft")}>
                 {saving ? "Saving…" : "Save draft"}
               </Button>
-              <Button variant="primary" disabled={saving} onClick={() => save("published")}>
+              <Button variant="primary" loading={saving} onClick={() => save("published")}>
                 Publish
               </Button>
             </>
@@ -356,7 +358,7 @@ export default function BlogEditor({ postId }: { postId?: number }) {
                 </h2>
                 {form.cover && (
                   // eslint-disable-next-line @next/next/no-img-element -- admin preview of arbitrary URLs
-                  <img src={form.cover} alt="" className="my-4 w-full rounded-lg" />
+                  <img src={mediaUrl(form.cover)} alt="" className="my-4 w-full rounded-lg" />
                 )}
                 <div className="text-[15px] text-slate-800 dark:text-slate-300">
                   {form.content.trim() ? (

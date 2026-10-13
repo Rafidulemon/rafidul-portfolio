@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 
 const FlashScreen = () => {
   const [showText, setShowText] = useState(false);
@@ -69,8 +69,8 @@ const FlashScreen = () => {
             className="flex justify-center md:justify-end"
           >
             <div className="relative w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80">
-              <Image
-                src="/images/hero-image.png"
+              <SmartImage
+                src="portfolio/images/hero-image.png"
                 alt="Hero Image"
                 layout="fill"
                 objectFit="cover"

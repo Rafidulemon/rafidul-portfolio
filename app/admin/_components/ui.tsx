@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
+import Spinner from "@/app/components/display/Spinner";
 
 export const cx = (...parts: (string | false | null | undefined)[]) => parts.filter(Boolean).join(" ");
 
@@ -10,11 +11,15 @@ export const inputCls =
 export function Button({
   variant = "secondary",
   size = "md",
+  loading = false,
   className,
+  children,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "danger" | "ghost";
   size?: "sm" | "md";
+  /** Shows the spinner before the label and disables the button. */
+  loading?: boolean;
 }) {
   const styles = {
     primary: "bg-cyan-600 text-white hover:bg-cyan-500 disabled:hover:bg-cyan-600",
@@ -27,13 +32,18 @@ export function Button({
     <button
       type="button"
       {...props}
+      disabled={props.disabled || loading}
+      aria-busy={loading || undefined}
       className={cx(
         "inline-flex items-center justify-center gap-1.5 rounded-lg font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
         size === "sm" ? "px-2.5 py-1 text-xs" : "px-4 py-2 text-sm",
         styles,
         className
       )}
-    />
+    >
+      {loading && <Spinner size="xs" mono label="Working" />}
+      {children}
+    </button>
   );
 }
 

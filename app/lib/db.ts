@@ -47,9 +47,60 @@ export function ensureSchema(): Promise<void> {
         mime text not null,
         size int not null,
         name text not null default '',
-        data bytea not null,
+        data bytea,
         created_at timestamptz not null default now()
       )`;
+      // Uploads now live in R2; only the object key is kept here. `data` is only set on legacy rows.
+      await sql`alter table media add column if not exists key text`;
+      await sql`alter table media alter column data drop not null`;
+      await sql`create table if not exists messages (
+        id uuid primary key default gen_random_uuid(),
+        name text not null,
+        email text not null,
+        subject text not null,
+        body text not null,
+        status text not null default 'new',
+        intent text not null default 'other',
+        urgency text not null default 'normal',
+        summary text not null default '',
+        draft text not null default '',
+        created_at timestamptz not null default now(),
+        read_at timestamptz
+      )`;
+      await sql`create index if not exists messages_created_idx on messages (created_at desc)`;
+      await sql`create table if not exists message_replies (
+        id uuid primary key default gen_random_uuid(),
+        message_id uuid not null references messages(id) on delete cascade,
+        to_email text not null,
+        subject text not null,
+        body text not null,
+        created_at timestamptz not null default now()
+      )`;
+      await sql`create index if not exists message_replies_msg_idx on message_replies (message_id, created_at)`;
+      await sql`create table if not exists page_views (
+        id bigserial primary key,
+        visitor_id text not null,
+        session_id text not null,
+        path text not null,
+        referrer text not null default '',
+        referrer_host text not null default '',
+        source text not null default 'internal',
+        utm_source text not null default '',
+        utm_medium text not null default '',
+        utm_campaign text not null default '',
+        country text not null default '',
+        region text not null default '',
+        city text not null default '',
+        device text not null default '',
+        browser text not null default '',
+        os text not null default '',
+        language text not null default '',
+        screen text not null default '',
+        ip_hash text not null default '',
+        created_at timestamptz not null default now()
+      )`;
+      await sql`create index if not exists page_views_created_idx on page_views (created_at desc)`;
+      await sql`create index if not exists page_views_visitor_idx on page_views (visitor_id)`;
       await sql`create table if not exists doc_embeddings (
         uid text primary key,
         hash text not null,

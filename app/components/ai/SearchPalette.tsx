@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Spinner from "../display/Spinner";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -432,10 +433,7 @@ export default function SearchPalette() {
                 className="h-14 w-full bg-transparent text-base text-black outline-none placeholder:text-gray-500 dark:text-white"
               />
               {loading ? (
-                <span
-                  className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent"
-                  aria-label="Searching"
-                />
+                <Spinner size="xs" label="Searching" className="shrink-0" />
               ) : query ? (
                 <button
                   type="button"

@@ -6,6 +6,7 @@ import Footer from "../navigations/Footer";
 import ChatIcon from "../display/ChatIcon";
 import TechBackground from "../display/TechBackground";
 import SearchPalette from "../ai/SearchPalette";
+import PageViewTracker from "../analytics/PageViewTracker";
 import type { ContactInfo } from "@/types/content";
 
 /** Public-site frame. The admin area renders bare, with its own layout. */
@@ -36,6 +37,7 @@ export default function SiteChrome({
         >
           Skip to content
         </a>
+        <PageViewTracker />
         <Header contact={contact} />
         <main id="main-content" className="px-6 md:px-10 pt-24 md:pt-28 pb-6 min-h-screen">
           {children}

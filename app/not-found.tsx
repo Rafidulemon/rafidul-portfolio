@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 
 const Error404 = () => {
   const router = useRouter();
@@ -9,8 +9,8 @@ const Error404 = () => {
     <div className="flex flex-col items-center justify-center text-center">
       <div className="w-[90%] min-h-[calc(80vh-10px)] flex flex-col items-center justify-center text-center -mt-8 md:-mt-20">
         <div className="w-full max-w-[60%] md:max-w-md">
-          <Image
-            src="/images/404_snow.gif"
+          <SmartImage
+            src="portfolio/images/404_snow.gif"
             alt="404 Page Not Found"
             width={500}
             height={380}
@@ -19,8 +19,8 @@ const Error404 = () => {
         </div>
 
         <div className="w-full w-full md:w-[30%]">
-          <Image
-            src="/images/dark_404_1.gif"
+          <SmartImage
+            src="portfolio/images/dark_404_1.gif"
             alt="404 Page Not Found"
             width={500}
             height={500}

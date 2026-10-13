@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { MdArrowOutward, MdAutoAwesome, MdDownload } from "react-icons/md";
@@ -123,12 +123,12 @@ export default function AboutHero({
           />
           <div className="absolute -inset-6 rounded-full bg-cyan-500/20 blur-3xl" aria-hidden />
           <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full border-4 border-white/80 bg-slate-900 dark:border-slate-900 md:h-[280px] md:w-[280px]">
-            <Image
-              src="/images/ai-image-1.png"
+            <SmartImage
+              src="portfolio/images/about-photo.jpg"
               alt={`Portrait of ${about.name}`}
               fill
               sizes="280px"
-              className="object-cover"
+              className="object-cover object-top"
               priority
             />
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 import { Text } from "../typography/Text";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { openChat } from "../display/ChatIcon";
@@ -22,7 +22,7 @@ function ProjectsCard(props: ProjectsCardProps) {
     <div className="relative bg-white dark:bg-[#111111] rounded-2xl shadow-md shadow-cyan-900 flex flex-col overflow-hidden">
       {/* Image Section */}
       <div className="relative md:w-[450px] h-[200px] md:h-[250px]">
-        <Image
+        <SmartImage
           src={src}
           alt={project_title}
           width={450}

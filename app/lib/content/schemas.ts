@@ -16,7 +16,8 @@ const image = z
   .string()
   .trim()
   .max(500)
-  .refine((v) => v === "" || /^(https?:\/\/|\/)/i.test(v), "Must be a /path or https:// URL");
+  // An R2 object key ("portfolio/uploads/…"), a /path or an https:// URL. Script-capable schemes are refused.
+  .refine((v) => !/^\s*(javascript|data|vbscript|file|blob):/i.test(v) && !/\s|\.\./.test(v), "Must be an uploaded image, a /path or an https:// URL");
 const tags = (maxItems = 30) => z.array(req(60)).max(maxItems);
 
 const skill = z.object({

@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { completeJson, hasLlm } from "@/app/lib/ai/llm";
 import { getClientIp, rateLimit } from "@/app/lib/ai/ratelimit";
+import { checkEmail } from "@/app/lib/email-check";
+import { createTransporter, mailConfig, oneLine } from "@/app/lib/mail";
+import { createMessage } from "@/app/lib/messages";
+import { dbEnabled } from "@/app/lib/db";
 
 const INTENTS = ["hiring", "freelance", "collaboration", "question", "spam", "other"];
 const URGENCIES = ["high", "normal", "low"];
@@ -64,59 +67,86 @@ export async function POST(request: Request) {
     const email = clean(body.email);
     const title = clean(body.title);
     const message = String(body.message ?? "").trim();
-    if (!name || !email || !title || !message) {
-      return NextResponse.json(
-        { message: "All fields are required" },
-        { status: 400 }
-      );
+    if (!name || !title || !message) {
+      return NextResponse.json({ message: "Name, subject and message are required" }, { status: 400 });
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) {
-      return NextResponse.json({ message: "Invalid email address" }, { status: 400 });
+    // Email is mandatory and must be a real, deliverable address (syntax + the domain accepts mail).
+    const emailCheck = await checkEmail(email);
+    if (!emailCheck.ok) {
+      return NextResponse.json({ message: emailCheck.message, field: "email" }, { status: 400 });
     }
     if (String(message).length > 5000 || String(name).length > 100 || String(title).length > 100) {
       return NextResponse.json({ message: "Message is too long" }, { status: 400 });
     }
 
-    // Accepts the documented names and the NEXT_PUBLIC_* names this project's .env uses.
-    // (Only read on the server here. Prefer the non-public names: NEXT_PUBLIC_ values
-    // can be inlined into browser bundles if any client code ever references them.)
-    const smtpUser = process.env.EMAIL_SERVER_USER ?? process.env.NEXT_PUBLIC_EMAIL_USER;
-    const smtpPass = process.env.EMAIL_SERVER_PASS ?? process.env.NEXT_PUBLIC_EMAIL_PASS;
-    const senderAddress = process.env.EMAIL_FROM ?? smtpUser;
-    const receiverAddress =
-      process.env.EMAIL_RECEIVER ??
-      process.env.NEXT_PUBLIC_RECEIVER_EMAIL ??
-      process.env.EMAIL_FROM ??
-      smtpUser;
-
-    if (!smtpUser || !smtpPass || !senderAddress || !receiverAddress) {
-      return NextResponse.json(
-        { message: "Email service is not configured properly." },
-        { status: 500 }
-      );
+    const cfg = mailConfig();
+    if (!cfg && !dbEnabled) {
+      return NextResponse.json({ message: "The contact service is not configured." }, { status: 500 });
     }
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
 
     const triage = await triageMessage(name, title, message);
 
-    await transporter.sendMail({
-      from: senderAddress,
-      replyTo: `${name} <${email}>`,
-      to: receiverAddress,
-      subject: `${triage ? `[${triage.intent} | ${triage.urgency}] ` : ""}Contact Form: ${name}`,
-      text:
-        `Name: ${name}\nEmail: ${email}\nTitle: ${title}\nMessage: ${message}` +
-        (triage
-          ? `\n\n--- AI triage ---\nIntent: ${triage.intent}\nUrgency: ${triage.urgency}\nSummary: ${triage.summary}\n\nSuggested reply draft:\n${triage.draft}`
-          : ""),
-    });
+    // 1) Save to the inbox (the admin panel reads from here).
+    let saved = false;
+    let id = "";
+    if (dbEnabled) {
+      try {
+        id = await createMessage({
+          name,
+          email,
+          subject: title,
+          body: message,
+          intent: triage?.intent,
+          urgency: triage?.urgency,
+          summary: triage?.summary,
+          draft: triage?.draft,
+        });
+        saved = true;
+      } catch (error) {
+        console.error("[contact] could not save message:", error);
+      }
+    }
+
+    // 2) Notify the owner by email. Best-effort when the message is already saved.
+    let emailed = false;
+    if (cfg) {
+      try {
+        const { transporter } = createTransporter();
+        const site = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || "").trim().replace(/\/+$/, "");
+        await transporter.sendMail({
+          from: cfg.from,
+          replyTo: `${oneLine(name).replace(/["<>]/g, "")} <${email}>`,
+          to: cfg.owner,
+          subject: `${triage ? `[${triage.intent} | ${triage.urgency}] ` : ""}Contact Form: ${name}`,
+          text:
+            `Name: ${name}
+Email: ${email}
+Title: ${title}
+Message: ${message}` +
+            (id && site ? `
+
+Reply from the admin panel: ${site}/admin/messages?id=${id}` : "") +
+            (triage
+              ? `
+
+--- AI triage ---
+Intent: ${triage.intent}
+Urgency: ${triage.urgency}
+Summary: ${triage.summary}
+
+Suggested reply draft:
+${triage.draft}`
+              : ""),
+        });
+        emailed = true;
+      } catch (error) {
+        console.error("[contact] notification email failed:", error);
+      }
+    }
+
+    if (!saved && !emailed) {
+      return NextResponse.json({ message: "Failed to send message" }, { status: 500 });
+    }
 
     return NextResponse.json({
       message: "Email sent successfully",

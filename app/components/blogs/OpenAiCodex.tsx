@@ -1,5 +1,6 @@
 import React from "react";
 import CodeBlock from "../CodeBlock";
+import { mediaUrl } from "@/app/lib/media";
 
 const OpenAiCodex = () => {
   const codexingithub = `
@@ -271,7 +272,7 @@ function sortArray(arr) {
       <div className="mt-4 aspect-video rounded-xl overflow-hidden shadow-md">
         <iframe
           className="w-full h-full"
-          src="/images/blogs/codex_video.mp4"
+          src={mediaUrl("portfolio/images/blogs/codex_video.mp4")}
           title="How to Connect OpenAI Codex in VS Code"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

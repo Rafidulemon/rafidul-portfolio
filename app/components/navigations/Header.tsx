@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import SmartImage from "@/app/components/display/SmartImage";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
@@ -81,7 +81,7 @@ function Logo({ contact, onClick }: { contact: ContactInfo; onClick?: () => void
           className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-cyan-400 to-emerald-400 opacity-80 blur-[1px] transition-all duration-500 group-hover:-inset-1 group-hover:opacity-100"
         />
         <span className="relative block h-full w-full overflow-hidden rounded-full border-2 border-white bg-slate-900 dark:border-slate-900">
-          <Image src="/images/hero-image.png" alt="" width={88} height={88} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <SmartImage src="portfolio/images/hero-image.png" alt="" width={88} height={88} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
         </span>
       </span>
       <span className="hidden leading-tight sm:block">

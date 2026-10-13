@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { PageLoader } from "@/app/components/display/Spinner";
 import Link from "next/link";
 import { Button, Card, api, cx, inputCls, useToasts } from "./ui";
 
@@ -104,7 +105,7 @@ export default function BlogsAdmin() {
       </div>
 
       <Card className="mt-4 p-0">
-        {posts === null && !error && <p className="p-6 text-sm text-slate-500">Loading…</p>}
+        {posts === null && !error && <PageLoader label="Loading posts…" className="!min-h-[200px]" />}
         {posts && filtered.length === 0 && (
           <div className="p-8 text-center">
             <p className="text-sm text-slate-500">

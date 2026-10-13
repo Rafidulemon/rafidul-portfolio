@@ -9,9 +9,11 @@
     "start": "next start",
     "lint": "next lint",
     "embed": "tsx scripts/build-embeddings.ts",
-    "db:setup": "tsx scripts/db-setup.ts"
+    "db:setup": "tsx scripts/db-setup.ts",
+    "images:upload": "tsx scripts/upload-images.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1150.0",
     "@hookform/resolvers": "^3.9.0",
     "@neondatabase/serverless": "^1.2.0",
     "@trpc/client": "^10.45.2",
