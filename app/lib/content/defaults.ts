@@ -68,7 +68,7 @@ export const DEFAULTS = {
       },
     ],
     experience: [
-      { role: "Software Engineer", company: "Echologyx Ltd.", url: "https://www.echologyx.com/", period: "From July 2026 to Present" },
+      { role: "Software Engineer L2 ", company: "Echologyx Ltd.", url: "https://www.echologyx.com/", period: "From July 2026 to Present", note: "Working with a UK-based e-commerce client" },
       { role: "Software Engineer", company: "Ninja Digital Innovations", url: "https://www.ninja-digital-innovations.com/", period: "From July 2025 to June 2026" },
       { role: "Software Engineer (Remote)", company: "Brand Cloud Inc. Bangladesh", url: "https://bc-bangladesh.com/", period: "From August 2023 to June 2025" },
       { role: "Jr. Business Analyst", company: "SoftBD Ltd.", url: "https://www.softbdltd.com/", period: "From January 2023 to July 2023" },

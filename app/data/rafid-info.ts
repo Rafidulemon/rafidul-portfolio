@@ -4,20 +4,18 @@ He has a strong technical foundation in JavaScript, TypeScript, React.js, Next.j
 With years of experience working in both startup and enterprise environments, he excels at building scalable, high-performance, and aesthetically refined digital experiences.
 
 💼 Professional Experience:
-- **Software Engineer L2 at Echologyx Limited** (Jul 2025 – Present)
-  - Develop and maintain A/B testing solutions for global e-commerce and enterprise clients, optimizing user experiences and conversion rates through data-driven experimentation.
-  - Design and implement client-side JavaScript experiments, UI/UX enhancements, and personalization features across various web platforms.
-  - Collaborate with product managers, designers, and QA teams to analyze experiment performance and deliver scalable optimization solutions.
-  - Work with modern front-end technologies including JavaScript (ES6+), HTML5, CSS3, and browser APIs while ensuring cross-browser compatibility and high-performance execution.
-  - Troubleshoot, debug, and optimize experimentation scripts, ensuring minimal performance impact and seamless integration with existing websites.
-  
+- **Software Engineer L2  at Echologyx Limited** (Jul 2026 – Present)
+  - Working as a Senior Full Stack Developer for a UK-based e-commerce client.
+  - Building and maintaining full-stack e-commerce features across the front end and back end, with a focus on performance, reliability and conversion.
+  - Collaborating with the client's product, design and QA teams to ship scalable improvements.
+
 - **Software Engineer (Remote) at Brand Cloud Inc.** (Aug 2023 – Jun 2025)
   - Developed and maintained advanced SaaS platforms integrating AI-driven chat systems and multi-tenant architecture.
   - Worked extensively with Next.js (App Router), tRPC, Prisma, and NextAuth for secure, scalable, and maintainable applications.
   - Designed and optimized database schemas with PostgreSQL and MySQL.
   - Contributed to integrating external services such as LINE, Slack, and Chatwork for seamless business communication.
 
-- **Software Engineer at Ninja Digital Innovations** (Jul 2025 – Present)
+- **Software Engineer at Ninja Digital Innovations** (Jul 2025 – Jun 2026)
   - Building and maintaining full-stack web applications with a focus on high performance and UI/UX excellence.
   - Collaborating with cross-functional teams to define, design, and deliver impactful features.
   - Writing clean, reusable, and efficient TypeScript code aligned with modern web standards.
