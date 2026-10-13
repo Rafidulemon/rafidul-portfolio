@@ -78,9 +78,16 @@ export default function ContactForm() {
     const t = TOPICS.find((x) => x.id === id);
     if (!t) return;
     setTopic(id);
-    if (!watch("title")) setValue("title", t.subject, { shouldValidate: false });
-    // Only drop in the starter text if they haven't started writing.
-    if (!watch("message")?.trim()) setValue("message", t.starter, { shouldValidate: false });
+    // Swap in the new topic's subject/starter unless the visitor has edited them:
+    // empty or still equal to some topic's template counts as untouched.
+    const title = (watch("title") ?? "").trim();
+    if (!title || TOPICS.some((x) => x.subject === title)) {
+      setValue("title", t.subject, { shouldValidate: false });
+    }
+    const msg = (watch("message") ?? "").trim();
+    if (!msg || TOPICS.some((x) => x.starter.trim() === msg)) {
+      setValue("message", t.starter, { shouldValidate: false });
+    }
   };
 
   const onSubmit = async (data: FormData) => {
